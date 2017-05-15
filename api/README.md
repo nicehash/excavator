@@ -34,6 +34,10 @@ Method | Description | Supported NVIDIA | Supported AMD | Developer notes
 [device\.get](#device-get) | Queries particular device - GPU | Yes | Yes |
 [device\.set\.power_limit](#device-set-power-limit) | Sets device power limit | Yes | No | AMD pending
 [device\.set\.tdp](#device-set-tdp) | Sets device TDP | Yes | No | AMD pending
+device.set.core_delta | Sets device core clock (delta +/-) | Yes | No | AMD pending
+device.set.memory_delta | Sets device memory clock (delta +/-) | Yes | No | AMD pending
+device.set.fan.speed | Sets device fan speed | Yes | No | AMD pending
+device.set.fan.reset | Resets device fan speed | Yes | No | AMD pending
 
 
 # <a name="device-list"></a> device.list
