@@ -10,6 +10,8 @@ Simple: No simple usage; Excavator can be only used by mining experts!
 Advanced: There are two methods to use Excavator. Both rely on API commands you can find in file [excavator-man-API.txt](excavator-man-API.txt). Do note that API manuals are still being created and that is just an incomplete draft so far.
 
 1. Using API port; for that, you need an application that will pass commands to the Excavator. We do not provide any such application, nor there is any public source code available (yet). The API works over standard TCP port and is JSON-message based with '\n' terminated messages. Do note that once you build up such application, you virtually have no limits anymore. You can truly optimize your mining to the max; you can launch various algorithms (at the same time), you can randomly assign workers (turn devices on off), do dual/triple mining, algorithm switching, adjusting TDPs, core or memory clock and fan speeds. Additionally to that, you can also read various GPU parameters and algorithm speeds reached by GPUs.
+   
+   Default API bind port is 3456, but you can change it with '-p' command line parameter.
 
 2. Using start-up commanding file. See example [command_file_example.json](command_file_example.json).
 
@@ -22,6 +24,12 @@ Advanced: There are two methods to use Excavator. Both rely on API commands you 
    to retreive all available devices and their IDs.
 
    After you have your commanding file ready, use '-c' command line switch to provide file name when starting Excavator.
+   
+Excavator also supports configuring console logging level and file logging level. Level '0' means full detail logging, level '6' means no logging. By default console logging is set to '2', file logging set to '6'. You can change file logging with '-f' and console logging with '-d' command line parameters.
+
+# Command line parameters
+
+TODO
 
 
 # Additional notices
