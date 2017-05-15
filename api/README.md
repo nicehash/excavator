@@ -26,10 +26,10 @@ The response usually has more fields which depends on API method being executed.
 
 Device related get and set methods
 
-Method | Supported NVIDIA | Supported AMD
--------|------------------|----------------
-[device.list])(#device-list) | Yes | Yes
-[device.get])(#device-get) | Yes | Yes
+Method | Description | Supported NVIDIA | Supported AMD
+-------|-------------|-------------|----------------
+[device\.list](#device-list) | Queries available devices - GPUs | Yes | Yes
+[device\.get](#device-get) | Queries particular device - GPU | Yes | Yes
 
 
 # <a name="device-list"></a> device.list
