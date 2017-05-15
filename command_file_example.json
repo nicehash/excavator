@@ -9,6 +9,6 @@
 	{"time":10,"loop":10,"commands":[
 		{"id":1,"method":"worker.print.speed","params":["0"]},
 		{"id":1,"method":"worker.print.speed","params":["1"]},
-		{"id":1,"method":"algorithm.print.speeds","params":["0"]},
+		{"id":1,"method":"algorithm.print.speeds","params":["0"]}
 	]}
 ]
