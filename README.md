@@ -1,17 +1,17 @@
 # NiceHash Excavator
 
-Excavator is GPU miner by NiceHash for mining various altcoins on NiceHash.com. Excavator is being actively developed by djeZo and zawawa. Miner is using custom built code base with modern approach and supporting modern video cards - NVIDIA and AMD. (For AMD support, please see amd/README.txt for important details.)
+Excavator is GPU miner by NiceHash for mining various altcoins on NiceHash.com. Excavator is being actively developed by djeZo and zawawa. Miner is using custom built code base with modern approach and supporting modern video cards - NVIDIA and AMD. For AMD support, please see [AMD readme](amd/README.md) for important details.
 
 
 # How to use Excavator?
 
 Simple: No simple usage; Excavator can be only used by mining experts!
 
-Advanced: There are two methods to use Excavator. Both rely on API commands you can find in file 'excavator-man-API.txt'. Do note that API manuals are still being created and that is just an incomplete draft so far.
+Advanced: There are two methods to use Excavator. Both rely on API commands you can find in file [excavator-man-API.txt](excavator-man-API.txt). Do note that API manuals are still being created and that is just an incomplete draft so far.
 
 1. Using API port; for that, you need an application that will pass commands to the Excavator. We do not provide any such application, nor there is any public source code available (yet). The API works over standard TCP port and is JSON-message based with '\n' terminated messages. Do note that once you build up such application, you virtually have no limits anymore. You can truly optimize your mining to the max; you can launch various algorithms (at the same time), you can randomly assign workers (turn devices on off), do dual/triple mining, algorithm switching, adjusting TDPs, core or memory clock and fan speeds. Additionally to that, you can also read various GPU parameters and algorithm speeds reached by GPUs.
 
-2. Using start-up commanding file. See example 'command_file_example.json'.
+2. Using start-up commanding file. See example [command_file_example.json](command_file_example.json).
 
    File contains a JSON array of all actions that would happen during runtime of Excavator. Each array item has two mandatory fields and one optional. Mandatory is 'time' which tells you after how many seconds since start of Excavator commands should execute and 'commands' which is a JSON array of commands you can find in 'excavator-man-API.txt'. 
 
