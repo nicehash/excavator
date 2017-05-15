@@ -32,6 +32,8 @@ Method | Description | Supported NVIDIA | Supported AMD
 -------|-------------|-------------|----------------
 [device\.list](#device-list) | Queries available devices - GPUs | Yes | Yes
 [device\.get](#device-get) | Queries particular device - GPU | Yes | Yes
+[device\.set\.power_limit](#device-set-power-limit) | Sets device power limit | Yes | No
+[device\.set\.tdp](#device-set-tdp) | Sets device TDP | Yes | No
 
 
 # <a name="device-list"></a> device.list
@@ -96,6 +98,7 @@ Example response:
    "error":null
 }
 ```
+
 
 # <a name="device-get"></a> device.get
 
@@ -162,4 +165,44 @@ Example response:
    "id":1,
    "error":null
 }
+```
+
+
+# <a name="device-set-power-limit"></a> device.set.power_limit
+
+Sets power limit for certain device. Provided power limit is in Watts and it has to be be inside interval `gpu_power_limit_min` and `gpu_power_limit_min` provided by method [device\.get](#device-get).
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID.
+2 | string | New power limit in Watts.
+
+Example usage:
+```
+{"id":1,"method":"device.set.power_limit","params":["0","150"]}
+```
+
+Example response:
+```
+{"id":1,"error":null}
+```
+
+
+# <a name="device-set-tdp"></a> device.set.tdp
+
+Similar as [device\.set\.power_limit](#device-set-power-limit), this method sets TDP in %. Provided TDP limit is in %. Setting TDP too high or too low may fail.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID.
+2 | string | New TDP limit %.
+
+Example usage:
+```
+{"id":1,"method":"device.set.tdp","params":["0","80"]}
+```
+
+Example response:
+```
+{"id":1,"error":null}
 ```
