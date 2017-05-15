@@ -29,6 +29,8 @@ Advanced: There are two methods to use Excavator. Both rely on API commands you 
    
 Excavator also supports configuring console logging level and file logging level. Level '0' means full detail logging, level '6' means no logging. By default console logging is set to '2', file logging set to '6'. You can change file logging with '-f' and console logging with '-d' command line parameters.
 
+To get details about specific algorithms that are available in Excavator, check [AMD information](/amd) or [NVIDIA information](/nvidia).
+
 # Command line parameters
 
 Parameter | Range | Description | Default
