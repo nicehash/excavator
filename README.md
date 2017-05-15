@@ -4,7 +4,6 @@ Excavator is GPU miner by NiceHash for mining various altcoins on NiceHash.com. 
 
 
 # How to use Excavator?
------------------------
 
 Simple: No simple usage; Excavator can be only used by mining experts!
 
@@ -25,14 +24,12 @@ to retreive all available devices and their IDs.
 After you have your commanding file ready, use '-c' command line switch to provide file name when starting Excavator.
 
 
-Additional notices
-------------------
+# Additional notices
 
 WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVERCLOCKING MAY PERMANENTLY DAMAGE YOUR COMPUTER HARDWARE! If you overclock, we suggest you to set '-or' to reset clocks after miner quits. This may prevent driver crashes or freezes due to high clocks. With parameter '-od' you can adjust overclock delay and apply new clocks when mining is already happening. This can also prevent crashes or freezes due to high clocks.
 
 
-Changelog
----------
+# Changelog
 
 v1.2.0a
 - changed commanding interface to JSON based messages over startup file or API
