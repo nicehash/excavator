@@ -28,12 +28,12 @@ The response usually has more fields which depends on API method being executed.
 
 Device related get and set methods
 
-Method | Description | Supported NVIDIA | Supported AMD
--------|-------------|-------------|----------------
-[device\.list](#device-list) | Queries available devices - GPUs | Yes | Yes
-[device\.get](#device-get) | Queries particular device - GPU | Yes | Yes
-[device\.set\.power_limit](#device-set-power-limit) | Sets device power limit | Yes | No
-[device\.set\.tdp](#device-set-tdp) | Sets device TDP | Yes | No
+Method | Description | Supported NVIDIA | Supported AMD | Developer notes
+-------|-------------|-------------|----------------|------
+[device\.list](#device-list) | Queries available devices - GPUs | Yes | Yes |
+[device\.get](#device-get) | Queries particular device - GPU | Yes | Yes |
+[device\.set\.power_limit](#device-set-power-limit) | Sets device power limit | Yes | No | AMD pending
+[device\.set\.tdp](#device-set-tdp) | Sets device TDP | Yes | No | AMD pending
 
 
 # <a name="device-list"></a> device.list
