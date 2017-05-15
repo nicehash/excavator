@@ -13,15 +13,15 @@ Advanced: There are two methods to use Excavator. Both rely on API commands you 
 
 2. Using start-up commanding file. See example 'command_file_example.json'.
 
-File contains a JSON array of all actions that would happen during runtime of Excavator. Each array item has two mandatory fields and one optional. Mandatory is 'time' which tells you after how many seconds since start of Excavator commands should execute and 'commands' which is a JSON array of commands you can find in 'excavator-man-API.txt'. 
+ File contains a JSON array of all actions that would happen during runtime of Excavator. Each array item has two mandatory fields and one optional. Mandatory is 'time' which tells you after how many seconds since start of Excavator commands should execute and 'commands' which is a JSON array of commands you can find in 'excavator-man-API.txt'. 
 
-Optionally you can specify 'loop' which repeat commands every 'loop' seconds. When creating algorithms and workers, note that IDs of returned objects always  run from 0 and on, so first algorithm always has ID 0, second 1 etc. 
+ Optionally you can specify 'loop' which repeat commands every 'loop' seconds. When creating algorithms and workers, note that IDs of returned objects always  run from 0 and on, so first algorithm always has ID 0, second 1 etc. 
 
-You will want to figure out ID of each card; use telnet to connect to Excavator then send command 
-> {"id":1,"method":"device.list","params":[]}
-to retreive all available devices and their IDs.
+ You will want to figure out ID of each card; use telnet to connect to Excavator then send command 
+ > {"id":1,"method":"device.list","params":[]}
+ to retreive all available devices and their IDs.
 
-After you have your commanding file ready, use '-c' command line switch to provide file name when starting Excavator.
+ After you have your commanding file ready, use '-c' command line switch to provide file name when starting Excavator.
 
 
 # Additional notices
