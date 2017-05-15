@@ -31,6 +31,8 @@ Excavator also supports configuring console logging level and file logging level
 
 To get details about specific algorithms that are available in Excavator, check [AMD information](/amd) or [NVIDIA information](/nvidia).
 
+Excavator needs [Microsoft Visual Studio 2013 redistributable (x64)](https://www.microsoft.com/en-us/download/details.aspx?id=40784).
+
 # Command line parameters
 
 Parameter | Range | Description | Default
