@@ -7,6 +7,7 @@ Name | Supported devices | Wcount*1 | Pcount*2
 [decred](#decred)| NVIDIA SM 5.0+ | 1 | 3
 
 *1 Recommended number of workers per device to reach optimal speeds.
+
 *2 Number of supported parameters. Parameters are explained in details in section for each algorithm.
 
 
