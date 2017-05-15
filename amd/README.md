@@ -61,15 +61,15 @@ requirement will be removed for the next stable version.
 
 Parameter # | Range | Explanation
 -----------------|----------|---------
-
-There are no parameters available for equihash. To manage intensity of this algorithm, we suggest you to run only one worker to reach low intensity and multiple (suggest 2) workers per device to reach optimal speed.
+1 | 0 or 1 | Disable/enable binary kernels
+2 | 0 or 1 | Disable/enable the Global Data Share (requires admin privileges)
 
 
 ## <a name="pascal"></a> pascal
 
 Parameter # | Range | Explanation
 -----------------|----------|---------
-1 | 0-∞ | Number of blocks
-2 | 0-1024 | Number of threads per block
+1 | 0-∞ | Global work size
+2 | 0-256 | Local work size
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
