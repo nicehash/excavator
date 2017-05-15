@@ -26,18 +26,42 @@ The response usually has more fields which depends on API method being executed.
 
 # Methods
 
-Device related get and set methods
+**Device related get and set methods**
 
 Method | Description | Supported NVIDIA | Supported AMD | Developer notes
 -------|-------------|-------------|----------------|------
-[device\.list](#device-list) | Queries available devices - GPUs | Yes | Yes |
-[device\.get](#device-get) | Queries particular device - GPU | Yes | Yes |
-[device\.set\.power_limit](#device-set-power-limit) | Sets device power limit | Yes | No | AMD pending
-[device\.set\.tdp](#device-set-tdp) | Sets device TDP | Yes | No | AMD pending
-device.set.core_delta | Sets device core clock (delta +/-) | Yes | No | AMD pending
-device.set.memory_delta | Sets device memory clock (delta +/-) | Yes | No | AMD pending
-device.set.fan.speed | Sets device fan speed | Yes | No | AMD pending
-device.set.fan.reset | Resets device fan speed | Yes | No | AMD pending
+[device\.list](#device-list) | Queries available devices - GPUs. | Yes | Yes |
+[device\.get](#device-get) | Queries particular device - GPU. | Yes | Yes |
+[device\.set\.power_limit](#device-set-power-limit) | Sets device power limit. | Yes | No | AMD pending
+[device\.set\.tdp](#device-set-tdp) | Sets device TDP. | Yes | No | AMD pending
+device.set.core_delta | Sets device core clock (delta +/-). | Yes | No | AMD pending
+device.set.memory_delta | Sets device memory clock (delta +/-). | Yes | No | AMD pending
+device.set.fan.speed | Sets device fan speed. | Yes | No | AMD pending
+device.set.fan.reset | Resets device fan speed. | Yes | No | AMD pending
+
+**Algorithm managing methods**
+
+Method | Description 
+-------|------------
+algorithm.add | Adds new algorithm.
+algorithm.remove | Removes algorithm.
+algorithm.list | Lists all algorithms.
+algorithm.print.speeds | Prints speed of all algorithms.
+
+**Worker managing methods**
+
+Method | Description 
+-------|------------
+worker.add | Adds new worker.
+worker.free | Removes worker.
+worker.reset | Resets worker's speed.
+worker.print.speed | Prints speed of a worker.
+
+**Miscellaneous methods**
+
+Method | Description 
+-------|------------
+quit | Quits Excavator.
 
 
 # <a name="device-list"></a> device.list
