@@ -2,6 +2,7 @@
 
 Excavator is GPU miner by NiceHash for mining various altcoins on NiceHash.com. Excavator is being actively developed by djeZo and zawawa. Miner is using custom built code base with modern approach and supporting modern video cards - NVIDIA and AMD. For AMD support, please see [AMD readme](amd/README.md) for important details.
 
+Download from here: https://github.com/nicehash/excavator/releases
 
 # How to use Excavator?
 
@@ -30,7 +31,14 @@ Excavator also supports configuring console logging level and file logging level
 
 # Command line parameters
 
-TODO
+Parameter | Range | Description | Default
+-----------------|----------|----------|---------
+-h | none | Displays help; details about all supported command line parameters |
+-p | 1-65535 | API bind port | 3456
+-i | local IP | API bind IP | 127.0.0.1
+-d | 0-6 | Console log level | 2
+-f | 0-6 | File log level | 6
+-c | file name | Use commanding file; no API is available |
 
 
 # Additional notices
