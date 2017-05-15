@@ -21,6 +21,7 @@ Advanced: There are two methods to use Excavator. Both rely on API commands you 
 
    You will want to figure out ID of each card; use telnet to connect to Excavator then send command 
    > {"id":1,"method":"device.list","params":[]}
+   
    to retreive all available devices and their IDs.
 
    After you have your commanding file ready, use '-c' command line switch to provide file name when starting Excavator.
