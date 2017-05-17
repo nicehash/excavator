@@ -1,4 +1,4 @@
-# OpenCL Support in excavator
+﻿# OpenCL Support in excavator
 
 **Please read this document carefully, especially if you are mining Equihash-based coins.** 
 
@@ -26,9 +26,7 @@ zawawa
 
 Excavator *should* work with any OpenCL-compatible devices. For optimal performance,
 however, please use AMD graphics cards with 
-the GCN2 architecture or above. Excavator has been tested against 
-AMD Crimson Software 16.9.2 on Windows 10 64-bit, but it should work with
-any recent AMD drivers.
+the GCN2 architecture or above and **AMD Crimson Software 16.9.2 **.
 
 
 ## Supported Algorithms
