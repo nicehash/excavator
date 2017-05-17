@@ -45,7 +45,7 @@ Method | Description
 -------|------------
 algorithm.add | Adds new algorithm.
 algorithm.remove | Removes algorithm.
-algorithm.list | Lists all algorithms.
+[algorithm\.list](#algorithm-list) | Lists all algorithms.
 algorithm.print.speeds | Prints speed of all algorithms.
 
 **Worker managing methods**
@@ -233,4 +233,75 @@ Example usage:
 Example response:
 ```
 {"id":1,"error":null}
+```
+
+
+# <a name="algorithm-list"></a> algorithm.list
+
+List all currently running algorithms. Each algorithm has a list of workers. Each worker is assigned to certain device and has certain speed.
+
+This method does not take in any parameter.
+
+Response field | Type | Description
+------|---------|---------
+`algorithms` | array | Array of algorithms. If no algorithms, this array is empty.
+`algorithms[i]/algorithm_id` | int | Algorithm ID.
+`algorithms[i]/algorithm_id` | string | Algorithm name.
+`algorithms[i]/connected` | boolean | `True` if connected to remote pool.
+`algorithms[i]/got_job` | boolean | `True` if remote pool provided valid job.
+`algorithms[i]/address` | string | Remote address of the pool.
+`algorithms[i]/login` | string | Login to the pool.
+`algorithms[i]/workers` | array | Array of workers.
+`algorithms[i]/workers[k]/worker_id` | int | Worker ID.
+`algorithms[i]/workers[k]/device_id` | int | Linked device ID.
+`algorithms[i]/workers[k]/params` | array | Parameters which were used to start this worker (array of strings).
+`algorithms[i]/workers[k]/speed` | float | Speed in hashes per second.
+
+Example usage:
+```
+{"id":1,"method":"algorithm.list","params":[]}
+```
+
+Example response:
+```
+{
+   "algorithms":[
+      {
+         "algorithm_id":0,
+         "name":"equihash",
+         "connected":true,
+         "got_job":true,
+         "address":"equihash.eu.nicehash.com:3357",
+         "login":"34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x",
+         "workers":[
+            {
+               "worker_id":0,
+               "device_id":0,
+               "params":[
+
+               ],
+               "speed":433.22
+            },
+            {
+               "worker_id":1,
+               "device_id":1,
+               "params":[
+
+               ],
+               "speed":155.28
+            },
+            {
+               "worker_id":2,
+               "device_id":1,
+               "params":[
+
+               ],
+               "speed":152.72
+            }
+         ]
+      }
+   ],
+   "id":1,
+   "error":null
+}
 ```
