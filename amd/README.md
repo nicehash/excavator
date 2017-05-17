@@ -26,7 +26,7 @@ zawawa
 
 Excavator *should* work with any OpenCL-compatible devices. For optimal performance,
 however, please use AMD graphics cards with 
-the GCN2 architecture or above and **AMD Crimson Software 16.9.2 **.
+the GCN2 architecture or above and **AMD Crimson Software 16.9.2**.
 
 
 ## Supported Algorithms
