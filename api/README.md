@@ -61,7 +61,8 @@ worker.print.speed | Prints speed of a worker.
 
 Method | Description 
 -------|------------
-quit | Quits Excavator.
+[info](#info) | Gets information about Excavator.
+[quit](#quit) | Quits Excavator.
 
 
 # <a name="device-list"></a> device.list
@@ -301,6 +302,61 @@ Example response:
          ]
       }
    ],
+   "id":1,
+   "error":null
+}
+```
+
+
+# <a name="info"></a> info
+
+Returns basic information about Execavator.
+
+This method does not take in any parameter.
+
+Response field | Type | Description
+------|---------|---------
+`version` | string | Version.
+`build_platform` | string | Build platform.
+`build_time` | string | Build time.
+`build_number` | int | Build number.
+`uptime` | long | Uptime in milliseconds.
+
+Example usage:
+```
+{"id":1,"method":"info","params":[]}
+```
+
+Example response:
+```
+{  
+   "version":"1.2.1a",
+   "build_platform":"Windows",
+   "build_time":"2017-05-18 13:39:44",
+   "build_number":6,
+   "uptime":21594,
+   "id":1,
+   "error":null
+}
+```
+
+
+# <a name="quit"></a> quit
+
+Exits Excavator.
+
+This method does not take in any parameter.
+
+This method returns no response fields.
+
+Example usage:
+```
+{"id":1,"method":"info","params":[]}
+```
+
+Example response:
+```
+{  
    "id":1,
    "error":null
 }
