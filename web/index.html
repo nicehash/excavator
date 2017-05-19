@@ -76,7 +76,8 @@
 	.segment table tr{}
 	.segment table tr th{font-size:10px;letter-spacing:2px;color:#aaaaaa;text-transform:uppercase;font-family:'ralewaymedium',sans-serif;padding:25px;background:#fdfdfd;border-bottom:1px solid #ededed;font-weight:400;}
 	.segment table tr td{padding:35px 25px;border-bottom:1px solid #ededed;}
-	.segment table tr td:first-child{color:#fa8742;font-family:'ralewaybold',sans-serif;}
+	.segment table tr td:nth-child(1){color:#fa8742;font-family:'ralewaybold',sans-serif;}
+	.segment table tr td:nth-child(2){color:#fa8742;font-family:'ralewaybold',sans-serif;}
 	.segment.algorithms table tr td{border-bottom:0;padding-bottom:0;}
 	.segment.algorithms table tr.workers td{border-bottom:1px solid #ededed;}
 	.segment.algorithms table tr td .status_0{color:#f23232;font-family:'ralewayblack',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:12px;background:url(" data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAxNiAzMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTYgMzI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiNFRTM2MzU7fQ0KCS5zdDF7ZmlsbDojNjhCNTQ1O30NCjwvc3R5bGU+DQo8cmVjdCB4PSItMSIgeT0iMjMuMSIgdHJhbnNmb3JtPSJtYXRyaXgoMC43MDcxIDAuNzA3MSAtMC43MDcxIDAuNzA3MSAxOC40ODI3IDMuNjM3NikiIGNsYXNzPSJzdDAiIHdpZHRoPSIxMS43IiBoZWlnaHQ9IjIiLz4NCjxyZWN0IHg9Ii0wLjIiIHk9IjgiIHRyYW5zZm9ybT0ibWF0cml4KDAuNzA3MSAwLjcwNzEgLTAuNzA3MSAwLjcwNzEgNy4yMTE1IDAuNjc3NykiIGNsYXNzPSJzdDEiIHdpZHRoPSI1LjkiIGhlaWdodD0iMiIvPg0KPHJlY3QgeD0iMi4yIiB5PSI2LjkiIHRyYW5zZm9ybT0ibWF0cml4KC0wLjcwNzEgMC43MDcxIC0wLjcwNzEgLTAuNzA3MSAxNy4wMTQ1IDguNzc2NykiIGNsYXNzPSJzdDEiIHdpZHRoPSI5LjEiIGhlaWdodD0iMiIvPg0KPHJlY3QgeD0iLTEiIHk9IjIzLjEiIHRyYW5zZm9ybT0ibWF0cml4KC0wLjcwNzEgMC43MDcxIC0wLjcwNzEgLTAuNzA3MSAyNS4zNDIgMzcuNzYxNykiIGNsYXNzPSJzdDAiIHdpZHRoPSIxMS43IiBoZWlnaHQ9IjIiLz4NCjwvc3ZnPg0K") no-repeat;background-size:40px 40px;background-position:0px -24px;padding:1px 0 0 30px;}
@@ -88,7 +89,8 @@
 	.segment.algorithms table tr.workers td table.mini tr td{padding:15px 0;font-size:14px;color:#524e4e;font-family:'ralewaymedium',sans-serif;border-bottom:0;}
 	.segment.algorithms table tr.workers td table.mini tr td:first-child{color:#524e4e;font-family:'ralewaymedium',sans-serif;}
 	.segment.algorithms table tr.workers td table.mini tr:last-child td{padding-bottom:0;}
-	.device{width:40%;}
+	.deviceId{width:5%;}
+	.device{width:35%;}
 	.temperature{width:15%;}
 	.utilization{width:15%;}
 	.power{width:15%;}
@@ -131,6 +133,7 @@
 		<div class="segment devices">
 			<table>
 				<tr>
+					<th class="deviceid rmv">#</th>
 					<th class="device">Device</th>
 					<th class="temperature rmv">Temperature</th>
 					<th class="utilization rmv">Utilization</th>
@@ -164,7 +167,7 @@
 		var devicesArray = {};
 		var algorithmsArray = {};
 		var temperature, utilization, power, fan, fanRPM, deviceName, allDevices, deviceId;
-
+		var algoSuffix, algoEfficiencySuffix, algoWorkerSuffix, algoWorkerEfficiencySuffix;
 		function getDevices(){
 			$.getJSON('api?command={"id":1,"method":"device.list","params":[]}',function(dataDevices){
 				var deviceHtml = '';
@@ -189,6 +192,7 @@
 							for(var n=0;n<devicesCount;n++){
 								// Generate content
 								deviceHtml += '<tr>';
+								deviceHtml += '	<td class="rmv">' + devicesArray[n].deviceId + '</td>';
 								deviceHtml += '	<td>' + devicesArray[n].deviceName + '<div class="shw"><b>Temparature:</b> ' + devicesArray[n].temperature + ' °C<br><b>Utilization:</b> ' + devicesArray[n].temperature + '<br><b>Power usage:</b> ' + devicesArray[n].power + ' W<br><b>Fan speed:</b> ' + devicesArray[n].fanRPM + ' RPM</div></td>';
 								deviceHtml += '	<td class="rmv">' + devicesArray[n].temperature + '°C</td>';
 								deviceHtml += '	<td class="rmv">' + devicesArray[n].utilization + '%</td>';
@@ -251,31 +255,59 @@
 					workersHtml += '	<td colspan="4">';
 					workersHtml += '		<table class="mini">';
 					workersHtml += '			<tr>';
+					workersHtml += '				<th class="rmv idWorker">#</th>';
 					workersHtml += '				<th class="deviceWorker">Device</th>';
 					workersHtml += '				<th class="speedWorker">Speed</th>';
 					workersHtml += '				<th class="rmv efficiencyWorker">Efficiency</th>';
 					workersHtml += '			</tr>';
 					jQuery.each(workersArray, function(i,work){
+						algoWorkerSuffix = 'H';
+						var workerSpeed = work;
+						if (workerSpeed > 1000000000000000){ workerSpeed /= 1000000000000000; algoWorkerSuffix = 'PH';}
+						else if (workerSpeed > 1000000000000){ workerSpeed /= 1000000000000; algoWorkerSuffix = 'TH';}
+						else if (workerSpeed > 1000000000){ workerSpeed /= 1000000000; algoWorkerSuffix = 'GH';}
+						else if (workerSpeed > 1000000){ workerSpeed /= 1000000; algoWorkerSuffix = 'MH';}
+						else if (workerSpeed > 1000){ workerSpeed /= 1000; algoWorkerSuffix = 'kH';}
 						algo.totalPower += parseFloat(devicesArray[i].power);
 						workersHtml += '<tr>';
+						workersHtml += '	<td class="rmv">' + devicesArray[i].deviceId + '</td>';
 						workersHtml += '	<td>' + devicesArray[i].deviceName + '</td>';
-						workersHtml += '	<td>' + parseFloat(work).toFixed(2) + '</td>';
+						workersHtml += '	<td>' + parseFloat(workerSpeed).toFixed(3) + ' ' + algoWorkerSuffix + '/s</td>';
 						var workerEfficiency = 0;
 						if (work > 0 && devicesArray[i].power > 0) { workerEfficiency = work/devicesArray[i].power; }
-						workersHtml += '	<td class="rmv">' + parseFloat(workerEfficiency).toFixed(2) + '</td>';
+						algoWorkerEfficiencySuffix = 'H';
+						if (workerEfficiency > 1000000000000000){ workerEfficiency /= 1000000000000000; algoWorkerEfficiencySuffix = 'PH';}
+						else if (workerEfficiency > 1000000000000){ workerEfficiency /= 1000000000000; algoWorkerEfficiencySuffix = 'TH';}
+						else if (workerEfficiency > 1000000000){ workerEfficiency /= 1000000000; algoWorkerEfficiencySuffix = 'GH';}
+						else if (workerEfficiency > 1000000){ workerEfficiency /= 1000000; algoWorkerEfficiencySuffix = 'MH';}
+						else if (workerEfficiency > 1000){ workerEfficiency /= 1000; algoWorkerEfficiencySuffix = 'kH';}
+						workersHtml += '	<td class="rmv">' + parseFloat(workerEfficiency).toFixed(3) + ' ' + algoWorkerEfficiencySuffix + '/J</td>';
 						workersHtml += '</tr>';
 					});
 					workersHtml += '		</table>';
 					workersHtml += '	</td>';
 					workersHtml += '</tr>';
-					algo.efficiency = 0;
-					if (algo.speed>0 && algo.totalPower>0){	algo.efficiency = algo.speed/algo.totalPower; }
+					algoSuffix = 'H';
+					var algoSpeed = algo.speed;
+					if (algoSpeed > 1000000000000000){ algoSpeed /= 1000000000000000; algoSuffix = 'PH';}
+					else if (algoSpeed > 1000000000000){ algoSpeed /= 1000000000000; algoSuffix = 'TH';}
+					else if (algoSpeed > 1000000000){ algoSpeed /= 1000000000; algoSuffix = 'GH';}
+					else if (algoSpeed > 1000000){ algoSpeed /= 1000000; algoSuffix = 'MH';}
+					else if (algoSpeed > 1000){ algoSpeed /= 1000; algoSuffix = 'kH';}
+					var algoEfficiency = 0;
+					if (algo.speed>0 && algo.totalPower>0){	algoEfficiency = algo.speed/algo.totalPower; }
+					algoEfficiencySuffix = 'H';
+					if (algoEfficiency > 1000000000000000){ algoEfficiency /= 1000000000000000; algoEfficiencySuffix = 'PH';}
+					else if (algoEfficiency > 1000000000000){ algoEfficiency /= 1000000000000; algoEfficiencySuffix = 'TH';}
+					else if (algoEfficiency > 1000000000){ algoEfficiency /= 1000000000; algoEfficiencySuffix = 'GH';}
+					else if (algoEfficiency > 1000000){ algoEfficiency /= 1000000; algoEfficiencySuffix = 'MH';}
+					else if (algoEfficiency > 1000){ algoEfficiency /= 1000; algoEfficiencySuffix = 'kH';}
 					algorithmsHtml += '<tr>';
-					algorithmsHtml += '	<td>' + algo.name + '<div class="shw"><b>Status:</b> ' + algo.gotJob + '<br><b>Address:</b> ' + algo.address + '<br><b>Speed:</b> ' + parseFloat(algo.speed).toFixed(2) + '<br><b>Efficiency:</b> ' + parseFloat(algo.efficiency).toFixed(2) + '</div></td>';
+					algorithmsHtml += '	<td>' + algo.name + '<div class="shw"><b>Status:</b> ' + algo.gotJob + '<br><b>Address:</b> ' + algo.address + '<br><b>Speed:</b> ' + parseFloat(algoSpeed).toFixed(3) + ' ' + algoSuffix + '/s<br><b>Efficiency:</b> ' + parseFloat(algoEfficiency).toFixed(3) + ' ' + algoEfficiencySuffix + '/J</div></td>';
 					algorithmsHtml += '	<td class="rmv">' + algo.gotJob + '</td>';
 					algorithmsHtml += '	<td class="rmv">' + algo.address + '</td>';
-					algorithmsHtml += '	<td class="rmv">' + parseFloat(algo.speed).toFixed(2) + '</td>';
-					algorithmsHtml += '	<td class="rmv">' + parseFloat(algo.efficiency).toFixed(2) + '</td>';
+					algorithmsHtml += '	<td class="rmv">' + parseFloat(algoSpeed).toFixed(3) + ' ' + algoSuffix + '/s</td>';
+					algorithmsHtml += '	<td class="rmv">' + parseFloat(algoEfficiency).toFixed(3) + ' ' + algoEfficiencySuffix + '/J</td>';
 					algorithmsHtml += '</tr>';				
 					$('#algorithmsHtml').append(algorithmsHtml + workersHtml);
 				});
