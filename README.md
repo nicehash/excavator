@@ -1,20 +1,23 @@
 # NiceHash Excavator
 
-Excavator is GPU miner by NiceHash for mining various altcoins on NiceHash.com. Excavator is being actively developed by djeZo and zawawa. Miner is using custom built code base with modern approach and supporting modern video cards - NVIDIA and AMD. For AMD support, please see [AMD readme](amd/README.md) for important details.
+Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com). Excavator is being actively developed by djeZo and zawawa. Miner is using custom built code base with modern approach and supporting modern video cards - NVIDIA and AMD. For AMD support, please see [AMD readme](amd/README.md) for important details.
 
 Download from here: https://github.com/nicehash/excavator/releases
 
+
 # How to use Excavator?
 
-Simple: No simple usage; Excavator can be only used by mining experts!
+**ADVANCED** There are two methods to use Excavator. Both rely on API commands you can find in file [excavator-man-API.txt](excavator-man-API.txt). Do note that API manuals are still being created and that is just an incomplete draft so far.
 
-Advanced: There are two methods to use Excavator. Both rely on API commands you can find in file [excavator-man-API.txt](excavator-man-API.txt). Do note that API manuals are still being created and that is just an incomplete draft so far.
+1. Using API port or HTTP API; for that, you need an application that will pass commands to the Excavator. We do not provide any such application (except [web example](/web)), nor there is any public source code available (yet). 
 
-1. Using API port; for that, you need an application that will pass commands to the Excavator. We do not provide any such application, nor there is any public source code available (yet). The API works over standard TCP port and is JSON-message based with '\n' terminated messages. Do note that once you build up such application, you virtually have no limits anymore. You can truly optimize your mining to the max; you can launch various algorithms (at the same time), you can randomly assign workers (turn devices on off), do dual/triple mining, algorithm switching, adjusting TDPs, core or memory clock and fan speeds. Additionally to that, you can also read various GPU parameters and algorithm speeds reached by GPUs.
+   The API works over standard TCP port and is JSON-message based with '\n' terminated messages. Do note that once you build up such application, you virtually have no limits anymore. You can truly optimize your mining to the max; you can launch various algorithms (at the same time), you can randomly assign workers (turn devices on off), do dual/triple mining, algorithm switching, adjusting TDPs, core or memory clock and fan speeds. Additionally to that, you can also read various GPU parameters and algorithm speeds reached by GPUs.
    
    Default API bind port is 3456, but you can change it with '-p' command line parameter.
 
-2. Using start-up commanding file. See example [command_file_example.json](command_file_example.json).
+   HTTP API is disabled by default. You can enable it by configuring [command line parameters](#cmdline).
+
+2. Using start-up commanding file. See example [default_command_file.json](default_command_file.json).
 
    File contains a JSON array of all actions that would happen during runtime of Excavator. Each array item has two mandatory fields and one optional. Mandatory is 'time' which tells you after how many seconds since start of Excavator commands should execute and 'commands' which is a JSON array of commands you can find in [excavator-man-API.txt](excavator-man-API.txt). 
 
@@ -26,23 +29,30 @@ Advanced: There are two methods to use Excavator. Both rely on API commands you 
    to retreive all available devices and their IDs.
 
    After you have your commanding file ready, use '-c' command line switch to provide file name when starting Excavator.
+
+   We suggest using [excavator+web+restart_script.bat](excavator+web+restart_script.bat) that automatically launches web browser displaying status and has a restart script to put Excavator back on if it crashes.
    
 Excavator also supports configuring console logging level and file logging level. Level '0' means full detail logging, level '6' means no logging. By default console logging is set to '2', file logging set to '6'. You can change file logging with '-f' and console logging with '-d' command line parameters.
 
 To get details about specific algorithms that are available in Excavator, check [AMD information](/amd) or [NVIDIA information](/nvidia).
 
-Excavator needs [Microsoft Visual C++ 2013 redistributable (x64)](https://www.microsoft.com/en-us/download/details.aspx?id=40784).
+Excavator contains HTTP server. Currently, it can serve API commands and is by default disabled. You can enable it by configuring HTTP bind port ('-wp'). API is available at URL:
 
-# Command line parameters
+> http://bind-ip:bind-port/api?command={JSON-command-here}
+
+
+# <a name="cmdline"></a> Command line parameters
 
 Parameter | Range | Description | Default
 -----------------|----------|----------|---------
 -h | none | Displays help; details about all supported command line parameters |
--p | 1-65535 | API bind port | 3456
+-p | 0-65535 | API bind port; set to 0 to disable API | 3456
 -i | local IP | API bind IP | 127.0.0.1
+-wp | 0-65535 | HTTP API bind port | 0
+-wi | local IP | HTTP API bind IP | 127.0.0.1
 -d | 0-6 | Console log level | 2
 -f | 0-6 | File log level | 6
--c | file name | Use commanding file; no API is available |
+-c | file name | Use commanding file |
 
 
 # Additional notices
@@ -51,6 +61,16 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 
 # Changelog
+
+v1.2.1a
+- support for API and commanding file at the same time
+- added commanding file event: on_quit
+- fixed connection bug
+- added HTTP server for API commands
+- fixed a bug in phymem.sys
+- optimized equihash OpenCL kernel
+- added API method: info
+- general fixes and improvements
 
 v1.2.0a
 - changed commanding interface to JSON based messages over startup file or API

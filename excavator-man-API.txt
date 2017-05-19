@@ -41,7 +41,7 @@ Description: Sets TDP for certain device. Provided TDP is in % of default TDP. D
 Param 1: Device ID
 Param 2: TDP in %
 
-Example send: {"id":2,"method":"device.set.power_limit","params":["0","80"]}
+Example send: {"id":2,"method":"device.set.tdp","params":["0","80"]}
 
 
 
