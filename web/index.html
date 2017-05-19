@@ -169,43 +169,34 @@
 			$.getJSON('api?command={"id":1,"method":"device.list","params":[]}',function(dataDevices){
 				var deviceHtml = '';
 				allDevices = dataDevices.devices;
-				allDevices = allDevices.sort(function(a, b) {
-				  return parseInt(a.device_id) - parseInt(b.device_id);
-				});
-
 				var devicesCount = allDevices.length;
 				var devicesC	 = 0;
-				$.each(allDevices, function(i,data) {
+				jQuery.each(allDevices, function(i,device) {
 					// Get all data for deviceId
-					$.getJSON('api?command={"id":1,"method":"device.get","params":["' + data.device_id + '"]}',function(dataDevice){
-						temperature = dataDevice.gpu_temp; 
-						utilization = dataDevice.gpu_load;
-						power 	   	= parseFloat(dataDevice.gpu_power_usage).toFixed(2);
-						fan		   	= dataDevice.gpu_fan_speed;
-						fanRPM 	   	= dataDevice.gpu_fan_speed_rpm;
-						deviceName 	= data.name;
-						deviceId    = data.device_id;
-						
-						// Generate content
-						deviceHtml += '<tr>';
-						deviceHtml += '	<td>' + deviceName + '<div class="shw"><b>Temparature:</b> ' + temperature + ' °C<br><b>Utilization:</b> ' + temperature + '<br><b>Power usage:</b> ' + power + ' W<br><b>Fan speed:</b> ' + fanRPM + ' RPM</div></td>';
-						deviceHtml += '	<td class="rmv">' + temperature + '°C</td>';
-						deviceHtml += '	<td class="rmv">' + utilization + '%</td>';
-						deviceHtml += '	<td class="rmv">' + power + ' W</td>';
-						deviceHtml += '	<td class="rmv">' + fanRPM + ' RPM</td>';
-						deviceHtml += '</tr>';
-							
+					$.getJSON('api?command={"id":1,"method":"device.get","params":["' + device.device_id + '"]}',function(dataDevice){
 						// Save to array
-						devicesArray[deviceId] = [];
-						devicesArray[deviceId]['temperature'] 	= temperature;
-						devicesArray[deviceId]['deviceName'] 	= deviceName;
-						devicesArray[deviceId]['utilization'] 	= utilization;
-						devicesArray[deviceId]['power'] 		= power;
-						devicesArray[deviceId]['fan'] 			= fan;
-						devicesArray[deviceId]['fanRPM'] 		= fanRPM;
+						devicesArray[device.device_id] = [];
+						devicesArray[device.device_id]['temperature'] 	= dataDevice.gpu_temp;
+						devicesArray[device.device_id]['deviceName'] 	= device.name;
+						devicesArray[device.device_id]['utilization'] 	= dataDevice.gpu_load;
+						devicesArray[device.device_id]['power'] 		= parseFloat(dataDevice.gpu_power_usage).toFixed(2);
+						devicesArray[device.device_id]['fan'] 			= dataDevice.gpu_fan_speed;
+						devicesArray[device.device_id]['fanRPM'] 		= dataDevice.gpu_fan_speed_rpm;
+						devicesArray[device.device_id]['deviceId'] 		= device.device_id;
 
 						devicesC++;
 						if(devicesC==devicesCount){
+							for(var n=0;n<devicesCount;n++){
+								// Generate content
+								deviceHtml += '<tr>';
+								deviceHtml += '	<td>' + devicesArray[n].deviceName + '<div class="shw"><b>Temparature:</b> ' + devicesArray[n].temperature + ' °C<br><b>Utilization:</b> ' + devicesArray[n].temperature + '<br><b>Power usage:</b> ' + devicesArray[n].power + ' W<br><b>Fan speed:</b> ' + devicesArray[n].fanRPM + ' RPM</div></td>';
+								deviceHtml += '	<td class="rmv">' + devicesArray[n].temperature + '°C</td>';
+								deviceHtml += '	<td class="rmv">' + devicesArray[n].utilization + '%</td>';
+								deviceHtml += '	<td class="rmv">' + devicesArray[n].power + ' W</td>';
+								deviceHtml += '	<td class="rmv">' + devicesArray[n].fanRPM + ' RPM</td>';
+								deviceHtml += '</tr>';
+							}
+						
 							$('#devicesHtml').html(deviceHtml);
 							getAlgorithms();
 						}
@@ -235,14 +226,14 @@
 				
 				// Generate content algorithms + workers
 				$('#algorithmsHtml').html('');
-				jQuery.each(algorithmsArray, function(i,algo) {
+				jQuery.each(algorithmsArray, function(j,algo){
 					var algorithmsHtml = '';
 					var workersHtml = '';
 					
 					// Get all workers for algorithmId
 					var workers = algo.workers;
 					var workersArray = {};
-					jQuery.each(workers, function( i, work ) {
+					jQuery.each(workers, function(k,work){
 						var workerId = work.worker_id;
 						var workerDevice = work.device_id;
 						var workerSpeed = work.speed;
@@ -264,7 +255,7 @@
 					workersHtml += '				<th class="speedWorker">Speed</th>';
 					workersHtml += '				<th class="rmv efficiencyWorker">Efficiency</th>';
 					workersHtml += '			</tr>';
-					jQuery.each(workersArray, function( i, work ) {
+					jQuery.each(workersArray, function(i,work){
 						algo.totalPower += parseFloat(devicesArray[i].power);
 						workersHtml += '<tr>';
 						workersHtml += '	<td>' + devicesArray[i].deviceName + '</td>';
@@ -294,11 +285,13 @@
 		}
 		
 	  $(function(){
+
 		$.getJSON('api?command={"id":1,"method":"info","params":[]}',function(dataVersion) {
 			$('#ver').html(dataVersion.version);
 			$('#buildTime').html(dataVersion.build_time);
 			$('#buildNumber').html(dataVersion.build_number);
 		});
+
 		setInterval(function(){
 			countDown--;
 			if(countDown<0){
@@ -306,6 +299,7 @@
 				countDown = 10;
 			}
 		}, 1000);
+		
 	  });
 	</script>	
 </body>
