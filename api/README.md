@@ -43,7 +43,7 @@ device.set.fan.reset | Resets device fan speed. | Yes | No | AMD pending
 
 Method | Description 
 -------|------------
-algorithm.add | Adds new algorithm.
+[algorithm\.add](#algorithm-add) | Adds new algorithm.
 algorithm.remove | Removes algorithm.
 [algorithm\.list](#algorithm-list) | Lists all algorithms.
 algorithm.print.speeds | Prints speed of all algorithms.
@@ -234,6 +234,48 @@ Example usage:
 Example response:
 ```
 {"id":1,"error":null}
+```
+
+
+# <a name="algorithm-add"></a> algorithm.add
+
+Adds new algorithm instance to the miner. Establish connection with remote pool and starts receiving work. When creating device workers, use `algorithm_id` to attach worker to this algorithm.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Algorithm name (see list of supported algorithms for [NVIDIA](/../nvidia) and [AMD](/../amd)).
+2 | string | Stratum URL (hostname with port, without `stratum+tcp://` prefix).
+3 | string | Username and password (split with `:`);
+
+_REMARKS_ If provided parameter 2 is `"benchmark"` then no connection is established to the remote pool, but rather benchmark dummy job is used for serving mining work.
+
+Response field | Type | Description
+------|---------|---------
+`algorithms` | array | Array of algorithms. If no algorithms, this array is empty.
+`algorithms[i]/algorithm_id` | int | Algorithm ID.
+`algorithms[i]/algorithm_id` | string | Algorithm name.
+`algorithms[i]/connected` | boolean | `True` if connected to remote pool.
+`algorithms[i]/got_job` | boolean | `True` if remote pool provided valid job.
+`algorithms[i]/address` | string | Remote address of the pool.
+`algorithms[i]/login` | string | Login to the pool.
+`algorithms[i]/workers` | array | Array of workers.
+`algorithms[i]/workers[k]/worker_id` | int | Worker ID.
+`algorithms[i]/workers[k]/device_id` | int | Linked device ID.
+`algorithms[i]/workers[k]/params` | array | Parameters which were used to start this worker (array of strings).
+`algorithms[i]/workers[k]/speed` | float | Speed in hashes per second.
+
+Example usage:
+```
+{"id":1,"method":"algorithm.add","params":["equihash","equihash.eu.nicehash.com:3357","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x"]}
+```
+
+Example response:
+```
+{
+   "algorithm_id":0,
+   "id":1,
+   "error":null
+}
 ```
 
 
