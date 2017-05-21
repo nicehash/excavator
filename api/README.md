@@ -44,7 +44,7 @@ device.set.fan.reset | Resets device fan speed. | Yes | No | AMD pending
 Method | Description 
 -------|------------
 [algorithm\.add](#algorithm-add) | Adds new algorithm.
-algorithm.remove | Removes algorithm.
+[algorithm\.remove](#algorithm-remove) | Removes algorithm.
 [algorithm\.list](#algorithm-list) | Lists all algorithms.
 algorithm.print.speeds | Prints speed of all algorithms.
 
@@ -52,8 +52,8 @@ algorithm.print.speeds | Prints speed of all algorithms.
 
 Method | Description 
 -------|------------
-worker.add | Adds new worker.
-worker.free | Removes worker.
+[worker\.add](#worker-add) | Adds new worker.
+[worker\.free](#worker-free) | Frees worker.
 worker.reset | Resets worker's speed.
 worker.print.speed | Prints speed of a worker.
 
@@ -363,9 +363,63 @@ Example response:
 ```
 
 
+# <a name="worker-add"></a> worker.add
+
+Creates a new worker by linking certain device with an algorithm.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Algorithm ID.
+2 | string | Device ID.
+3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](/../nvidia) and [AMD](/../amd).
+
+Response field | Type | Description
+------|---------|---------
+`worker_id` | int | Worker ID.
+
+Example usage:
+```
+{"id":1,"method":"worker.add","params":["0","0"]}
+```
+
+Example response:
+```
+{
+   "worker_id":0,
+   "id":1,
+   "error":null
+}
+```
+
+
+# <a name="worker-free"></a> worker.free
+
+Unlinks device from algorithm for provided worker. Worker thread with CUDA context or OpenCL thread stays alive and is ready to be
+occupied with next [worker\.add](#worker-add) call for that device. This call causes mining to stop on certain device.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Worker ID.
+
+This method returns no response fields. If error occured, field `error` is not `null` and contains error message of type `string`.
+
+Example usage:
+```
+{"id":1,"method":"worker.free","params":["0"]}
+```
+
+Example response:
+```
+{
+   "id":1,
+   "error":null
+}
+```
+
+
 # <a name="info"></a> info
 
-Returns basic information about Execavator.
+Returns basic information about Excavator.
 
 This method does not take in any parameter.
 
