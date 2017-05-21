@@ -5,6 +5,7 @@ Name | Supported devices | Wcount*1 | Pcount*2
 [equihash](#equihash) | NVIDIA SM 5.0+ | 2 | 0
 [pascal](#pascal) | NVIDIA SM 5.0+ | 1 | 2
 [decred](#decred)| NVIDIA SM 5.0+ | 1 | 3
+[sia](#sia)| NVIDIA SM 5.0+ | 1 | 2
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
@@ -35,7 +36,7 @@ Step 3 after 2 and step 5 before 6 assures that the GPU never enters P0 state wi
 Parameter # | Range | Explanation
 -----------------|----------|---------
 1 | 0-inf | Number of blocks
-2 | 0-1024 | Number of threads per block
+2 | 0-512 | Number of threads per block
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
@@ -45,7 +46,19 @@ If no parameters are provided, device specific defaults are used. If provided pa
 Parameter # | Range | Explanation
 -----------------|----------|---------
 1 | 0-inf | Number of blocks
-2 | 0-1024 | Number of threads per block
+2 | 0-512 | Number of threads per block
 3 | 0-inf | Number of iterations per thread
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+
+# <a name="sia"></a> sia
+
+Parameter # | Range | Explanation
+-----------------|----------|---------
+1 | 0-inf | Number of blocks
+2 | 0-512 | Number of threads per block
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+**WARNING: Sia is not tuned per card yet. You may reach higher speeds by experimenting with parameters.**

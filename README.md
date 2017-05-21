@@ -62,6 +62,10 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.2.2a
+- added algorithm CUDA sia
+- general fixes and improvements
+
 v1.2.1a
 - support for API and commanding file at the same time
 - added commanding file event: on_quit
