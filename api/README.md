@@ -251,18 +251,7 @@ _REMARKS_ If provided parameter 2 is `"benchmark"` then no connection is establi
 
 Response field | Type | Description
 ------|---------|---------
-`algorithms` | array | Array of algorithms. If no algorithms, this array is empty.
-`algorithms[i]/algorithm_id` | int | Algorithm ID.
-`algorithms[i]/algorithm_id` | string | Algorithm name.
-`algorithms[i]/connected` | boolean | `True` if connected to remote pool.
-`algorithms[i]/got_job` | boolean | `True` if remote pool provided valid job.
-`algorithms[i]/address` | string | Remote address of the pool.
-`algorithms[i]/login` | string | Login to the pool.
-`algorithms[i]/workers` | array | Array of workers.
-`algorithms[i]/workers[k]/worker_id` | int | Worker ID.
-`algorithms[i]/workers[k]/device_id` | int | Linked device ID.
-`algorithms[i]/workers[k]/params` | array | Parameters which were used to start this worker (array of strings).
-`algorithms[i]/workers[k]/speed` | float | Speed in hashes per second.
+`algorithm_id` | int | Algorithm ID.
 
 Example usage:
 ```
@@ -273,6 +262,30 @@ Example response:
 ```
 {
    "algorithm_id":0,
+   "id":1,
+   "error":null
+}
+```
+
+
+# <a name="algorithm-remove"></a> algorithm.remove
+
+Removes algorithm. This method also clears all linked workers. Call this method when connection to remote pool is not needed anymore.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Algorithm ID.
+
+This method returns no response fields. If error occured, field `error` is not `null` and contains error message of type `string`.
+
+Example usage:
+```
+{"id":1,"method":"algorithm.remove","params":["0"]}
+```
+
+Example response:
+```
+{
    "id":1,
    "error":null
 }
