@@ -243,7 +243,7 @@ Adds new algorithm instance to the miner. Establish connection with remote pool 
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Algorithm name (see list of supported algorithms for [NVIDIA](/../nvidia) and [AMD](/../amd)).
+1 | string | Algorithm name (see list of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia) and [AMD](https://github.com/nicehash/excavator/tree/master/amd)).
 2 | string | Stratum URL (hostname with port, without `stratum+tcp://` prefix).
 3 | string | Username and password (split with `:`);
 
@@ -371,7 +371,7 @@ Command parameter # | Type | Description
 -------|---------|---------
 1 | string | Algorithm ID.
 2 | string | Device ID.
-3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](/../nvidia) and [AMD](/../amd).
+3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia) and [AMD](https://github.com/nicehash/excavator/tree/master/amd).
 
 Response field | Type | Description
 ------|---------|---------
