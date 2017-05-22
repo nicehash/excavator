@@ -35,8 +35,10 @@ The following algorithms are currently supported:
 
 Name | Supported devices | Wcount*1 | Pcount*2
 -----------------|----------|---------|----
-[equihash](#equihash) | GCN2+ | 4 to 6| 2
-[pascal](#pascal) | GCN2+ | 4 | 2
+[equihash](#equihash) | GCN2+ | 4 | 2
+[pascal](#pascal) | GCN1+ | 4 | 3
+[sia](#sia) | GCN1+ | 4 | 2
+[decred](#decred) | GCN1+ | 4 | 4
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
@@ -69,5 +71,28 @@ Parameter # | Range | Explanation
 -----------------|----------|---------
 1 | 0-∞ | Global work size
 2 | 0-256 | Local work size
+3 | 0-∞ | Number of iterations
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+
+## <a name="sia"></a> sia
+
+Parameter # | Range | Explanation
+-----------------|----------|---------
+1 | 0-∞ | Global work size
+2 | 0-256 | Local work size
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+
+## <a name="decred"></a> decred
+
+Parameter # | Range | Explanation
+-----------------|----------|---------
+1 | 0 or 1 | Disable/enable binary kernels
+2 | 0-∞ | Global work size
+3 | 0-256 | Local work size
+4 | 0-∞ | Number of iterations
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.

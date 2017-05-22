@@ -1,6 +1,6 @@
 # NiceHash Excavator
 
-Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com). Excavator is being actively developed by djeZo and zawawa. Miner is using custom built code base with modern approach and supporting modern video cards - NVIDIA and AMD. For AMD support, please see [AMD readme](amd/README.md) for important details.
+Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com) and other pools. Excavator is being actively developed by djeZo and zawawa. Miner is using custom built code base with modern approach and supporting modern video cards - NVIDIA and AMD. For AMD support, please see [AMD readme](amd/README.md) for important details.
 
 Download from here: https://github.com/nicehash/excavator/releases
 
@@ -8,7 +8,7 @@ Download from here: https://github.com/nicehash/excavator/releases
 YOU ARE NOT ALLOWED TO REDISTRIBUTE IT!**
 
 
-# How to use Excavator?
+# How to Use Excavator?
 
 **ADVANCED** There are two methods to use Excavator. Both rely on API commands you can find in file [excavator-man-API.txt](excavator-man-API.txt). Do note that API manuals are still being created and that is just an incomplete draft so far.
 
@@ -44,7 +44,7 @@ Excavator contains HTTP server. Currently, it can serve API commands and is by d
 > http://bind-ip:bind-port/api?command={JSON-command-here}
 
 
-# <a name="cmdline"></a> Command line parameters
+# <a name="cmdline"></a> Command Line Parameters
 
 Parameter | Range | Description | Default
 -----------------|----------|----------|---------
@@ -58,12 +58,16 @@ Parameter | Range | Description | Default
 -c | file name | Use commanding file |
 
 
-# Additional notices
+# Additional Notices
 
 WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVERCLOCKING MAY PERMANENTLY DAMAGE YOUR COMPUTER HARDWARE! If you overclock, we suggest you to set '-or' to reset clocks after miner quits. This may prevent driver crashes or freezes due to high clocks. With parameter '-od' you can adjust overclock delay and apply new clocks when mining is already happening. This can also prevent crashes or freezes due to high clocks.
 
 
 # Changelog
+
+v1.2.3a
+- added algorithm OpenCL sia
+- added algorithm OpenCL decred
 
 v1.2.2a
 - added algorithm CUDA sia
