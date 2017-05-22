@@ -4,6 +4,9 @@ Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com]
 
 Download from here: https://github.com/nicehash/excavator/releases
 
+**WARNING!!! Excavator is a proprietary software by NiceHash and has a special [EULA](excavator-EULA.txt).
+YOU ARE NOT ALLOWED TO REDISTRIBUTE IT!**
+
 
 # How to use Excavator?
 
