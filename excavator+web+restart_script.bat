@@ -21,6 +21,8 @@ echo Opening website
 start cmd /c "@echo off & echo Please, wait %WEB_LAUNCH_DELAY% seconds for Excavator status page to open... & ping 127.0.0.1 -n %WEB_LAUNCH_DELAY% > nul & if "%WEB_HOST%"=="0.0.0.0" (explorer http://127.0.0.1:%WEB_PORT%) else (explorer http://%WEB_HOST%:%WEB_PORT%) & exit"
 
 :start
+@setlocal enableextensions
+@cd /d "%~dp0"
 echo Starting Excavator...
 excavator.exe -c %COMMAND_FILE% -d %CONSOLE_LOG_LEVEL% -f %FILE_LOG_LEVEL% -p 0 -wp %WEB_PORT% -wi %WEB_HOST%
 echo Excavator has crashed... restarting in %RESTART_DELAY% seconds...

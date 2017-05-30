@@ -8,7 +8,7 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />		   
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <script type="text/javascript">
@@ -65,6 +65,7 @@
 	.loader {border: 12px solid #f3f3f3;border-top: 12px solid #fbc342;border-radius: 50%;width: 120px; height: 120px;animation: spin 2s linear infinite;	margin:100px auto;}
 	@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}
 	.loadingFrame{width:100%;}
+	.errorFrame{width:100%;padding:60px 0;margin:0 auto;font-size:24px;text-align:center;color:#f23232;font-family:'ralewaybold',sans-serif;}
 	.header_line{background: #fba542;background: -moz-linear-gradient(left, #fb8842 0%, #fbc342 50%, #7db9e8 100%);background: -webkit-linear-gradient(left, #fb8842 0%, #fbc342 100%);background: linear-gradient(to right, #fb8842 0%,#fbc342 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb8842', endColorstr='#7db9e8',GradientType=1);width:100%;height:20px;margin:0 0 60px 0;}
 	header{display:table;margin:0 auto 60px auto;}
 	h1{color:#382c2e;font-size:60px;line-height:1;padding:0;margin:0;text-transform:uppercase;font-family:'ralewayblack',sans-serif;}
@@ -133,6 +134,7 @@
 		<h2>by NiceHash</h2>
 	</header>
 	<div class="loadingFrame"><div class="loader"></div></div>
+	<div class="errorFrame" style="display:none;">Excavator is currently offline.</div>
 	<div id="content" style="display:none;">
 		<div class="segment devices">
 			<table>
@@ -162,7 +164,8 @@
 		</div>
 	</div>
 	<footer>
-		Excavator version: <span id="ver"></span> <span class="divider">|</span> Build time: <span id="buildTime"></span> <span class="divider">|</span> Build number: <span id="buildNumber"></span><br><br>
+		<div id="versionData">Excavator version: <span id="ver"></span> <span class="divider">|</span> Build time: <span id="buildTime"></span> <span class="divider">|</span> Build number: <span id="buildNumber"></span></div>
+		<br><br>
 		<a href="https://www.nicehash.com" target="_blank">NiceHash</a><span class="divider">|</span><a href="https://github.com/nicehash/excavator/" target="_blank">Excavator on GitHub</a><span class="divider">|</span><a href="mailto:support@nicehash.com">Contact</a>
 	</footer>
 
@@ -210,6 +213,11 @@
 						}
 					});
 				});
+			}).fail(function() {
+				$('.loadingFrame').hide();
+				$('#content').hide();
+				$('#versionData').hide();
+				$('.errorFrame').show();
 			});
 		}
 		
@@ -326,6 +334,8 @@
 			$('#ver').html(dataVersion.version);
 			$('#buildTime').html(dataVersion.build_time);
 			$('#buildNumber').html(dataVersion.build_number);
+		}).fail(function() {
+			$('#versionData').hide();
 		});
 
 		setInterval(function(){

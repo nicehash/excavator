@@ -65,6 +65,10 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.2.4a
+- improved OpenCL hardware detection and monitoring
+- improved web page
+
 v1.2.3a
 - added algorithm OpenCL sia
 - added algorithm OpenCL decred
