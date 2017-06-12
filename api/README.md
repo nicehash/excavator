@@ -34,32 +34,32 @@ Method | Description | Supported NVIDIA | Supported AMD | Developer notes
 [device\.get](#device-get) | Queries particular device - GPU. | Yes | Yes |
 [device\.set\.power_limit](#device-set-power-limit) | Sets device power limit. | Yes | No | AMD pending
 [device\.set\.tdp](#device-set-tdp) | Sets device TDP. | Yes | No | AMD pending
-device.set.core_delta | Sets device core clock (delta +/-). | Yes | No | AMD pending
-device.set.memory_delta | Sets device memory clock (delta +/-). | Yes | No | AMD pending
-device.set.fan.speed | Sets device fan speed. | Yes | No | AMD pending
-device.set.fan.reset | Resets device fan speed. | Yes | No | AMD pending
+[device\.set\.core_delta](#device-set-core-delta) | Sets device core clock (delta +/-). | Yes | No | AMD pending
+[device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-). | Yes | No | AMD pending
+[device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed. | Yes | No | AMD pending
+[device\.set\.fan\.reset](#device-set-fan-reset) | Resets device fan speed. | Yes | No | AMD pending
 
 **Algorithm managing methods**
 
-Method | Description 
+Method | Description
 -------|------------
 [algorithm\.add](#algorithm-add) | Adds new algorithm.
 [algorithm\.remove](#algorithm-remove) | Removes algorithm.
 [algorithm\.list](#algorithm-list) | Lists all algorithms.
-algorithm.print.speeds | Prints speed of all algorithms.
+[algorithm\.print\.speeds](#algorithm-print-speeds) | Prints speed of all algorithms.
 
 **Worker managing methods**
 
-Method | Description 
+Method | Description
 -------|------------
 [worker\.add](#worker-add) | Adds new worker.
 [worker\.free](#worker-free) | Frees worker.
-worker.reset | Resets worker's speed.
-worker.print.speed | Prints speed of a worker.
+[worker\.reset](#worker-reset) | Resets worker's speed.
+[worker\.print\.speed](#worker-speed)| Prints speed of a worker.
 
 **Miscellaneous methods**
 
-Method | Description 
+Method | Description
 -------|------------
 [info](#info) | Gets information about Excavator.
 [quit](#quit) | Quits Excavator.
@@ -119,7 +119,7 @@ Example response:
           "name":"Ellesmere",
           "gpgpu_type":2,
           "details":{
-          
+
           }
       }
    ],
@@ -213,7 +213,10 @@ Example usage:
 
 Example response:
 ```
-{"id":1,"error":null}
+{
+  "id":1,
+  "error":null
+}
 ```
 
 
@@ -233,8 +236,106 @@ Example usage:
 
 Example response:
 ```
-{"id":1,"error":null}
+{
+  "id":1,
+  "error":null
+}
 ```
+
+
+# <a name="device-set-core-delta"></a> device.set.core_delta
+
+Sets delta of max core clock of GPU. Provided clock delta is in MHz. Note that this clock is not achieved if GPU is TDP limited.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID.
+2 | string | Clock delta in MHz.
+
+Example usage:
+```
+{"id":1,"method":"device.set.core_delta","params":["0","250"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
+
+# <a name="device-set-memory-delta"></a> device.set.memory_delta
+
+Sets delta of max memory clock of GPU. Provided clock delta is in MHz.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID.
+2 | string | Clock delta in MHz.
+
+Example usage:
+```
+{"id":1,"method":"device.set.memory_delta","params":["0","-300"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
+
+# <a name="device-set-fan-speed"></a> device.set.fan.speed
+
+Sets fan speed of device. Provided fan speed is in %.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID.
+2 | string | Fan speed in % (from 0 to 100).
+
+Example usage:
+```
+{"id":1,"method":"device.set.fan.speed","params":["0","60"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
+# <a name="device-set-fan-reset"></a> device.set.fan.reset
+
+Resets fan speed to factory's default.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID.
+
+
+Example usage:
+```
+{"id":1,"method":"device.set.fan.reset","params":["0"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
 
 
 # <a name="algorithm-add"></a> algorithm.add
@@ -363,6 +464,25 @@ Example response:
 ```
 
 
+# <a name="algorithm-print-speeds"></a> algorithm.print.speeds
+
+Prints total speed of all algorithms to console output.
+
+
+Example usage:
+```
+{"id":1,"method":"algorithm.print.speeds","params":[]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
 # <a name="worker-add"></a> worker.add
 
 Creates a new worker by linking certain device with an algorithm.
@@ -415,6 +535,56 @@ Example response:
    "error":null
 }
 ```
+
+
+
+# <a name="worker-reset"></a> worker.reset
+
+Resets logged speed of worker to 0.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Worker ID.
+
+
+Example usage:
+```
+{"id":1,"method":"worker.reset","params":["0"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
+
+
+# <a name="worker-speed"></a> worker.print.speed
+
+Prints speed of worker to console output. Useful for benchmarking.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Worker ID.
+
+
+Example usage:
+```
+{"id":1,"method":"worker.print.speed","params":["0"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
 
 
 # <a name="info"></a> info
