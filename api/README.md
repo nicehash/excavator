@@ -4,7 +4,25 @@
 
 # Overview
 
-API is based on TCP-JSON messaging system. Every input JSON message (command) has an output JSON message (response). All commands and response are terminated by newline character '\n'.
+There are two ways to use API. Details are explained below.
+
+1. Using HTTP API
+
+   You need to launch Excavator with `-wp` command line parameter being set to local HTTP bind port. Optionally, you may also set `-wi` to set local bind IP and `-wa` to set authorization token.
+
+   To issue an API command, use following URL format:
+
+   > http://bind-ip:bind-port/api?command={JSON-command-here}
+
+   You may encode URL. List of available JSON commands is listed below in this document. Response is returned as JSON message in HTTP content field.
+
+   To limit access to write-API methods, you can specify HTTP API authorization token. When calling these API methods, you need to set HTTP header with name `Authorization` and value token. Write-API methods are all methods that alter behaviour of Excavator or cause some system/device changes.
+
+2. Using TCP stream
+
+   You need to launch Excavator with `-p` command line parameter being set to local TCP bind port. Optionally, you may also set `-i` to set local bind IP.
+
+   API is based on TCP-JSON messaging system. Every input JSON message (command) has an output JSON message (response). All commands and response are terminated by newline character `\n`.
 
 Each command has three mandatory fields:
 
@@ -266,7 +284,6 @@ Example response:
 ```
 
 
-
 # <a name="device-set-memory-delta"></a> device.set.memory_delta
 
 Sets delta of max memory clock of GPU. Provided clock delta is in MHz.
@@ -288,7 +305,6 @@ Example response:
   "error":null
 }
 ```
-
 
 
 # <a name="device-set-fan-speed"></a> device.set.fan.speed
@@ -335,7 +351,6 @@ Example response:
   "error":null
 }
 ```
-
 
 
 # <a name="algorithm-add"></a> algorithm.add
