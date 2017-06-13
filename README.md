@@ -10,7 +10,9 @@ YOU ARE NOT ALLOWED TO REDISTRIBUTE IT!**
 
 # How to Use Excavator?
 
-**ADVANCED** There are two methods to use Excavator. Both rely on API commands you can find in file [excavator-man-API.txt](excavator-man-API.txt). Do note that API manuals are still being created and that is just an incomplete draft so far.
+First, make sure you have Visual C++ 2013 redistributable (x64) installed.
+
+**ADVANCED** There are two methods to use Excavator. Both rely on API commands you can find in [API section](/api).
 
 1. Using API port or HTTP API; for that, you need an application that will pass commands to the Excavator. We do not provide any such application (except [web example](/web)), nor there is any public source code available (yet). 
 
@@ -22,7 +24,7 @@ YOU ARE NOT ALLOWED TO REDISTRIBUTE IT!**
 
 2. Using start-up commanding file. See example [default_command_file.json](default_command_file.json).
 
-   File contains a JSON array of all actions that would happen during runtime of Excavator. Each array item has two mandatory fields and one optional. Mandatory is 'time' which tells you after how many seconds since start of Excavator commands should execute and 'commands' which is a JSON array of commands you can find in [excavator-man-API.txt](excavator-man-API.txt). 
+   File contains a JSON array of all actions that would happen during runtime of Excavator. Each array item has two mandatory fields and one optional. Mandatory is 'time' which tells you after how many seconds since start of Excavator commands should execute and 'commands' which is a JSON array of commands you can find in [API section](/api). 
 
    Optionally you can specify 'loop' which repeat commands every 'loop' seconds. When creating algorithms and workers, note that IDs of returned objects always  run from 0 and on, so first algorithm always has ID 0, second 1 etc. 
 
@@ -39,10 +41,6 @@ Excavator also supports configuring console logging level and file logging level
 
 To get details about specific algorithms that are available in Excavator, check [AMD information](/amd) or [NVIDIA information](/nvidia).
 
-Excavator contains HTTP server. Currently, it can serve API commands and is by default disabled. You can enable it by configuring HTTP bind port ('-wp'). API is available at URL:
-
-> http://bind-ip:bind-port/api?command={JSON-command-here}
-
 
 # <a name="cmdline"></a> Command Line Parameters
 
@@ -53,6 +51,7 @@ Parameter | Range | Description | Default
 -i | local IP | API bind IP | 127.0.0.1
 -wp | 0-65535 | HTTP API bind port | 0
 -wi | local IP | HTTP API bind IP | 127.0.0.1
+-wa | string | HTTP API authorization token |
 -d | 0-6 | Console log level | 2
 -f | 0-6 | File log level | 6
 -c | file name | Use commanding file |
@@ -64,6 +63,16 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 
 # Changelog
+
+v1.2.5a
+- added hardware acceleration for Radeon RX 460/470/480/560/570/580
+- added daggerhashimoto (a.k.a. Ethash) OpenCL kernel for NiceHash
+- added algorithm details (pool stats)
+- added system details to info API
+- added optional HTTP API auth token
+- wrong OpenCL.dll fix attempt
+- improved OpenCL hardware management
+- added algorithm CUDA lbry
 
 v1.2.4a
 - improved OpenCL hardware detection and monitoring

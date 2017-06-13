@@ -176,14 +176,14 @@
 		var temperature, utilization, power, fan, fanRPM, deviceName, allDevices, deviceId;
 		var algoSuffix, algoEfficiencySuffix, algoWorkerSuffix, algoWorkerEfficiencySuffix;
 		function getDevices(){
-			$.getJSON('api?command={"id":1,"method":"device.list","params":[]}',function(dataDevices){
+			$.getJSON('api?command={"id":1,"method":"device.list","params":[]}&nocache=' + (new Date()).getTime() + '',function(dataDevices){
 				var deviceHtml = '';
 				allDevices = dataDevices.devices;
 				var devicesCount = allDevices.length;
 				var devicesC	 = 0;
 				jQuery.each(allDevices, function(i,device) {
 					// Get all data for deviceId
-					$.getJSON('api?command={"id":1,"method":"device.get","params":["' + device.device_id + '"]}',function(dataDevice){
+					$.getJSON('api?command={"id":1,"method":"device.get","params":["' + device.device_id + '"]}&nocache=' + (new Date()).getTime() + '',function(dataDevice){
 						// Save to array
 						devicesArray[device.device_id] = [];
 						devicesArray[device.device_id]['temperature'] 	= dataDevice.gpu_temp;
@@ -223,7 +223,7 @@
 		
 		// Get all algorithms
 		function getAlgorithms(){
-			$.getJSON('api?command={"id":1,"method":"algorithm.list","params":[]}',function(dataAlgorithms){
+			$.getJSON('api?command={"id":1,"method":"algorithm.list","params":[]}&nocache=' + (new Date()).getTime() + '',function(dataAlgorithms){
 				var algorithms = dataAlgorithms.algorithms;
 				jQuery.each(algorithms, function(i,algo) {
 					var algorithmId = algo.algorithm_id;
@@ -324,13 +324,14 @@
 					$('#algorithmsHtml').append(algorithmsHtml + workersHtml);
 				});
 				$(".loadingFrame").hide();
+				$(".errorFrame").hide();
 				$("#content").show();
 			});
 		}
 		
 	  $(function(){
 
-		$.getJSON('api?command={"id":1,"method":"info","params":[]}',function(dataVersion) {
+		$.getJSON('api?command={"id":1,"method":"info","params":[]}&nocache=' + (new Date()).getTime() + '',function(dataVersion) {
 			$('#ver').html(dataVersion.version);
 			$('#buildTime').html(dataVersion.build_time);
 			$('#buildNumber').html(dataVersion.build_number);

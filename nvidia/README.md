@@ -6,6 +6,7 @@ Name | Supported devices | Wcount*1 | Pcount*2
 [pascal](#pascal) | NVIDIA SM 5.0+ | 1 | 2
 [decred](#decred)| NVIDIA SM 5.0+ | 1 | 3
 [sia](#sia)| NVIDIA SM 5.0+ | 1 | 2
+[lbry](#lbry)| NVIDIA SM 5.0+ | 1 | 3
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
@@ -62,3 +63,15 @@ Parameter # | Range | Explanation
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
 **WARNING: Sia is not tuned per card yet. You may reach higher speeds by experimenting with parameters.**
+
+# <a name="lbry"></a> lbry
+
+Parameter # | Range | Explanation
+-----------------|----------|---------
+1 | 0-inf | Number of blocks
+2 | 0-768 | Number of threads per block
+3 | 0-inf | Number of iterations per thread
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+**WARNING: Lbry is tuned for next cards: 1080 Ti, 1080, 1070 and 1060 6GB. You may reach higher speeds by experimenting with parameters when using a different card.**
