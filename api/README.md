@@ -421,6 +421,10 @@ Response field | Type | Description
 `algorithms[i]/algorithm_id` | string | Algorithm name.
 `algorithms[i]/connected` | boolean | `True` if connected to remote pool.
 `algorithms[i]/got_job` | boolean | `True` if remote pool provided valid job.
+`algorithms[i]/details/total_shares` | int | Total shares sent to the remote pool.
+`algorithms[i]/details/total_accepted` | int | Total shares accepted by the remote pool.
+`algorithms[i]/details/total_rejected` | int | Total shares rejected by the remote pool.
+`algorithms[i]/details/last_efficiency` | float | Efficiency of past 32 shares (1.0 = all accepted).
 `algorithms[i]/address` | string | Remote address of the pool.
 `algorithms[i]/login` | string | Login to the pool.
 `algorithms[i]/workers` | array | Array of workers.
@@ -443,6 +447,13 @@ Example response:
          "name":"equihash",
          "connected":true,
          "got_job":true,
+         "details":
+            {
+               "total_shares":10,
+               "total_accepted":10,
+               "total_rejected":0,
+               "last_efficiency":1.0
+            },
          "address":"equihash.eu.nicehash.com:3357",
          "login":"34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x",
          "workers":[
