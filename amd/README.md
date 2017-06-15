@@ -43,7 +43,7 @@ it either at startup or by running the following .bat file:
 Please note that you need administrator privileges to do so and 
 a restart is required after executing the .bat file. The second 
 requirement will be removed for the next stable version. Lastly, for the initial run,
-it is very important to **reset the graphics card to stock settings.**
+it is very important to **reset the graphics card to stock settings, including the BIOS.**
 
 If everything goes well, you should see the following message:
 
@@ -76,7 +76,8 @@ If no parameters are provided, device specific defaults are used. If provided pa
 
 ### <a name="daggerhashimoto"></a> daggerhashimoto
 
-With daggerhashimoto/Ethash, excavator only supports NiceHash as a pool for now.
+With daggerhashimoto/Ethash, excavator only supports NiceHash'es Ethereum stratum mining protocol:
+https://github.com/nicehash/Specifications/blob/master/EthereumStratum_NiceHash_v1.0.0.txt
 
 Parameter # | Range | Explanation
 -----------------|----------|---------

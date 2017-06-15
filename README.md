@@ -64,6 +64,12 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.2.6a
+- stabilized hardware acceleration
+- improved DAG handling
+- improved lbry parameters
+- zero division bug fix
+
 v1.2.5a
 - added hardware acceleration for Radeon RX 460/470/480/560/570/580
 - added daggerhashimoto (a.k.a. Ethash) OpenCL kernel for NiceHash
