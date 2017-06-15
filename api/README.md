@@ -418,7 +418,7 @@ Response field | Type | Description
 ------|---------|---------
 `algorithms` | array | Array of algorithms. If no algorithms, this array is empty.
 `algorithms[i]/algorithm_id` | int | Algorithm ID.
-`algorithms[i]/algorithm_id` | string | Algorithm name.
+`algorithms[i]/name` | string | Algorithm name.
 `algorithms[i]/connected` | boolean | `True` if connected to remote pool.
 `algorithms[i]/got_job` | boolean | `True` if remote pool provided valid job.
 `algorithms[i]/details/total_shares` | int | Total shares sent to the remote pool.
