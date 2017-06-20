@@ -68,6 +68,7 @@ v1.2.7a
 - digitally signed phymem.sys
 - added named parameters
 - added algorithm CUDA blake2s
+- bug fixes and improvements
 
 v1.2.6a
 - stabilized hardware acceleration
