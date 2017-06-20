@@ -34,16 +34,8 @@ the GCN2 architecture or above.
 Excavator supports hardware acceleration for daggerhashimoto/Ethash- and Equihash-based 
 coins, such as Ethereum and Zcash. In order to enable it, you need to **run 
 the miner as administrator** as excavator needs to access the graphics 
-card directly. Furthermore, **driver signature enforcement needs to be 
-disabled** on Windows 10 for the time being. You can deactivate
-it either at startup or by running the following .bat file:
-
-    turn-driver-signature-enforcement-off.bat
-
-Please note that you need administrator privileges to do so and 
-a restart is required after executing the .bat file. The second 
-requirement will be removed for the next stable version. Lastly, for the initial run,
-it is very important to **reset the graphics card to stock settings, including the BIOS.**
+card directly. Furthermore,  for the initial run,
+it is very important to **reset the graphics card to the stock settings, including the BIOS.**
 
 If everything goes well, you should see the following message:
 
@@ -52,7 +44,7 @@ If everything goes well, you should see the following message:
 Otherwise:
 
     Failed to load phymem.
-    Please disable driver signature enforcement and run miner as administrator.
+    Please run miner as administrator if you are using AMD cards.
 
 
 ## Supported Algorithms

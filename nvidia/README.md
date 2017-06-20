@@ -7,10 +7,16 @@ Name | Supported devices | Wcount*1 | Pcount*2
 [decred](#decred)| NVIDIA SM 5.0+ | 1 | 3
 [sia](#sia)| NVIDIA SM 5.0+ | 1 | 2
 [lbry](#lbry)| NVIDIA SM 5.0+ | 1 | 3
+[blake2s](#blake2s)| NVIDIA SM 5.0+ | 1 | 3
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
 *2 Number of supported parameters. Parameters are explained in details in section for each algorithm.
+
+All CUDA algorithms support named parameters. Named parameters are of format NAME=VALUE; example:
+   `... ["0","1","TPB=512","B=30"] ...`
+
+When providing named parameters, order is not important. You can mix named and unnamed parameters. Named parameters are ignored in unnamed list.
 
 
 # <a name="equihash"></a> equihash
@@ -34,44 +40,58 @@ Step 3 after 2 and step 5 before 6 assures that the GPU never enters P0 state wi
 
 # <a name="pascal"></a> pascal
 
-Parameter # | Range | Explanation
+Parameter # or name | Range | Explanation
 -----------------|----------|---------
-1 | 0-inf | Number of blocks
-2 | 0-512 | Number of threads per block
+1 or `B` | 0-inf | Number of blocks
+2 or `TPB` | 0-512 | Number of threads per block
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
 
 # <a name="decred"></a> decred
 
-Parameter # | Range | Explanation
+Parameter # or name | Range | Explanation
 -----------------|----------|---------
-1 | 0-inf | Number of blocks
-2 | 0-512 | Number of threads per block
-3 | 0-inf | Number of iterations per thread
+1 or `B` | 0-inf | Number of blocks
+2 or `TPB` | 0-512 | Number of threads per block
+3 or `NPT` | 0-inf | Number of iterations per thread
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
 
 # <a name="sia"></a> sia
 
-Parameter # | Range | Explanation
+Parameter # or name | Range | Explanation
 -----------------|----------|---------
-1 | 0-inf | Number of blocks
-2 | 0-512 | Number of threads per block
+1 or `B` | 0-inf | Number of blocks
+2 or `TPB` | 0-512 | Number of threads per block
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
 **WARNING: Sia is not tuned per card yet. You may reach higher speeds by experimenting with parameters.**
 
+
 # <a name="lbry"></a> lbry
 
-Parameter # | Range | Explanation
+Parameter # or name | Range | Explanation
 -----------------|----------|---------
-1 | 0-inf | Number of blocks
-2 | 0-768 | Number of threads per block
-3 | 0-inf | Number of iterations per thread
+1 or `B` | 0-inf | Number of blocks
+2 or `TPB` | 0-768 | Number of threads per block
+3 or `NPT` | 0-inf | Number of iterations per thread
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
 **WARNING: Lbry is tuned for next cards: 1080 Ti, 1080, 1070 and 1060 6GB. You may reach higher speeds by experimenting with parameters when using a different card.**
+
+
+# <a name="blake2s"></a> blake2s
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `B` | 0-inf | Number of blocks
+2 or `TPB` | 0-1024 | Number of threads per block
+3 or `NPT` | 0-inf | Number of iterations per thread
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+**WARNING: Blake2s is tuned for next cards: 1080 Ti, 1080, 1070 and 1060 6GB. You may reach higher speeds by experimenting with parameters when using a different card.**

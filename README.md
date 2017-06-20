@@ -59,10 +59,15 @@ Parameter | Range | Description | Default
 
 # Additional Notices
 
-WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVERCLOCKING MAY PERMANENTLY DAMAGE YOUR COMPUTER HARDWARE! If you overclock, we suggest you to set '-or' to reset clocks after miner quits. This may prevent driver crashes or freezes due to high clocks. With parameter '-od' you can adjust overclock delay and apply new clocks when mining is already happening. This can also prevent crashes or freezes due to high clocks.
+WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVERCLOCKING MAY PERMANENTLY DAMAGE YOUR COMPUTER HARDWARE! 
 
 
 # Changelog
+
+v1.2.7a
+- digitally signed phymem.sys
+- added named parameters
+- added algorithm CUDA blake2s
 
 v1.2.6a
 - stabilized hardware acceleration
