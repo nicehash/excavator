@@ -64,6 +64,9 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.2.8a
+- improved phymem.sys handling
+
 v1.2.7a
 - digitally signed phymem.sys
 - added named parameters
