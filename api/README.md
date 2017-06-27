@@ -656,7 +656,7 @@ This method returns no response fields.
 
 Example usage:
 ```
-{"id":1,"method":"info","params":[]}
+{"id":1,"method":"quit","params":[]}
 ```
 
 Example response:
