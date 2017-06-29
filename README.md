@@ -64,6 +64,11 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.2.9a
+- further phymem.sys bug fixes
+- added algorithm CUDA daggerhashimoto
+- bug fixes
+
 v1.2.8a
 - improved phymem.sys handling
 

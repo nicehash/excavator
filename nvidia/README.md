@@ -8,6 +8,7 @@ Name | Supported devices | Wcount*1 | Pcount*2
 [sia](#sia)| NVIDIA SM 5.0+ | 1 | 2
 [lbry](#lbry)| NVIDIA SM 5.0+ | 1 | 3
 [blake2s](#blake2s)| NVIDIA SM 5.0+ | 1 | 3
+[daggerhashimoto](#daggerhashimoto)| NVIDIA SM 5.2+ | 1 | 4
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
@@ -95,3 +96,22 @@ Parameter # or name | Range | Explanation
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
 **WARNING: Blake2s is tuned for next cards: 1080 Ti, 1080, 1070 and 1060 6GB. You may reach higher speeds by experimenting with parameters when using a different card.**
+
+# <a name="daggerhashimoto"></a> daggerhashimoto
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `B` | 0-inf | Number of blocks
+2 or `TPB` | 0-512 | Number of threads per block
+3 or `HPW` | 0-8 | Number of parallel hashes per warp
+4 or `S` | 0-2 | Number of streams
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+**WARNING: Daggerhashimoto is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB and 1050 Ti. You may reach higher speeds by experimenting with parameters when using a different card.**
+
+NOTE1: If you use Windows 10 and your speed is very low, make sure you use Windows version 1607 or higher and latest NVIDIA drivers.
+
+NOTE2: You can set epoch for benchmark as a third parameter when adding benchmark algorithm. Example to benchmark with epoch 150:
+
+`{"id":1,"method":"algorithm.add","params":["daggerhashimoto","benchmark","150"]}`
