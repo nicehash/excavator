@@ -110,8 +110,10 @@ If no parameters are provided, device specific defaults are used. If provided pa
 
 **WARNING: Daggerhashimoto is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB and 1050 Ti. You may reach higher speeds by experimenting with parameters when using a different card.**
 
-NOTE1: If you use Windows 10 and your speed is very low, make sure you use Windows version 1607 or higher and latest NVIDIA drivers.
+NOTE1: If you use Windows 10 and your speed is very low, make sure you use Windows version 1607 or higher and latest NVIDIA drivers. When you use Maxwell cards for mining, also make sure you turn on `Optimize for compute performance` and set some value for `DSR-Factors` in NVIDIA control panel.
 
 NOTE2: You can set epoch for benchmark as a third parameter when adding benchmark algorithm. Example to benchmark with epoch 150:
 
 `{"id":1,"method":"algorithm.add","params":["daggerhashimoto","benchmark","150"]}`
+
+NOTE3: Only EthereumStratum protocol is supported. This means daggerhashimoto may not work on all pools. Specifications of EthereumStratum can be found here: https://github.com/nicehash/Specifications

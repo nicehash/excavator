@@ -55,6 +55,7 @@ Parameter | Range | Description | Default
 -d | 0-6 | Console log level | 2
 -f | 0-6 | File log level | 6
 -c | file name | Use commanding file |
+-na |  | Disable AMD support |
 
 
 # Additional Notices
@@ -63,6 +64,13 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 
 # Changelog
+
+v1.2.10a
+- added DAG cache host memory storage for quicker DAG switches
+- speed improvements for all CUDA algorithms for certain cards
+- CUDA faster DAG generation
+- bug fixes for AMD cards
+- added option to disable AMD support
 
 v1.2.9a
 - further phymem.sys bug fixes
