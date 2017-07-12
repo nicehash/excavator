@@ -54,7 +54,7 @@ Method | Description | Supported NVIDIA | Supported AMD | Developer notes
 [device\.set\.tdp](#device-set-tdp) | Sets device TDP. | Yes | No | AMD pending
 [device\.set\.core_delta](#device-set-core-delta) | Sets device core clock (delta +/-). | Yes | No | AMD pending
 [device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-). | Yes | No | AMD pending
-[device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed. | Yes | No | AMD pending
+[device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed. | Yes | Yes | 
 [device\.set\.fan\.reset](#device-set-fan-reset) | Resets device fan speed. | Yes | No | AMD pending
 
 **Algorithm managing methods**
