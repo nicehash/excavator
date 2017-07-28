@@ -35,7 +35,7 @@ Excavator supports hardware acceleration for daggerhashimoto/Ethash- and Equihas
 coins, such as Ethereum and Zcash. In order to enable it, you need to **run 
 the miner as administrator** as excavator needs to access the graphics 
 card directly. Furthermore,  for the initial run,
-it is very important to **reset the graphics card to the stock settings, including the BIOS.**
+it is highly recommended to **reset the graphics card to the stock settings, including the BIOS.**
 
 If everything goes well, you should see the following message:
 
@@ -45,6 +45,10 @@ Otherwise:
 
     Failed to load phymem.
     Please run miner as administrator if you are using AMD cards.
+
+Also, it should be noted that excavator's hardware acceleration is not compatible
+with MSI Afterburner and Radeon Settings. They will be automatically shut down 
+when excavator starts and resumed when it quits.
 
 
 ## Supported Algorithms

@@ -65,6 +65,12 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.2.11a
+- added support for TITAN Xp
+- added algorithm CUDA lyra2rev2
+- added API method message
+- bug fixes & improvements
+
 v1.2.10a
 - added DAG cache host memory storage for quicker DAG switches
 - speed improvements for all CUDA algorithms for certain cards
