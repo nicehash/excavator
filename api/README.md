@@ -81,6 +81,7 @@ Method | Description
 -------|------------
 [info](#info) | Gets information about Excavator.
 [quit](#quit) | Quits Excavator.
+[message](#message) | Displays message in console.
 
 
 # <a name="device-list"></a> device.list
@@ -587,8 +588,6 @@ Example response:
 ```
 
 
-
-
 # <a name="worker-speed"></a> worker.print.speed
 
 Prints speed of worker to console output. Useful for benchmarking.
@@ -610,7 +609,6 @@ Example response:
   "error":null
 }
 ```
-
 
 
 # <a name="info"></a> info
@@ -664,5 +662,28 @@ Example response:
 {  
    "id":1,
    "error":null
+}
+```
+
+
+# <a name="message"></a> message
+
+Displays provided message in console output.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Message.
+
+
+Example usage:
+```
+{"id":1,"method":"message","params":["Test!"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
 }
 ```
