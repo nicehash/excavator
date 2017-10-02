@@ -179,8 +179,8 @@ Response field | Type | Description
 `gpu_clock_memory` | int | Maximal GPU core clock (non restricted by temperature or power throttling).
 `gpu_fan_speed` | int | Current fan speed in %.
 `gpu_fan_speed_rpm` | int | Current fan speed in RPMs.
-`gpu_memory_free` | int | Free GPU memory in bytes.
-`gpu_memory_used` | int | Used GPU memory in bytes.
+`gpu_memory_free` | long | Free GPU memory in bytes.
+`gpu_memory_used` | long | Used GPU memory in bytes.
 
 Example usage:
 ```
