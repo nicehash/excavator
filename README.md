@@ -1,6 +1,6 @@
 # NiceHash Excavator
 
-Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com) and other pools. Excavator is being actively developed by djeZo and zawawa. Miner is using custom built code base with modern approach and supporting modern video cards - NVIDIA and AMD. For AMD support, please see [AMD readme](amd/README.md) for important details.
+Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com) and other pools. Excavator is being actively developed by djeZo, zawawa, dropky and voidstar. Miner is using custom built code base with modern approach and supporting modern video cards - NVIDIA and AMD. For AMD support, please see [AMD readme](amd/README.md) for important details.
 
 Download from here: https://github.com/nicehash/excavator/releases
 
@@ -14,29 +14,29 @@ First, make sure you have Visual C++ 2013 redistributable (x64) installed.
 
 **ADVANCED** There are two methods to use Excavator. Both rely on API commands you can find in [API section](/api).
 
-1. Using API port or HTTP API; for that, you need an application that will pass commands to the Excavator. We do not provide any such application (except [web example](/web)), nor there is any public source code available (yet). 
+1. Using API port or HTTP API; for that, you need an application that will pass commands to the Excavator. We do not provide any such application (except [web example](/web)), nor there is any public source code available (yet).
 
    The API works over standard TCP port and is JSON-message based with '\n' terminated messages. Do note that once you build up such application, you virtually have no limits anymore. You can truly optimize your mining to the max; you can launch various algorithms (at the same time), you can randomly assign workers (turn devices on off), do dual/triple mining, algorithm switching, adjusting TDPs, core or memory clock and fan speeds. Additionally to that, you can also read various GPU parameters and algorithm speeds reached by GPUs.
-   
+
    Default API bind port is 3456, but you can change it with '-p' command line parameter.
 
    HTTP API is disabled by default. You can enable it by configuring [command line parameters](#cmdline).
 
 2. Using start-up commanding file. See example [default_command_file.json](default_command_file.json).
 
-   File contains a JSON array of all actions that would happen during runtime of Excavator. Each array item has two mandatory fields and one optional. Mandatory is 'time' which tells you after how many seconds since start of Excavator commands should execute and 'commands' which is a JSON array of commands you can find in [API section](/api). 
+   File contains a JSON array of all actions that would happen during runtime of Excavator. Each array item has two mandatory fields and one optional. Mandatory is 'time' which tells you after how many seconds since start of Excavator commands should execute and 'commands' which is a JSON array of commands you can find in [API section](/api).
 
-   Optionally you can specify 'loop' which repeat commands every 'loop' seconds. When creating algorithms and workers, note that IDs of returned objects always  run from 0 and on, so first algorithm always has ID 0, second 1 etc. 
+   Optionally you can specify 'loop' which repeat commands every 'loop' seconds. When creating algorithms and workers, note that IDs of returned objects always  run from 0 and on, so first algorithm always has ID 0, second 1 etc.
 
-   You will want to figure out ID of each card; use telnet to connect to Excavator then send command 
+   You will want to figure out ID of each card; use telnet to connect to Excavator then send command
    > {"id":1,"method":"device.list","params":[]}
-   
+
    to retreive all available devices and their IDs.
 
    After you have your commanding file ready, use '-c' command line switch to provide file name when starting Excavator.
 
    We suggest using [excavator+web+restart_script.bat](excavator+web+restart_script.bat) that automatically launches web browser displaying status and has a restart script to put Excavator back on if it crashes.
-   
+
 Excavator also supports configuring console logging level and file logging level. Level '0' means full detail logging, level '6' means no logging. By default console logging is set to '2', file logging set to '6'. You can change file logging with '-f' and console logging with '-d' command line parameters.
 
 To get details about specific algorithms that are available in Excavator, check [AMD information](/amd) or [NVIDIA information](/nvidia).
@@ -60,10 +60,24 @@ Parameter | Range | Description | Default
 
 # Additional Notices
 
-WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVERCLOCKING MAY PERMANENTLY DAMAGE YOUR COMPUTER HARDWARE! 
+WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVERCLOCKING MAY PERMANENTLY DAMAGE YOUR COMPUTER HARDWARE!
 
 
 # Changelog
+
+v1.3.1a
+- bug fixes & improvements
+- equihash speed improvement
+- support for P106-100 and P104-100
+
+v1.3.0a
+- bug fixes & improvements
+- improve DAG cache handling for daggerhashimoto/ethash
+- improve hardware acceleration, including reduced power consumption and named parameters for memory timings etc
+- added dual mining CUDA daggerhashimoto_sia, daggerhashimoto_pascal, daggerhashimoto_decred
+- speed improvements for CUDA sia
+- added CUDA DAG device memory storage
+- added initial Linux support
 
 v1.2.11a
 - added support for TITAN Xp

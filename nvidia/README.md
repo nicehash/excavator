@@ -2,14 +2,17 @@
 
 Name | Supported devices | Wcount*1 | Pcount*2
 -----------------|----------|---------|----
-[equihash](#equihash) | NVIDIA SM 5.0+ | 2 | 0
+[equihash](#equihash) | NVIDIA SM 5.0+ | 1/2 | 0
 [pascal](#pascal) | NVIDIA SM 5.0+ | 1 | 2
 [decred](#decred)| NVIDIA SM 5.0+ | 1 | 3
-[sia](#sia)| NVIDIA SM 5.0+ | 1 | 2
+[sia](#sia)| NVIDIA SM 5.0+ | 1 | 3
 [lbry](#lbry)| NVIDIA SM 5.0+ | 1 | 3
 [blake2s](#blake2s)| NVIDIA SM 5.0+ | 1 | 3
 [daggerhashimoto](#daggerhashimoto)| NVIDIA SM 5.2+ | 1 | 4
-[lyra2rev2](#lyra2rev2)| NVIDIA SM 5.2+ | 1 | 1
+[lyra2rev2](#lyra2rev2)| NVIDIA SM 5.0+ | 1 | 1
+[daggerhashimoto_decred](#daggerhashimoto_decred)| NVIDIA SM 5.2+ | 1 | 3
+[daggerhashimoto_sia](#daggerhashimoto_sia)| NVIDIA SM 5.2+ | 1 | 3
+[daggerhashimoto_pascal](#daggerhashimoto_pascal)| NVIDIA SM 5.2+ | 1 | 3
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
@@ -26,7 +29,7 @@ When providing named parameters, order is not important. You can mix named and u
 Parameter # | Range | Explanation
 -----------------|----------|---------
 
-There are no parameters available for equihash. To manage intensity of this algorithm, we suggest you to run only one worker to reach low intensity and multiple (suggest 2) workers per device to reach optimal speed.
+There are no parameters available for equihash. We suggest using two workers per device when running on the GTX 1080 Ti or on Windows 7*, otherwise use one worker per device.  
 
 We suggest you to overclock memory and reduce power limit to reach better speeds and optimal speed-to-power ratio. A typical usage scenario is following:
 1. Add new equihash algorithm with 'algorithm.add' method.
@@ -39,6 +42,8 @@ We suggest you to overclock memory and reduce power limit to reach better speeds
 
 Step 3 after 2 and step 5 before 6 assures that the GPU never enters P0 state with overclocked memory which can cause crashes. This means that you can overclock memory higher.
 
+\* To manage intensity of this algorithm, we suggest you to run only one worker to reach low intensity and multiple (suggest 2) workers per device to reach optimal speed.
+
 
 # <a name="pascal"></a> pascal
 
@@ -49,7 +54,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Pascal is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050 and 1030. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Pascal is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 # <a name="decred"></a> decred
 
@@ -61,7 +66,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Decred is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050 and 1030. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Decred is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 # <a name="sia"></a> sia
 
@@ -69,10 +74,11 @@ Parameter # or name | Range | Explanation
 -----------------|----------|---------
 1 or `B` | 0-inf | Number of blocks
 2 or `TPB` | 0-512 | Number of threads per block
+3 or `NPT` | 0-inf | Number of iterations per thread
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Sia is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050 and 1030. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Sia is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 
 # <a name="lbry"></a> lbry
@@ -85,7 +91,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Lbry is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050 and 1030. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Lbry is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 
 # <a name="blake2s"></a> blake2s
@@ -98,7 +104,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Blake2s is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050 and 1030. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Blake2s is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 # <a name="daggerhashimoto"></a> daggerhashimoto
 
@@ -111,7 +117,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Daggerhashimoto is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB and 1050 Ti. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Daggerhashimoto is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 NOTE1: If you use Windows 10 and your speed is very low, make sure you use Windows version 1607 or higher and latest NVIDIA drivers. When you use Maxwell cards for mining, also make sure you turn on `Optimize for compute performance` and set some value for `DSR-Factors` in NVIDIA control panel.
 
@@ -129,4 +135,59 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Lyra2REv2 is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050 and 1030. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Lyra2REv2 is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
+
+
+# <a name="daggerhashimoto_decred"></a> daggerhashimoto_decred
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `R_0` | 0-16 | Ratio of blocks used for daggerhashimoto\*
+2 or `R_1` | 0-16 | Ratio of blocks used for decred\*
+3 or `P` | 0-1 | Profitability of decred\*\*
+
+\* The R_0:R_1 ratio adjusts how many blocks are used for each algorithm.
+
+\*\* Set P to 0 or 1 based on current profitability of decred. If profitability of decred is low compared to profitability of daggerhashimoto set P to 0, otherwise to 1.
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+**WARNING: Daggerhashimoto_decred is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
+
+NOTE1: Parameter P is used to select the most profitable default ratio values. If P is 0 the goal is to reach highest daggerhashimoto speed while retaining decent speed on decred. When P is 1 default ratio is set to reach highest combined speeds on both algorithms.
+
+# <a name="daggerhashimoto_sia"></a> daggerhashimoto_sia
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `R_0` | 0-16 | Ratio of blocks used for daggerhashimoto\*
+2 or `R_1` | 0-16 | Ratio of blocks used for sia\*
+3 or `P` | 0-1 | Profitability of sia\*\*
+
+\* The R_0:R_1 ratio adjusts how many blocks are used for each algorithm.
+
+\*\* Set P to 0 or 1 based on current profitability of sia. If profitability of sia is low compared to profitability of daggerhashimoto set P to 0, otherwise to 1.
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+**WARNING: Daggerhashimoto_sia is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
+
+NOTE1: Parameter P is used to select the most profitable default ratio values. If P is 0 the goal is to reach highest daggerhashimoto speed while retaining decent speed on sia. When P is 1 default ratio is set to reach highest combined speeds on both algorithms.
+
+# <a name="daggerhashimoto_pascal"></a> daggerhashimoto_pascal
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `R_0` | 0-16 | Ratio of blocks used for daggerhashimoto\*
+2 or `R_1` | 0-16 | Ratio of blocks used for pascal\*
+3 or `P` | 0-inf | Number of iterations per thread for pascal\*\*
+
+\* The R_0:R_1 ratio adjusts how many blocks are used for each algorithm.
+
+\*\* Set P to 0 or 1 based on current profitability of pascal. If profitability of pascal is low compared to profitability of daggerhashimoto set P to 0, otherwise to 1.
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+**WARNING: Daggerhashimoto_pascal is tuned for next cards: 1080 Ti, 1080, 1070 and P104-100. You may reach higher speeds by experimenting with parameters when using a different card.**
+
+NOTE1: Parameter P is used to select the most profitable default ratio values. If P is 0 the goal is to reach highest daggerhashimoto speed while retaining decent speed on pascal. When P is 1 default ratio is set to reach highest combined speeds on both algorithms.

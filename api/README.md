@@ -54,7 +54,7 @@ Method | Description | Supported NVIDIA | Supported AMD | Developer notes
 [device\.set\.tdp](#device-set-tdp) | Sets device TDP. | Yes | No | AMD pending
 [device\.set\.core_delta](#device-set-core-delta) | Sets device core clock (delta +/-). | Yes | No | AMD pending
 [device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-). | Yes | No | AMD pending
-[device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed. | Yes | Yes | 
+[device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed. | Yes | Yes |
 [device\.set\.fan\.reset](#device-set-fan-reset) | Resets device fan speed. | Yes | No | AMD pending
 
 **Algorithm managing methods**
@@ -179,6 +179,8 @@ Response field | Type | Description
 `gpu_clock_memory` | int | Maximal GPU core clock (non restricted by temperature or power throttling).
 `gpu_fan_speed` | int | Current fan speed in %.
 `gpu_fan_speed_rpm` | int | Current fan speed in RPMs.
+`gpu_memory_free` | int | Free GPU memory in bytes.
+`gpu_memory_used` | int | Used GPU memory in bytes.
 
 Example usage:
 ```
@@ -210,6 +212,8 @@ Example response:
    "gpu_clock_memory":5513,
    "gpu_fan_speed":40,
    "gpu_fan_speed_rpm":0,
+   "gpu_memory_free": 3066073088,
+   "gpu_memory_used": 155152384,
    "id":1,
    "error":null
 }
@@ -363,8 +367,10 @@ Command parameter # | Type | Description
 1 | string | Algorithm name (see list of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia) and [AMD](https://github.com/nicehash/excavator/tree/master/amd)).
 2 | string | Stratum URL (hostname with port, without `stratum+tcp://` prefix).
 3 | string | Username and password (split with `:`);
+4+ | string | _OPTIONAL PARAMETER_. Stratum URL for second algorithm when dual mining.
+5+| string | _OPTIONAL PARAMETER_. Username and password for second algorithm when dual mining.
 
-_REMARKS_ If provided parameter 2 is `"benchmark"` then no connection is established to the remote pool, but rather benchmark dummy job is used for serving mining work.
+_REMARKS_ If provided parameter 2 or 4 is `"benchmark"` then no connection is established to the remote pool, but rather benchmark dummy job is used for serving mining work.
 
 Response field | Type | Description
 ------|---------|---------
@@ -373,6 +379,11 @@ Response field | Type | Description
 Example usage:
 ```
 {"id":1,"method":"algorithm.add","params":["equihash","equihash.eu.nicehash.com:3357","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x"]}
+```
+
+Example usage 2:
+```
+{"id":1,"method":"algorithm.add","params":["daggerhashimoto_decred","daggerhashimoto.eu.nicehash.com:3353","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x", "decred.eu.nicehash.com:3354","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x"]}
 ```
 
 Example response:
@@ -446,17 +457,30 @@ Example response:
       {
          "algorithm_id":0,
          "name":"equihash",
-         "connected":true,
-         "got_job":true,
-         "details":
+         "pools":[
             {
-               "total_shares":10,
-               "total_accepted":10,
-               "total_rejected":0,
-               "last_efficiency":1.0
+               "connected":true,
+               "got_job":true,
+               "details":
+                  {
+                     "total_shares":10,
+                     "total_accepted":10,
+                     "total_rejected":0,
+                     "last_efficiency":1.0
+                  },
+               "address":"equihash.eu.nicehash.com:3357",
+               "login":"34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x"
             },
-         "address":"equihash.eu.nicehash.com:3357",
-         "login":"34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x",
+            {
+               "connected":false,
+               "got_job":false,
+               "details":
+                  {
+                  },
+               "address":"benchmark",
+               "login":"benchmark"
+            }
+          ],
          "workers":[
             {
                "worker_id":0,
@@ -464,7 +488,10 @@ Example response:
                "params":[
 
                ],
-               "speed":433.22
+               "speed":[
+                  433.22,
+                  0.0
+                ]
             },
             {
                "worker_id":1,
@@ -472,7 +499,10 @@ Example response:
                "params":[
 
                ],
-               "speed":155.28
+               "speed":[
+                  155.28,
+                  0.0
+                ]
             },
             {
                "worker_id":2,
@@ -480,13 +510,17 @@ Example response:
                "params":[
 
                ],
-               "speed":152.72
+               "speed":[
+                  152.72,
+                  0.0
+                ]
             }
          ]
       }
    ],
    "id":1,
    "error":null
+
 }
 ```
 
