@@ -29,7 +29,7 @@ When providing named parameters, order is not important. You can mix named and u
 Parameter # | Range | Explanation
 -----------------|----------|---------
 
-There are no parameters available for equihash. We suggest using two workers per device when running on the GTX 1080 Ti or on Windows 7*, otherwise use one worker per device.  
+There are no parameters available for equihash. We suggest using two workers per device when running on the GTX 1080 Ti or on Windows 7\*, otherwise **use one worker per device.**  
 
 We suggest you to overclock memory and reduce power limit to reach better speeds and optimal speed-to-power ratio. A typical usage scenario is following:
 1. Add new equihash algorithm with 'algorithm.add' method.

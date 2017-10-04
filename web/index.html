@@ -157,7 +157,6 @@
 					<th class="status rmv">Status</th>
 					<th class="address rmv">Address</th>
 					<th class="totalSpeed rmv">Total speed</th>
-					<th class="efficiency rmv">Efficiency</th>
 				</tr>
 				<tbody id="algorithmsHtml"></tbody>
 			</table>
@@ -174,7 +173,7 @@
 		var devicesArray = {};
 		var algorithmsArray = {};
 		var temperature, utilization, power, fan, fanRPM, deviceName, allDevices, deviceId;
-		var algoSuffix, algoEfficiencySuffix, algoWorkerSuffix, algoWorkerEfficiencySuffix;
+		var algoSuffix, algoWorkerSuffix;
 		function getDevices(){
 			$.getJSON('api?command={"id":1,"method":"device.list","params":[]}&nocache=' + (new Date()).getTime() + '',function(dataDevices){
 				var deviceHtml = '';
@@ -278,7 +277,6 @@
 					workersHtml += '				<th class="rmv idWorker">#</th>';
 					workersHtml += '				<th class="deviceWorker">Device</th>';
 					workersHtml += '				<th class="speedWorker">Speed</th>';
-					workersHtml += '				<th class="rmv efficiencyWorker">Efficiency</th>';
 					workersHtml += '			</tr>';
 
 					jQuery.each(workersArray, function(i,work){
@@ -292,6 +290,7 @@
 							else if (workerSpeed > 1000000){ workerSpeed /= 1000000; algoWorkerSuffix = 'MH';}
 							else if (workerSpeed > 1000){ workerSpeed /= 1000; algoWorkerSuffix = 'kH';}
 
+							// speed
 							if (p == poolsArray.length - 1 ) {
 								algo.totalPower += parseFloat(devicesArray[i].power);
 								workersHtml += '<tr>';
@@ -301,20 +300,12 @@
 									workersHtml += '	<td>' + parseFloat(workerSpeed).toFixed(3) + ' ' + algoWorkerSuffix + '/s</td>';
 								else
 										workersHtml += speed0Html + parseFloat(workerSpeed).toFixed(3) + ' ' + algoWorkerSuffix + '/s</td>';
-								var workerEfficiency = 0;
-								if (work > 0 && devicesArray[i].power > 0) { workerEfficiency = work/devicesArray[i].power; }
-								algoWorkerEfficiencySuffix = 'H';
-								if (workerEfficiency > 1000000000000000){ workerEfficiency /= 1000000000000000; algoWorkerEfficiencySuffix = 'PH';}
-								else if (workerEfficiency > 1000000000000){ workerEfficiency /= 1000000000000; algoWorkerEfficiencySuffix = 'TH';}
-								else if (workerEfficiency > 1000000000){ workerEfficiency /= 1000000000; algoWorkerEfficiencySuffix = 'GH';}
-								else if (workerEfficiency > 1000000){ workerEfficiency /= 1000000; algoWorkerEfficiencySuffix = 'MH';}
-								else if (workerEfficiency > 1000){ workerEfficiency /= 1000; algoWorkerEfficiencySuffix = 'kH';}
-								workersHtml += '	<td class="rmv">' + parseFloat(workerEfficiency).toFixed(3) + ' ' + algoWorkerEfficiencySuffix + '/J</td>';
 								workersHtml += '</tr>';
 							}
 							else {
 								speed0Html += '	<td>' + parseFloat(workerSpeed).toFixed(3) + ' ' + algoWorkerSuffix + '/s <br> ';
 							}
+
 						});
 					});
 
@@ -337,24 +328,15 @@
 						else if (algoSpeed > 1000000000){ algoSpeed /= 1000000000; algoSuffix = 'GH';}
 						else if (algoSpeed > 1000000){ algoSpeed /= 1000000; algoSuffix = 'MH';}
 						else if (algoSpeed > 1000){ algoSpeed /= 1000; algoSuffix = 'kH';}
-						var algoEfficiency = 0;
-						if (algo.speed>0 && algo.totalPower>0){	algoEfficiency = algo.speed/algo.totalPower; }
-						algoEfficiencySuffix = 'H';
-						if (algoEfficiency > 1000000000000000){ algoEfficiency /= 1000000000000000; algoEfficiencySuffix = 'PH';}
-						else if (algoEfficiency > 1000000000000){ algoEfficiency /= 1000000000000; algoEfficiencySuffix = 'TH';}
-						else if (algoEfficiency > 1000000000){ algoEfficiency /= 1000000000; algoEfficiencySuffix = 'GH';}
-						else if (algoEfficiency > 1000000){ algoEfficiency /= 1000000; algoEfficiencySuffix = 'MH';}
-						else if (algoEfficiency > 1000){ algoEfficiency /= 1000; algoEfficiencySuffix = 'kH';}
 
 						algorithmsHtml += '<tr><td>';
 						if (p == 0) {
 							algorithmsHtml += algo.name;
 						}
-						algorithmsHtml += '<div class="shw"><b>Status:</b> ' + pool.gotJob + '<br><b>Address:</b> ' + pool.address + '<br><b>Speed:</b> ' + parseFloat(algoSpeed).toFixed(3) + ' ' + algoSuffix + '/s<br><b>Efficiency:</b> ' + parseFloat(algoEfficiency).toFixed(3) + ' ' + algoEfficiencySuffix + '/J</div></td>';
+						algorithmsHtml += '<div class="shw"><b>Status:</b> ' + pool.gotJob + '<br><b>Address:</b> ' + pool.address + '<br><b>Speed:</b> ' + parseFloat(algoSpeed).toFixed(3) + ' ' + algoSuffix + '/s</div></td>';
 						algorithmsHtml += '	<td class="rmv">' + pool.gotJob + '</td>';
 						algorithmsHtml += '	<td class="rmv">' + pool.address + '</td>';
 						algorithmsHtml += '	<td class="rmv">' + parseFloat(algoSpeed).toFixed(3) + ' ' + algoSuffix + '/s</td>';
-						algorithmsHtml += '	<td class="rmv">' + parseFloat(algoEfficiency).toFixed(3) + ' ' + algoEfficiencySuffix + '/J</td>';
 						algorithmsHtml += '</tr>';
 
 					});
