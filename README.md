@@ -65,6 +65,9 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.3.2a
+- equihash bug fixes & improvements
+
 v1.3.1a
 - bug fixes & improvements
 - equihash speed improvement

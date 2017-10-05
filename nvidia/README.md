@@ -2,7 +2,7 @@
 
 Name | Supported devices | Wcount*1 | Pcount*2
 -----------------|----------|---------|----
-[equihash](#equihash) | NVIDIA SM 5.0+ | 1/2 | 0
+[equihash](#equihash) | NVIDIA SM 5.0+ | 1/2 | 1
 [pascal](#pascal) | NVIDIA SM 5.0+ | 1 | 2
 [decred](#decred)| NVIDIA SM 5.0+ | 1 | 3
 [sia](#sia)| NVIDIA SM 5.0+ | 1 | 3
@@ -23,27 +23,28 @@ All CUDA algorithms support named parameters. Named parameters are of format NAM
 
 When providing named parameters, order is not important. You can mix named and unnamed parameters. Named parameters are ignored in unnamed list.
 
-
-# <a name="equihash"></a> equihash
-
-Parameter # | Range | Explanation
------------------|----------|---------
-
-There are no parameters available for equihash. We suggest using two workers per device when running on the GTX 1080 Ti or on Windows 7\*, otherwise **use one worker per device.**  
-
 We suggest you to overclock memory and reduce power limit to reach better speeds and optimal speed-to-power ratio. A typical usage scenario is following:
-1. Add new equihash algorithm with 'algorithm.add' method.
-2. Link devices with equihash algorithm using 'worker.add' method.
+1. Add new algorithm with 'algorithm.add' method.
+2. Link devices with algorithm using 'worker.add' method.
 3. Apply device specific overclocking and power limits.
 4. Mine...
 5. Reset device specific overclocking and power limits.
 6. Unlink devices.
-7. Remove equihash algorithm.
+7. Remove algorithm.
 
 Step 3 after 2 and step 5 before 6 assures that the GPU never enters P0 state with overclocked memory which can cause crashes. This means that you can overclock memory higher.
 
+# <a name="equihash"></a> equihash
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `M` | 0 or 1 | Mode of algorithm
+
+If no parameters are provided, device specific defaults are used (M=0). We suggest using two workers per device when running equihash with mode 0*, otherwise use one worker per device.  
+
 \* To manage intensity of this algorithm, we suggest you to run only one worker to reach low intensity and multiple (suggest 2) workers per device to reach optimal speed.
 
+**WARNING: Mode 1 is currently unstable on some Windows systems.**
 
 # <a name="pascal"></a> pascal
 
