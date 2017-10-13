@@ -54,6 +54,7 @@ Parameter | Range | Description | Default
 -wa | string | HTTP API authorization token |
 -d | 0-6 | Console log level | 2
 -f | 0-6 | File log level | 6
+-fn | file name | Log file | log_$timestamp.log
 -c | file name | Use commanding file |
 -na |  | Disable AMD support |
 
@@ -64,6 +65,11 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 
 # Changelog
+
+v1.3.3a
+- bug fixes & improvements
+- added algorithm cryptonight
+- added algorithm keccak
 
 v1.3.2a
 - equihash bug fixes & improvements

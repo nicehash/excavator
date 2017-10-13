@@ -13,6 +13,8 @@ Name | Supported devices | Wcount*1 | Pcount*2
 [daggerhashimoto_decred](#daggerhashimoto_decred)| NVIDIA SM 5.2+ | 1 | 3
 [daggerhashimoto_sia](#daggerhashimoto_sia)| NVIDIA SM 5.2+ | 1 | 3
 [daggerhashimoto_pascal](#daggerhashimoto_pascal)| NVIDIA SM 5.2+ | 1 | 3
+[cryptonight](#cryptonight)| NVIDIA SM 5.0+ | 1 |2
+[keccak](#keccak)| NVIDIA SM 5.0+ | 1 |3
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
@@ -192,3 +194,26 @@ If no parameters are provided, device specific defaults are used. If provided pa
 **WARNING: Daggerhashimoto_pascal is tuned for next cards: 1080 Ti, 1080, 1070 and P104-100. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 NOTE1: Parameter P is used to select the most profitable default ratio values. If P is 0 the goal is to reach highest daggerhashimoto speed while retaining decent speed on pascal. When P is 1 default ratio is set to reach highest combined speeds on both algorithms.
+
+# <a name="cryptonight"></a> cryptonight
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `B` | 0-inf | Number of blocks
+2 or `TPB` | 0-1024 | Number of threads per block
+
+If no parameters are provided or '0' is specified, the device specific default values will be used.
+
+**WARNING: This algorithm is optimized for the following cards: 1080 Ti, 1080, 1070, and 1060 6GB.**
+
+# <a name="keccak"></a> keccak
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `B` | 0-inf | Number of blocks
+2 or `TPB` | 0-256 | Number of threads per block
+3 or `NPT` | 0-inf | Number of iterations per thread
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+**WARNING: Keccak is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
