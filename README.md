@@ -66,6 +66,12 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.3.4a
+- bug fixes & improvements
+- speed improvements for equihash
+- speed improvements for keccak
+- speed improvements for lyra2rev2
+
 v1.3.3a
 - bug fixes & improvements
 - added algorithm cryptonight

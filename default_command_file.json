@@ -3,7 +3,6 @@
 		{"id":1,"method":"algorithm.add","params":["equihash","equihash.usa.nicehash.com:3357","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.testrig"]}
 	]},
 	{"time":3,"commands":[
-		{"id":1,"method":"worker.add","params":["0","0"]},
 		{"id":1,"method":"worker.add","params":["0","0"]}
 	]},
 	{"time":10,"loop":10,"commands":[

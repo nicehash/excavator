@@ -4,8 +4,6 @@
 	]},
 	{"time":2,"commands":[
 		{"id":1,"method":"worker.add","params":["0","1"]},
-		{"id":1,"method":"worker.add","params":["0","1"]},
-		{"id":1,"method":"worker.add","params":["0","2"]},
 		{"id":1,"method":"worker.add","params":["0","2"]},
 		{"id":1,"method":"worker.add","params":["0","3"]}
 	]},
@@ -26,11 +24,7 @@
 	{"time":10,"commands":[
 		{"id":1,"method":"worker.reset","params":["0"]},
 		{"id":1,"method":"worker.reset","params":["1"]},
-		{"id":1,"method":"worker.reset","params":["2"]},
-		{"id":1,"method":"worker.reset","params":["3"]},
-		{"id":1,"method":"worker.reset","params":["4"]},
-		{"id":1,"method":"worker.reset","params":["5"]},
-		{"id":1,"method":"worker.reset","params":["6"]}
+		{"id":1,"method":"worker.reset","params":["2"]}
 	]},
 	{"time":15,"loop":15,"commands":[
 	  	{"id":1,"method":"algorithm.print.speeds","params":[]}

@@ -40,9 +40,9 @@ Step 3 after 2 and step 5 before 6 assures that the GPU never enters P0 state wi
 
 Parameter # or name | Range | Explanation
 -----------------|----------|---------
-1 or `M` | 0 or 1 | Mode of algorithm
+1 or `M` | 0, 1 , 2 | Mode of algorithm
 
-If no parameters are provided, device specific defaults are used (M=0). We suggest using two workers per device when running equihash with mode 0*, otherwise use one worker per device.  
+If no parameters are provided, device specific defaults are used (M=1). We suggest using two workers per device when running equihash with mode 0*, otherwise use one worker per device.   
 
 \* To manage intensity of this algorithm, we suggest you to run only one worker to reach low intensity and multiple (suggest 2) workers per device to reach optimal speed.
 
