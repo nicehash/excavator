@@ -66,6 +66,9 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.3.6a
+- cryptonight bug fixes & improvements
+
 v1.3.5a
 - cryptonight bug fixes & improvements
 
