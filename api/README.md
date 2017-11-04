@@ -1,4 +1,4 @@
-# Excavator API
+# Excavator API Version 0.0.1
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -721,3 +721,8 @@ Example response:
   "error":null
 }
 ```
+
+# Changelog
+
+* v0.0.1 (2017-11-04)
+    - Initial version.
