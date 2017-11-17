@@ -66,6 +66,11 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.3.7a
+- bug fixes & improvements
+- fixed high CPU loads
+- support for GTX 1070 Ti and GTX 970
+
 v1.3.6a
 - cryptonight bug fixes & improvements
 

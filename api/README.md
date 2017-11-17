@@ -1,4 +1,4 @@
-# Excavator API
+# Excavator API Version 0.0.2
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -63,6 +63,7 @@ Method | Description
 -------|------------
 [algorithm\.add](#algorithm-add) | Adds new algorithm.
 [algorithm\.remove](#algorithm-remove) | Removes algorithm.
+[algorithm\.clear](#algorithm-clear) | Removes all algorithms.
 [algorithm\.list](#algorithm-list) | Lists all algorithms.
 [algorithm\.print\.speeds](#algorithm-print-speeds) | Prints speed of all algorithms.
 
@@ -71,9 +72,12 @@ Method | Description
 Method | Description
 -------|------------
 [worker\.add](#worker-add) | Adds new worker.
+[workers\.add](#workers-add) | Adds multiple workers.
 [worker\.free](#worker-free) | Frees worker.
+[workers\.free](#workers-free) | Frees multiple workers.
 [worker\.reset](#worker-reset) | Resets worker's speed.
 [worker\.print\.speed](#worker-speed)| Prints speed of a worker.
+
 
 **Miscellaneous methods**
 
@@ -396,6 +400,7 @@ Example response:
 ```
 
 
+
 # <a name="algorithm-remove"></a> algorithm.remove
 
 Removes algorithm. This method also clears all linked workers. Call this method when connection to remote pool is not needed anymore.
@@ -419,6 +424,26 @@ Example response:
 }
 ```
 
+# <a name="algorithm-clear"></a> algorithm.clear
+
+Removes all algorithms. See [algorithm\.remove](#algorithm-remove).
+
+This method does not take in any parameter.
+
+This method returns no response fields. If error occured, field `error` is not `null` and contains error message of type `string`.
+
+Example usage:
+```
+{"id":1,"method":"algorithm.clear","params":[]}
+```
+
+Example response:
+```
+{
+   "id":1,
+   "error":null
+}
+```
 
 # <a name="algorithm-list"></a> algorithm.list
 
@@ -573,6 +598,45 @@ Example response:
 ```
 
 
+# <a name="workers-add"></a> workers.add
+
+Creates multiple new workers. See [worker\.add](#worker-add).
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | "alg-" + Algorithm ID.
+2 | string | Device ID.
+3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia) and [AMD](https://github.com/nicehash/excavator/tree/master/amd).
+
+This method returns array of [worker\.add](#worker-add) responses.
+
+
+Example usage:
+```
+{"id":1,"method":"workers.add","params":["alg-0","0","alg-0","1"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "status":
+  [
+    {
+       "worker_id":0,
+       "error":null
+    }
+    ,
+    {
+       "worker_id":1,
+       "error":null
+    }
+  ]
+}
+```
+
+
+
 # <a name="worker-free"></a> worker.free
 
 Unlinks device from algorithm for provided worker. Worker thread with CUDA context or OpenCL thread stays alive and is ready to be
@@ -597,7 +661,34 @@ Example response:
 }
 ```
 
+# <a name="workers-free"></a> workers.free
 
+Free multiple workers. See [worker\.free](#worker-free).
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | String | Worker ID.
+2+ | String | _OPTIONAL_ Worker ID.
+
+This method returns array of [worker\.free](#worker-free) responses.
+
+Example usage:
+```
+{"id":1,"method":"workers.free","params":["0","1","2"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "status":
+  [
+      { "error":null },
+      { "error":null },
+      { "error":null }
+  ]
+}
+```
 
 # <a name="worker-reset"></a> worker.reset
 
@@ -644,7 +735,6 @@ Example response:
 }
 ```
 
-
 # <a name="info"></a> info
 
 Returns basic information about Excavator.
@@ -658,6 +748,10 @@ Response field | Type | Description
 `build_time` | string | Build time.
 `build_number` | int | Build number.
 `uptime` | long | Uptime in milliseconds.
+`cpu_load` | double | CPU load in percentage.
+`cpu_usage` | double | CPU usage in percentage.
+`ram_load` | double | Used memory in percentage.
+`ram_usage` | double | Used memory in MB.
 
 Example usage:
 ```
@@ -666,14 +760,18 @@ Example usage:
 
 Example response:
 ```
-{  
-   "version":"1.2.1a",
-   "build_platform":"Windows",
-   "build_time":"2017-05-18 13:39:44",
-   "build_number":6,
-   "uptime":21594,
-   "id":1,
-   "error":null
+{
+"version": "1.3.7a_nvidia",
+"build_platform": "Windows",
+"build_time": "2017-11-17 13:26:36",
+"build_number": 3456,
+"uptime": 75063,
+"cpu_load": 3.0168410822665095,
+"cpu_usage": 0,
+"ram_load": 42,
+"ram_usage": 167.91796875,
+"id": 1,
+"error": null
 }
 ```
 
@@ -721,3 +819,12 @@ Example response:
   "error":null
 }
 ```
+
+# Changelog
+
+* v0.0.2 (2017-11-07)
+    - Added [algorithm\.clear](#algorithm-clear), [workers\.free](#workers-free) and [workers\.add](#workers-add) methods.
+
+
+* v0.0.1 (2017-11-04)
+    - Initial version.
