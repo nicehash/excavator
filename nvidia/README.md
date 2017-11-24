@@ -15,6 +15,7 @@ Name | Supported devices | Wcount*1 | Pcount*2
 [daggerhashimoto_pascal](#daggerhashimoto_pascal)| NVIDIA SM 5.2+ | 1 | 3
 [cryptonight](#cryptonight)| NVIDIA SM 5.0+ | 1 |2
 [keccak](#keccak)| NVIDIA SM 5.0+ | 1 |3
+[neoscrypt](#neoscrypt)| NVIDIA SM 5.0+ | 1 |1
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
@@ -217,3 +218,13 @@ Parameter # or name | Range | Explanation
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
 **WARNING: Keccak is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, 970, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
+
+# <a name="neoscrypt"></a> neoscrypt
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `B` | 0-inf | Number of blocks
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+**WARNING: NeoScrypt is tuned for next cards: 1080 Ti, 1080, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
