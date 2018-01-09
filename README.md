@@ -57,6 +57,8 @@ Parameter | Range | Description | Default
 -fn | file name | Log file | log_$timestamp.log
 -c | file name | Use commanding file |
 
+Beware - with this miner almost all configuration is done via either the API or the JSON file. Setting the pool address, port, wallet address, worker name, etc - all these need to go in the JSON file, or need to be sent to the miner as commands via the API. This is different from most other miners out there, where you configure the pool, the wallet, etc via the command line - *that won't work with excavator*! Read the JSON documentation and see the JSON examples in the repo.
+
 
 # Additional Notices
 
