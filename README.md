@@ -1,6 +1,6 @@
 # NiceHash Excavator
 
-Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com) and other pools. Excavator is being actively developed by djeZo, zawawa, dropky and voidstar. Miner is using custom built code base with modern approach and supporting modern video cards - NVIDIA and AMD. For AMD support, please see [AMD readme](amd/README.md) for important details.
+Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com) and other pools. Excavator is being actively developed by djeZo, dropky, voidstar and agiz. Miner is using custom built code base with modern approach and supporting modern NVIDIA video cards.
 
 Download from here: https://github.com/nicehash/excavator/releases
 
@@ -39,7 +39,7 @@ First, make sure you have Visual C++ 2013 redistributable (x64) installed.
 
 Excavator also supports configuring console logging level and file logging level. Level '0' means full detail logging, level '6' means no logging. By default console logging is set to '2', file logging set to '6'. You can change file logging with '-f' and console logging with '-d' command line parameters.
 
-To get details about specific algorithms that are available in Excavator, check [AMD information](/amd) or [NVIDIA information](/nvidia).
+To get details about specific algorithms that are available in Excavator, check [NVIDIA information](/nvidia).
 
 
 # <a name="cmdline"></a> Command Line Parameters
@@ -56,7 +56,6 @@ Parameter | Range | Description | Default
 -f | 0-6 | File log level | 6
 -fn | file name | Log file | log_$timestamp.log
 -c | file name | Use commanding file |
--na |  | Disable AMD support |
 
 
 # Additional Notices

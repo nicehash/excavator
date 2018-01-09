@@ -46,16 +46,16 @@ The response usually has more fields which depends on API method being executed.
 
 **Device related get and set methods**
 
-Method | Description | Supported NVIDIA | Supported AMD | Developer notes
--------|-------------|-------------|----------------|------
-[device\.list](#device-list) | Queries available devices - GPUs. | Yes | Yes |
-[device\.get](#device-get) | Queries particular device - GPU. | Yes | Yes |
-[device\.set\.power_limit](#device-set-power-limit) | Sets device power limit. | Yes | No | AMD pending
-[device\.set\.tdp](#device-set-tdp) | Sets device TDP. | Yes | No | AMD pending
-[device\.set\.core_delta](#device-set-core-delta) | Sets device core clock (delta +/-). | Yes | No | AMD pending
-[device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-). | Yes | No | AMD pending
-[device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed. | Yes | Yes |
-[device\.set\.fan\.reset](#device-set-fan-reset) | Resets device fan speed. | Yes | No | AMD pending
+Method | Description
+-------|-------------
+[device\.list](#device-list) | Queries available devices - GPUs.
+[device\.get](#device-get) | Queries particular device - GPU.
+[device\.set\.power_limit](#device-set-power-limit) | Sets device power limit.
+[device\.set\.tdp](#device-set-tdp) | Sets device TDP.
+[device\.set\.core_delta](#device-set-core-delta) | Sets device core clock (delta +/-).
+[device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-).
+[device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed.
+[device\.set\.fan\.reset](#device-set-fan-reset) | Resets device fan speed.
 
 **Algorithm managing methods**
 
@@ -90,7 +90,7 @@ Method | Description
 
 # <a name="device-list"></a> device.list
 
-Returns list of available CUDA and OpenCL devices. Use this method to get list of available devices and their static (non-changing) details.
+Returns list of available CUDA devices. Use this method to get list of available devices and their static (non-changing) details.
 
 This method does not take in any parameter.
 
@@ -100,11 +100,11 @@ Response field | Type | Description
 `devices[i]/device_id` | int | Device ID. This is a handle for future API commands related to this device.
 `devices[i]/name` | string | Device name.
 `devices[i]/gpgpu_type` | int | GPGPU type. 1 means CUDA, 2 means OpenCL.
-`devices[i]/details` | object | Device details. CUDA/OpenCL specific.
-`devices[i]/details/cuda_id` | int | **CUDA ONLY** Device CUDA ID.
-`devices[i]/details/sm_major` | int | **CUDA ONLY** Device SM major version.
-`devices[i]/details/sm_minor` | int | **CUDA ONLY** Device SM minor version.
-`devices[i]/details/bus` | int | **CUDA ONLY** Device bus ID.
+`devices[i]/details` | object | Device details.
+`devices[i]/details/cuda_id` | int | Device CUDA ID.
+`devices[i]/details/sm_major` | int | Device SM major version.
+`devices[i]/details/sm_minor` | int | Device SM minor version.
+`devices[i]/details/bus` | int | Device bus ID.
 
 Example usage:
 ```
@@ -165,11 +165,11 @@ Response field | Type | Description
 `device_id` | int | Device ID. This is a handle for future API commands related to this device.
 `name` | string | Device name.
 `gpgpu_type` | int | GPGPU type. 1 means CUDA, 2 means OpenCL.
-`devices[i]/details` | object | Device details. CUDA/OpenCL specific.
-`devices[i]/details/cuda_id` | int | **CUDA ONLY** Device CUDA ID.
-`devices[i]/details/sm_major` | int | **CUDA ONLY** Device SM major version.
-`devices[i]/details/sm_minor` | int | **CUDA ONLY** Device SM minor version.
-`devices[i]/details/bus` | int | **CUDA ONLY** Device bus ID.
+`devices[i]/details` | object | Device details.
+`devices[i]/details/cuda_id` | int | Device CUDA ID.
+`devices[i]/details/sm_major` | int |Device SM major version.
+`devices[i]/details/sm_minor` | int | Device SM minor version.
+`devices[i]/details/bus` | int | Device bus ID.
 `uuid` | string | Unique identification of device. Use this to distinguish devices with same name in the system.
 `gpu_temp` | int | GPU temperature in °C.
 `gpu_load` | int | GPU core load in %.
@@ -368,7 +368,7 @@ Adds new algorithm instance to the miner. Establish connection with remote pool 
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Algorithm name (see list of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia) and [AMD](https://github.com/nicehash/excavator/tree/master/amd)).
+1 | string | Algorithm name (see list of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia).
 2 | string | Stratum URL (hostname with port, without `stratum+tcp://` prefix).
 3 | string | Username and password (split with `:`);
 4+ | string | _OPTIONAL PARAMETER_. Stratum URL for second algorithm when dual mining.
@@ -577,7 +577,7 @@ Command parameter # | Type | Description
 -------|---------|---------
 1 | string | Algorithm ID.
 2 | string | Device ID.
-3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia) and [AMD](https://github.com/nicehash/excavator/tree/master/amd).
+3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia).
 
 Response field | Type | Description
 ------|---------|---------
@@ -606,7 +606,7 @@ Command parameter # | Type | Description
 -------|---------|---------
 1 | string | "alg-" + Algorithm ID.
 2 | string | Device ID.
-3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia) and [AMD](https://github.com/nicehash/excavator/tree/master/amd).
+3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia).
 
 This method returns array of [worker\.add](#worker-add) responses.
 
@@ -639,7 +639,7 @@ Example response:
 
 # <a name="worker-free"></a> worker.free
 
-Unlinks device from algorithm for provided worker. Worker thread with CUDA context or OpenCL thread stays alive and is ready to be
+Unlinks device from algorithm for provided worker. Worker thread with CUDA context stays alive and is ready to be
 occupied with next [worker\.add](#worker-add) call for that device. This call causes mining to stop on certain device.
 
 Command parameter # | Type | Description
