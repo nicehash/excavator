@@ -52,6 +52,7 @@ Parameter | Range | Description | Default
 -wp | 0-65535 | HTTP API bind port | 0
 -wi | local IP | HTTP API bind IP | 127.0.0.1
 -wa | string | HTTP API authorization token |
+-wl | string | HTTP API path to index.html file | web\ (windows), web/ (linux)
 -d | 0-6 | Console log level | 2
 -f | 0-6 | File log level | 6
 -fn | file name | Log file | log_$timestamp.log
@@ -64,6 +65,11 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 
 # Changelog
+
+v1.3.9a
+- bug fixes & improvements
+- added algorithm Nist5
+- speed improvements for NeoScrypt
 
 v1.3.8a
 - added algorithm NeoScrypt
