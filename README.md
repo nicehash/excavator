@@ -70,6 +70,7 @@ v1.3.9a
 - bug fixes & improvements
 - added algorithm Nist5
 - speed improvements for NeoScrypt
+- added '-wl' command line parameter to specify path to index.html
 
 v1.3.8a
 - added algorithm NeoScrypt
