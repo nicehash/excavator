@@ -68,6 +68,7 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 v1.4.1a
 - fixed reconnect issues on some algorithms
+- added CUDA 9.1 binaries
 
 v1.4.0a
 - neoscrypt bug fixes & improvements
