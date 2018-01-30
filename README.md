@@ -41,7 +41,6 @@ Excavator also supports configuring console logging level and file logging level
 
 To get details about specific algorithms that are available in Excavator, check [NVIDIA information](/nvidia).
 
-
 # <a name="cmdline"></a> Command Line Parameters
 
 Parameter | Range | Description | Default
@@ -65,6 +64,10 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 
 # Changelog
+
+v1.4.2a
+- bug fixes & improvements
+- speed improvements for NeoScrypt
 
 v1.4.1a
 - fixed reconnect issues on some algorithms
