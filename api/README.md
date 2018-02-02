@@ -1,4 +1,4 @@
-# Excavator API Version 0.0.2
+# Excavator API Version 0.0.3
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -100,6 +100,7 @@ Response field | Type | Description
 `devices[i]/device_id` | int | Device ID. This is a handle for future API commands related to this device.
 `devices[i]/name` | string | Device name.
 `devices[i]/gpgpu_type` | int | GPGPU type. 1 means CUDA, 2 means OpenCL.
+`devices[i]/subvendor` | string | Subvendor id.
 `devices[i]/details` | object | Device details.
 `devices[i]/details/cuda_id` | int | Device CUDA ID.
 `devices[i]/details/sm_major` | int | Device SM major version.
@@ -119,6 +120,7 @@ Example response:
          "device_id":0,
          "name":"GeForce GTX 1060 6GB",
          "gpgpu_type":1,
+         "subvendor":"1462",
          "details":{
             "cuda_id":1,
             "sm_major":6,
@@ -130,6 +132,7 @@ Example response:
          "device_id":1,
          "name":"GeForce GTX 1070",
          "gpgpu_type":1,
+         "subvendor":"3842",
          "details":{
             "cuda_id":3,
             "sm_major":6,
@@ -141,6 +144,7 @@ Example response:
           "device_id":2,
           "name":"Ellesmere",
           "gpgpu_type":2,
+          "subvendor":"0",
           "details":{
 
           }
@@ -165,6 +169,7 @@ Response field | Type | Description
 `device_id` | int | Device ID. This is a handle for future API commands related to this device.
 `name` | string | Device name.
 `gpgpu_type` | int | GPGPU type. 1 means CUDA, 2 means OpenCL.
+`subvendor` | string | Subvendor id.
 `devices[i]/details` | object | Device details.
 `devices[i]/details/cuda_id` | int | Device CUDA ID.
 `devices[i]/details/sm_major` | int |Device SM major version.
@@ -197,6 +202,7 @@ Example response:
    "device_id":0,
    "name":"GeForce GTX 1080",
    "gpgpu_type":1,
+   "subvendor":"10de",
    "details":{
       "cuda_id":0,
       "sm_major":6,
@@ -821,6 +827,10 @@ Example response:
 ```
 
 # Changelog
+
+* v0.0.3 (2018-02-01)
+    - Added `devices[i]/subvendor` to [device\.list](#device-list) method.
+
 
 * v0.0.2 (2017-11-07)
     - Added [algorithm\.clear](#algorithm-clear), [workers\.free](#workers-free) and [workers\.add](#workers-add) methods.
