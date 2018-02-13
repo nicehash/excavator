@@ -225,8 +225,9 @@ If no parameters are provided, device specific defaults are used. If provided pa
 Parameter # or name | Range | Explanation
 -----------------|----------|---------
 1 or `B` | 0-inf | Number of blocks
+2 or `M` | 1-5 | Mode of algorithm
 
-If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used. Different modes use different kernels (kernels performance varies per card). 
 
 **WARNING: NeoScrypt is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
 

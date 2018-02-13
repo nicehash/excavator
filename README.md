@@ -65,6 +65,9 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 
 # Changelog
 
+v1.4.4a
+- speed improvements for NeoScrypt
+
 v1.4.3a
 - bug fixes & improvements
 - API version bumped to 0.0.3
