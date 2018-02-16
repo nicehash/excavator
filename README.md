@@ -10,7 +10,9 @@ YOU ARE NOT ALLOWED TO REDISTRIBUTE IT!**
 
 # How to Use Excavator?
 
-First, make sure you have Visual C++ 2013 redistributable (x64) installed.
+First, make sure you have Visual C++ 2017 redistributable (x64) installed.
+
+NVIDIA display driver 387.xx or more recent is required.
 
 **ADVANCED** There are two methods to use Excavator. Both rely on API commands you can find in [API section](/api).
 
