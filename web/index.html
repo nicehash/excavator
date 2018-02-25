@@ -143,6 +143,7 @@
 					<th class="device">Device</th>
 					<th class="temperature rmv">Temperature</th>
 					<th class="utilization rmv">Utilization</th>
+					<th class="utilization rmv">Power Limit</th>
 					<th class="power rmv">Power usage</th>
 					<th class="fan rmv">Fan speed</th>
 				</tr>
@@ -188,6 +189,7 @@
 						devicesArray[device.device_id]['temperature'] 	= dataDevice.gpu_temp;
 						devicesArray[device.device_id]['deviceName'] 	= device.name;
 						devicesArray[device.device_id]['utilization'] 	= dataDevice.gpu_load;
+						devicesArray[device.device_id]['power_limit'] 	= dataDevice.gpu_tdp_current;
 						devicesArray[device.device_id]['power'] 		= parseFloat(dataDevice.gpu_power_usage).toFixed(2);
 						devicesArray[device.device_id]['fan'] 			= dataDevice.gpu_fan_speed;
 						devicesArray[device.device_id]['fanRPM'] 		= dataDevice.gpu_fan_speed_rpm;
@@ -199,9 +201,10 @@
 								// Generate content
 								deviceHtml += '<tr>';
 								deviceHtml += '	<td class="rmv">' + devicesArray[n].deviceId + '</td>';
-								deviceHtml += '	<td>' + devicesArray[n].deviceName + '<div class="shw"><b>Temparature:</b> ' + devicesArray[n].temperature + ' °C<br><b>Utilization:</b> ' + devicesArray[n].utilization + '%<br><b>Power usage:</b> ' + devicesArray[n].power + ' W<br><b>Fan speed:</b> ' + devicesArray[n].fanRPM + ' RPM</div></td>';
+								deviceHtml += '	<td>' + devicesArray[n].deviceName + '<div class="shw"><b>Temparature:</b> ' + devicesArray[n].temperature + ' °C<br><b>Utilization:</b> ' + devicesArray[n].utilization +' °C<br><b>Power Limit:</b> ' + devicesArray[n].power_limit + '%<br><b>Power usage:</b> ' + devicesArray[n].power + ' W<br><b>Fan speed:</b> ' + devicesArray[n].fanRPM + ' RPM</div></td>';
 								deviceHtml += '	<td class="rmv">' + devicesArray[n].temperature + '°C</td>';
 								deviceHtml += '	<td class="rmv">' + devicesArray[n].utilization + '%</td>';
+								deviceHtml += '	<td class="rmv">' + devicesArray[n].power_limit + '%</td>';
 								deviceHtml += '	<td class="rmv">' + devicesArray[n].power + ' W</td>';
 								deviceHtml += '	<td class="rmv">' + devicesArray[n].fanRPM + ' RPM</td>';
 								deviceHtml += '</tr>';
