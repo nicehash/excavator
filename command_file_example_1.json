@@ -1,11 +1,14 @@
 [
-	{"time":1,"commands":[
-		{"id":1,"method":"algorithm.add","params":["equihash","equihash.eu.nicehash.com:3357","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.testrig"]}
+	{"time":0,"commands":[
+		{"id":1,"method":"subscribe","params":["nhmp.usa.nicehash.com:3200","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.testrig"]}
 	]},
+	{"time":1,"commands":[
+        {"id":1,"method":"algorithm.add","params":["equihash"]}
+    ]},
 	{"time":2,"commands":[
-		{"id":1,"method":"worker.add","params":["0","1"]},
-		{"id":1,"method":"worker.add","params":["0","2"]},
-		{"id":1,"method":"worker.add","params":["0","3"]}
+		{"id":1,"method":"worker.add","params":["equihash","1"]},
+		{"id":1,"method":"worker.add","params":["equihash","2"]},
+		{"id":1,"method":"worker.add","params":["equihash","3"]}
 	]},
 	{"time":5,"commands":[
 		{"id":1,"method":"device.set.power_limit","params":["0","150"]},

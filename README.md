@@ -1,6 +1,6 @@
 # NiceHash Excavator
 
-Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com) and other pools. Excavator is being actively developed by djeZo, dropky, voidstar and agiz. Miner is using custom built code base with modern approach and supporting modern NVIDIA video cards.
+Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com). Excavator is being actively developed by djeZo, dropky and voidstar. Miner is using custom built code base with modern approach and supporting modern NVIDIA video cards.
 
 Download from here: https://github.com/nicehash/excavator/releases
 
@@ -12,7 +12,7 @@ YOU ARE NOT ALLOWED TO REDISTRIBUTE IT!**
 
 First, make sure you have Visual C++ 2017 redistributable (x64) installed.
 
-NVIDIA display driver 387.xx or more recent is required.
+NVIDIA display driver 387.xx or more recent is required. CUDA devices with SM 5.0 and higher are supported.
 
 **ADVANCED** There are two methods to use Excavator. Both rely on API commands you can find in [API section](/api).
 
@@ -64,8 +64,17 @@ Parameter | Range | Description | Default
 
 WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVERCLOCKING MAY PERMANENTLY DAMAGE YOUR COMPUTER HARDWARE!
 
+From version 1.5.0a further excavator supports only NiceHash stratums.  
 
 # Changelog
+
+v1.5.0a
+- bug fixes & improvements
+- changed stratum protocol to NiceHash Miner Protocol
+- API version bumped to 0.1.0
+- added algorithm CryptoNightV7 (XMR)
+- speed improvements for CryptoNight
+- added support for Tesla P100
 
 v1.4.4a
 - speed improvements for NeoScrypt

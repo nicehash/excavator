@@ -1,4 +1,4 @@
-# Excavator API Version 0.0.3
+# Excavator API Version 0.1.0
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -44,6 +44,14 @@ The response usually has more fields which depends on API method being executed.
 
 # Methods
 
+**Subscribe managing methods**
+
+Method | Description
+-------|------------
+[subscribe](#subscribe) | Connects to NiceHash stratum server.
+[subscribe.info](#subscribe-info) | Lists subscribe information.
+[unsubscribe](#unsubscribe) | Disconnects from NiceHash stratum server.
+
 **Device related get and set methods**
 
 Method | Description
@@ -56,6 +64,8 @@ Method | Description
 [device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-).
 [device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed.
 [device\.set\.fan\.reset](#device-set-fan-reset) | Resets device fan speed.
+
+<!-- [device\.set\.intensity](#device-set-intensity) | Upcoming feature. -->
 
 **Algorithm managing methods**
 
@@ -72,12 +82,21 @@ Method | Description
 Method | Description
 -------|------------
 [worker\.add](#worker-add) | Adds new worker.
-[workers\.add](#workers-add) | Adds multiple workers.
 [worker\.free](#worker-free) | Frees worker.
-[workers\.free](#workers-free) | Frees multiple workers.
+[worker\.clear](#worker-clear) | Frees all workers.
 [worker\.reset](#worker-reset) | Resets worker's speed.
+[worker\.list](#worker-list) | Lists all workers.
 [worker\.print\.speed](#worker-speed)| Prints speed of a worker.
+[worker\.print\.speeds](#worker-speeds)| Prints speed of all workers.
+[workers\.add](#workers-add) | Adds multiple new workers.
+[workers\.free](#workers-free) | Frees multiple workers.
+[workers\.reset](#workers-reset) | Resets logged speed for multiple workers.
 
+**Miner managing methods**
+
+Method | Description
+-------|------------
+[miner\.stop](#miner-stop) | Stops mining without exiting excavator.
 
 **Miscellaneous methods**
 
@@ -86,6 +105,78 @@ Method | Description
 [info](#info) | Gets information about Excavator.
 [quit](#quit) | Quits Excavator.
 [message](#message) | Displays message in console.
+
+
+# <a name="subscribe"></a> subscribe
+
+Establish connection with NiceHash stratum server.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Stratum URL (hostname with port).
+2 | string | Username and password (split with `:`);
+
+NiceHash stratum servers are available at: nhmp.LOCATION.nicehash.com
+(LOCATION: eu, usa, hk, jp, in, br).
+
+
+Example usage:
+```
+{"id":1,"method":"subscribe","params":["nhmp.usa.nicehash.com:3200", "34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x"]}
+```
+
+Example response:
+```
+{
+   "id":1,
+   "error":null
+}
+```
+
+# <a name="subscribe-info"></a> subscribe.info
+
+Returns subscribe information.
+
+This method does not take in any parameter. If connection to the remote server is established and subscribe was successful or if subscribe has not been called yet, field error is set to null. Otherwise field error contains error message of type string.
+
+Response field | Type | Description
+------|---------|---------
+`address` | string | Remote address of the NiceHash stratum.
+`login` | string | Login credentials.
+
+Example usage:
+```
+{"id":1,"method":"subscribe.info","params":[]}
+```
+
+Example response:
+```
+{
+   "address":"nhmp.usa.nicehash.com:3200",
+   "login":"34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x",
+   "id":1,
+   "error":null
+}
+```
+
+# <a name="unsubscribe"></a> unsubscribe
+
+Drops connection to the NiceHash stratum server.
+
+This method does not take in any parameter.
+
+Example usage:
+```
+{"id":1,"method":"unsubscribe","params":[]}
+```
+
+Example response:
+```
+{
+   "id":1,
+   "error":null
+}
+```
 
 
 # <a name="device-list"></a> device.list
@@ -368,38 +459,40 @@ Example response:
 ```
 
 
+
 # <a name="algorithm-add"></a> algorithm.add
 
-Adds new algorithm instance to the miner. Establish connection with remote pool and starts receiving work. When creating device workers, use `algorithm_id` to attach worker to this algorithm.
+Adds new algorithm instance to the miner. Establish connection with remote pool and starts receiving work.
 
 Command parameter # | Type | Description
 -------|---------|---------
 1 | string | Algorithm name (see list of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia).
-2 | string | Stratum URL (hostname with port, without `stratum+tcp://` prefix).
-3 | string | Username and password (split with `:`);
-4+ | string | _OPTIONAL PARAMETER_. Stratum URL for second algorithm when dual mining.
-5+| string | _OPTIONAL PARAMETER_. Username and password for second algorithm when dual mining.
+2 | string | _OPTIONAL PARAMETER_ Use 'benchmark' to perform dummy job.
 
-_REMARKS_ If provided parameter 2 or 4 is `"benchmark"` then no connection is established to the remote pool, but rather benchmark dummy job is used for serving mining work.
+_REMARKS_:
+- If provided parameter 2 is `"benchmark"` then no connection is established to the remote pool, but rather benchmark dummy job is used for serving mining work.
+- For dual mining both algorithms have to be added.
 
-Response field | Type | Description
-------|---------|---------
-`algorithm_id` | int | Algorithm ID.
 
 Example usage:
 ```
-{"id":1,"method":"algorithm.add","params":["equihash","equihash.eu.nicehash.com:3357","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x"]}
+{"id":1,"method":"algorithm.add","params":["equihash"]}
 ```
 
-Example usage 2:
+Example usage 2 (benchmark):
 ```
-{"id":1,"method":"algorithm.add","params":["daggerhashimoto_decred","daggerhashimoto.eu.nicehash.com:3353","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x", "decred.eu.nicehash.com:3354","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x"]}
+{"id":1,"method":"algorithm.add","params":["equihash","benchmark"]}
+```
+
+Example usage 3 (dual mining):
+```
+{"id":1,"method":"algorithm.add","params":["daggerhashimoto"]},
+{"id":2,"method":"algorithm.add","params":["decred"]}
 ```
 
 Example response:
 ```
 {
-   "algorithm_id":0,
    "id":1,
    "error":null
 }
@@ -409,17 +502,17 @@ Example response:
 
 # <a name="algorithm-remove"></a> algorithm.remove
 
-Removes algorithm. This method also clears all linked workers. Call this method when connection to remote pool is not needed anymore.
+Removes algorithm. Note that this method stops all workers that are linked to that particular algorithm but it *does not* free them. You should explicitly call [worker\.free](#worker-free) or [worker\.clear](#worker-clear) to free also the workers.
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Algorithm ID.
+1 | string | Algorithm name.
 
 This method returns no response fields. If error occured, field `error` is not `null` and contains error message of type `string`.
 
 Example usage:
 ```
-{"id":1,"method":"algorithm.remove","params":["0"]}
+{"id":1,"method":"algorithm.remove","params":["equihash"]}
 ```
 
 Example response:
@@ -453,7 +546,7 @@ Example response:
 
 # <a name="algorithm-list"></a> algorithm.list
 
-List all currently running algorithms. Each algorithm has a list of workers. Each worker is assigned to certain device and has certain speed.
+List all currently running algorithms.
 
 This method does not take in any parameter.
 
@@ -463,18 +556,13 @@ Response field | Type | Description
 `algorithms[i]/algorithm_id` | int | Algorithm ID.
 `algorithms[i]/name` | string | Algorithm name.
 `algorithms[i]/connected` | boolean | `True` if connected to remote pool.
+`algorithms[i]/speed` | float | Speed in hashes per second.
 `algorithms[i]/got_job` | boolean | `True` if remote pool provided valid job.
-`algorithms[i]/details/total_shares` | int | Total shares sent to the remote pool.
-`algorithms[i]/details/total_accepted` | int | Total shares accepted by the remote pool.
-`algorithms[i]/details/total_rejected` | int | Total shares rejected by the remote pool.
-`algorithms[i]/details/last_efficiency` | float | Efficiency of past 32 shares (1.0 = all accepted).
-`algorithms[i]/address` | string | Remote address of the pool.
-`algorithms[i]/login` | string | Login to the pool.
-`algorithms[i]/workers` | array | Array of workers.
-`algorithms[i]/workers[k]/worker_id` | int | Worker ID.
-`algorithms[i]/workers[k]/device_id` | int | Linked device ID.
-`algorithms[i]/workers[k]/params` | array | Parameters which were used to start this worker (array of strings).
-`algorithms[i]/workers[k]/speed` | float | Speed in hashes per second.
+`algorithms[i]/received_jobs` | int | Number of jobs provided by the remote pool.
+`algorithms[i]/accepted_shares` | int | Total shares accepted by the remote pool.
+`algorithms[i]/rejected_shares` | int | Total shares rejected by the remote pool.
+
+
 
 Example usage:
 ```
@@ -484,74 +572,48 @@ Example usage:
 Example response:
 ```
 {
-   "algorithms":[
+   "algorithms": [
       {
-         "algorithm_id":0,
-         "name":"equihash",
-         "pools":[
-            {
-               "connected":true,
-               "got_job":true,
-               "details":
-                  {
-                     "total_shares":10,
-                     "total_accepted":10,
-                     "total_rejected":0,
-                     "last_efficiency":1.0
-                  },
-               "address":"equihash.eu.nicehash.com:3357",
-               "login":"34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x"
-            },
-            {
-               "connected":false,
-               "got_job":false,
-               "details":
-                  {
-                  },
-               "address":"benchmark",
-               "login":"benchmark"
-            }
-          ],
-         "workers":[
-            {
-               "worker_id":0,
-               "device_id":0,
-               "params":[
-
-               ],
-               "speed":[
-                  433.22,
-                  0.0
-                ]
-            },
-            {
-               "worker_id":1,
-               "device_id":1,
-               "params":[
-
-               ],
-               "speed":[
-                  155.28,
-                  0.0
-                ]
-            },
-            {
-               "worker_id":2,
-               "device_id":1,
-               "params":[
-
-               ],
-               "speed":[
-                  152.72,
-                  0.0
-                ]
-            }
-         ]
+         "algorithm_id": 20,
+         "name": "daggerhashimoto",
+         "speed": 9198932.692307692,
+         "uptime": 19.18597412109375,
+         "benchmark": false,
+         "accepted_shares": 0,
+         "rejected_shares": 0,
+         "got_job": true,
+         "received_jobs": 4,
+         "current_job_difficulty": 0.5
+      },
+      {
+         "algorithm_id": 21,
+         "name": "decred",
+         "speed": 5078989989.082617,
+         "uptime": 19.18767738342285,
+         "benchmark": false,
+         "sent_shares": 1,
+         "accepted_shares": 1,
+         "rejected_shares": 0,
+         "got_job": true,
+         "received_jobs": 1,
+         "current_job_difficulty": 4
+      },
+      {
+         "algorithm_id": 24,
+         "name": "equihash",
+         "speed": 441.36426519101843,
+         "uptime": 19.18423080444336,
+         "benchmark": false,
+         "sent_shares": 0,
+         "accepted_shares": 0,
+         "rejected_shares": 0,
+         "got_job": true,
+         "received_jobs": 2,
+         "current_job_difficulty": 1024
       }
    ],
-   "id":1,
-   "error":null
-
+   "id": 1,
+   "error": null
 }
 ```
 
@@ -581,7 +643,7 @@ Creates a new worker by linking certain device with an algorithm.
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Algorithm ID.
+1 | string | Algorithm name.
 2 | string | Device ID.
 3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia).
 
@@ -591,7 +653,12 @@ Response field | Type | Description
 
 Example usage:
 ```
-{"id":1,"method":"worker.add","params":["0","0"]}
+{"id":1,"method":"worker.add","params":["equihash","0"]}
+```
+
+Example usage 2:
+```
+{"id":1,"method":"worker.add","params":["daggerhashimoto_decred","0"]}
 ```
 
 Example response:
@@ -604,13 +671,192 @@ Example response:
 ```
 
 
+# <a name="worker-free"></a> worker.free
+
+Unlinks device from algorithm for provided worker. Worker thread with CUDA context stays alive and is ready to be
+occupied with next [worker\.add](#worker-add) call for that device. This call causes mining to stop on certain device.
+
+Command parameter # | Type | Description
+-------|---------|---------
+2 | string | Worker ID.
+
+This method returns no response fields. If error occured, field `error` is not `null` and contains error message of type `string`.
+
+Example usage:
+```
+{"id":1,"method":"worker.free","params":["0"]}
+```
+
+Example response:
+```
+{
+   "id":1,
+   "error":null
+}
+```
+
+# <a name="worker-clear"></a> worker.clear
+
+Unlinks device from algorithm for all workers. Effectively the same as calling [worker\.free](#worker-free) for each worker.
+
+This method does not take in any parameter.
+
+This method returns no response fields. If error occured, field `error` is not `null` and contains error message of type `string`.
+
+Example usage:
+```
+{"id":1,"method":"worker.clear","params":[""]}
+```
+
+Example response:
+```
+{
+   "id":1,
+   "error":null
+}
+```
+
+# <a name="worker-reset"></a> worker.reset
+
+Resets logged speed of worker to 0.
+
+Command parameter # | Type | Description
+-------|---------|---------
+2 | string | Worker ID.
+
+
+Example usage:
+```
+{"id":1,"method":"worker.reset","params":["0"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+# <a name="worker-list"></a> worker.list
+
+Report speed for all workers.
+
+This method does not take in any parameter.
+
+Response field | Type | Description
+------|---------|---------
+`workers` | array | Array of workers. If no workers, this array is empty.
+`workers[i]/device_id` | int | Device ID.
+`workers[i]/worker_id` | int | Worker ID.
+`workers[i]/params` | array | Parameters which were used to start this worker (array of strings).
+`workers[i]/algorithms` | array | Array of algorithms. Array can have zero, one or two elements.
+`workers[i]/algorithms[i]/id` | string | Algorithm ID.
+`workers[i]/algorithms[i]/name` | string | Algorithm name.
+`workers[i]/algorithms[i]/speed` | float | Algorithm speed.
+
+Example usage:
+```
+{"id":1,"method":"worker.list","params":[]}
+```
+
+Example response:
+```
+{
+   "workers": [
+      {
+         "worker_id": 0,
+         "device_id": 0,
+         "params": [],
+         "algorithms": [
+            {
+               "id": 21,
+               "name": "decred",
+               "speed": 4634748002.093876
+            }
+         ]
+      },
+      {
+         "worker_id": 0,
+         "device_id": 1,
+         "params": [],
+         "algorithms": [
+            {
+               "id": 24,
+               "name": "equihash",
+               "speed": 430.27065527065525
+            }
+         ]
+      },
+      {
+         "worker_id": 0,
+         "device_id": 2,
+         "params": [],
+         "algorithms": [
+            {
+               "id": 20,
+               "name": "daggerhashimoto",
+               "speed": 8513547.199441634
+            },
+            {
+               "id": 21,
+               "name": "decred",
+               "speed": 204325144.6518932
+            }
+         ]
+      }
+   ],
+   "id": 1,
+   "error": null
+}
+```
+
+# <a name="worker-speed"></a> worker.print.speed
+
+Prints speed of worker to console output. Useful for benchmarking.
+
+Command parameter # | Type | Description
+-------|---------|---------
+2 | string | Worker ID.
+
+
+Example usage:
+```
+{"id":1,"method":"worker.print.speed","params":["0"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+# <a name="worker-speeds"></a> worker.print.speeds
+
+Prints speeds of all workers to console output. Useful for benchmarking.
+
+Example usage:
+```
+{"id":1,"method":"worker.print.speeds","params":[]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
 # <a name="workers-add"></a> workers.add
 
 Creates multiple new workers. See [worker\.add](#worker-add).
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | "alg-" + Algorithm ID.
+1 | string | "alg-" + Algorithm Name.
 2 | string | Device ID.
 3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia).
 
@@ -619,7 +865,7 @@ This method returns array of [worker\.add](#worker-add) responses.
 
 Example usage:
 ```
-{"id":1,"method":"workers.add","params":["alg-0","0","alg-0","1"]}
+{"id":1,"method":"workers.add","params":["alg-equihash","0","alg-equihash","1"]}
 ```
 
 Example response:
@@ -642,45 +888,19 @@ Example response:
 ```
 
 
-
-# <a name="worker-free"></a> worker.free
-
-Unlinks device from algorithm for provided worker. Worker thread with CUDA context stays alive and is ready to be
-occupied with next [worker\.add](#worker-add) call for that device. This call causes mining to stop on certain device.
-
-Command parameter # | Type | Description
--------|---------|---------
-1 | string | Worker ID.
-
-This method returns no response fields. If error occured, field `error` is not `null` and contains error message of type `string`.
-
-Example usage:
-```
-{"id":1,"method":"worker.free","params":["0"]}
-```
-
-Example response:
-```
-{
-   "id":1,
-   "error":null
-}
-```
-
 # <a name="workers-free"></a> workers.free
 
 Free multiple workers. See [worker\.free](#worker-free).
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | String | Worker ID.
-2+ | String | _OPTIONAL_ Worker ID.
+1 | string | Array of [worker\.free](#worker-free) input parameters.
 
 This method returns array of [worker\.free](#worker-free) responses.
 
 Example usage:
 ```
-{"id":1,"method":"workers.free","params":["0","1","2"]}
+{"id":1,"method":"workers.free","params":["0","1"]}
 ```
 
 Example response:
@@ -690,54 +910,54 @@ Example response:
   "status":
   [
       { "error":null },
+      { "error":null }
+  ]
+}
+```
+
+# <a name="workers-reset"></a> workers.reset
+
+Resets logged speed for multiple workers. See [worker\.reset](#worker-reset).
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Array of [worker\.reset](#worker-reset) input parameters.
+
+This method returns array of [worker\.reset](#worker-reset) responses.
+
+Example usage:
+```
+{"id":1,"method":"workers.reset","params":["0","1"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "status":
+  [
       { "error":null },
       { "error":null }
   ]
 }
 ```
 
-# <a name="worker-reset"></a> worker.reset
+# <a name="miner-stop"></a> miner.stop
 
-Resets logged speed of worker to 0.
+Stops mining without exiting excavator. Effectively the same as calling [algorithm\.clear](#algorithm-clear), [worker\.clear](#worker-clear) and [unsubscribe](#unsubscribe).
 
-Command parameter # | Type | Description
--------|---------|---------
-1 | string | Worker ID.
-
+This method does not take in any parameter.
 
 Example usage:
 ```
-{"id":1,"method":"worker.reset","params":["0"]}
+{"id":1,"method":"miner.stop","params":[]}
 ```
 
 Example response:
 ```
 {
-  "id":1,
-  "error":null
-}
-```
-
-
-# <a name="worker-speed"></a> worker.print.speed
-
-Prints speed of worker to console output. Useful for benchmarking.
-
-Command parameter # | Type | Description
--------|---------|---------
-1 | string | Worker ID.
-
-
-Example usage:
-```
-{"id":1,"method":"worker.print.speed","params":["0"]}
-```
-
-Example response:
-```
-{
-  "id":1,
-  "error":null
+   "id": 1,
+   "error": null
 }
 ```
 
@@ -797,7 +1017,7 @@ Example usage:
 
 Example response:
 ```
-{  
+{
    "id":1,
    "error":null
 }
@@ -827,14 +1047,21 @@ Example response:
 ```
 
 # Changelog
+* v0.1.0 (excavator v1.5.0a)
+    - Added [subscribe](#subscribe), [subscribe\.info](#subscribe-info) and [unsubscribe](#unsubscribe) methods.
+    - Changed [algorithm.\add](#algorithm-add) and [algorithm.\remove](#algorithm-remove) input parameters.
+    - Changed response of the [algorithm.\list](#algorithm-list) method.
+    - Added [workers\.reset](#workers-reset), [worker\.list](#worker-list), [worker.\.print.\speeds](#worker-speeds) and [worker\.clear](#worker-clear) methods.
+    - Added [mining.\stop](#mining-stop) method.
 
-* v0.0.3 (2018-02-01)
+
+* v0.0.3 (excavator v1.4.3a)
     - Added `devices[i]/subvendor` to [device\.list](#device-list) method.
 
 
-* v0.0.2 (2017-11-07)
+* v0.0.2 (excavator v1.3.7a)
     - Added [algorithm\.clear](#algorithm-clear), [workers\.free](#workers-free) and [workers\.add](#workers-add) methods.
 
 
-* v0.0.1 (2017-11-04)
+* v0.0.1 (excavator v1.3.6a)
     - Initial version.

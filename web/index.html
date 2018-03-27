@@ -155,7 +155,7 @@
 				<tr>
 					<th class="algorithm">Algorithm</th>
 					<th class="status rmv">Status</th>
-					<th class="address rmv">Address</th>
+					<th class="address rmv"></th>
 					<th class="totalSpeed rmv">Total speed</th>
 				</tr>
 				<tbody id="algorithmsHtml"></tbody>
@@ -172,6 +172,7 @@
 		var countDown = -1;
 		var devicesArray = {};
 		var algorithmsArray = {};
+		var workersArray = {};
 		var temperature, utilization, power, fan, fanRPM, deviceName, allDevices, deviceId;
 		var algoSuffix, algoWorkerSuffix;
 		function getDevices(){
@@ -208,7 +209,7 @@
 							}
 
 							$('#devicesHtml').html(deviceHtml);
-							getAlgorithms();
+							getStatus();
 						}
 					});
 				});
@@ -220,109 +221,97 @@
 			});
 		}
 
-		// Get all algorithms
-		function getAlgorithms(){
+		// Get all algorithms and workers
+		function getStatus(){
+
+			/*
+			$.getJSON('api?command={"id":1,"method":"subscribe.info","params":[]}&nocache=' + (new Date()).getTime() + '',function(dataSubscribe) {
+				$('#stratum_addr').html(dataSubscribe.address);
+			});*/
+
 			$.getJSON('api?command={"id":1,"method":"algorithm.list","params":[]}&nocache=' + (new Date()).getTime() + '',function(dataAlgorithms){
 				var algorithms = dataAlgorithms.algorithms;
+
 				jQuery.each(algorithms, function(i,algo) {
 					var algorithmId = algo.algorithm_id;
 					algorithmsArray[algorithmId] = {};
-					algorithmsArray[algorithmId].name 			= algo.name;
-					algorithmsArray[algorithmId].pools	= algo.pools;
-					algorithmsArray[algorithmId].speed = [0,0];
-					algorithmsArray[algorithmId].totalPower		= 0;
-					algorithmsArray[algorithmId].workers 		= algo.workers;
+					algorithmsArray[algorithmId].workers = {};
+					algorithmsArray[algorithmId].name = algo.name;
+					algorithmsArray[algorithmId].speed = algo.speed;
+					algorithmsArray[algorithmId].got_job = algo.got_job;
 				});
 
-				// Generate content algorithms + workers
-				$('#algorithmsHtml').html('');
-				jQuery.each(algorithmsArray, function(j,algo){
-					var algorithmsHtml = '';
-					var workersHtml = '';
+				$.getJSON('api?command={"id":1,"method":"worker.list","params":[]}&nocache=' + (new Date()).getTime() + '',function(dataWorkers){
 
-					// Get all workers for algorithmId
-					var workers = algo.workers;
-					var workersArray = {};
-					jQuery.each(workers, function(k,work){
-						var workerId = work.worker_id;
-						var workerDevice = work.device_id;
-						var workerSpeed = work.speed;
-						algo.speed[0] += workerSpeed[0];
-						algo.speed[1] += workerSpeed[1];
+					jQuery.each(dataWorkers.workers, function(i,worker) {
 
-						if (workersArray[workerDevice] == null){
-							workersArray[workerDevice] = workerSpeed;
-						}else{
-							workersArray[workerDevice][0] += workerSpeed[0];
-							workersArray[workerDevice][1] += workerSpeed[1];
-						}
-					});
-
-					// Get all pool for algorithmId
-					var pools = algo.pools;
-					var poolsArray = [];
-					jQuery.each(pools, function(p,pool){
-						// List second pool only when dual mining
-						if ( !(p != 0 && !pool.connected && pool.address == "benchmark") )
-							poolsArray.push(pool);
-					});
-
-					// Generate content for workers
-					var workersHtml = '';
-					workersHtml += '<tr class="workers">';
-					workersHtml += '	<td class="rmv"></td>';
-					workersHtml += '	<td colspan="4">';
-					workersHtml += '		<table class="mini">';
-					workersHtml += '			<tr>';
-					workersHtml += '				<th class="rmv idWorker">#</th>';
-					workersHtml += '				<th class="deviceWorker">Device</th>';
-					workersHtml += '				<th class="speedWorker">Speed</th>';
-					workersHtml += '			</tr>';
-
-					jQuery.each(workersArray, function(i,work){
-						var speed0Html = '';
-						jQuery.each(poolsArray, function(p,pool){
-							algoWorkerSuffix = 'H';
-							var workerSpeed = work[p];
-							if (workerSpeed > 1000000000000000){ workerSpeed /= 1000000000000000; algoWorkerSuffix = 'PH';}
-							else if (workerSpeed > 1000000000000){ workerSpeed /= 1000000000000; algoWorkerSuffix = 'TH';}
-							else if (workerSpeed > 1000000000){ workerSpeed /= 1000000000; algoWorkerSuffix = 'GH';}
-							else if (workerSpeed > 1000000){ workerSpeed /= 1000000; algoWorkerSuffix = 'MH';}
-							else if (workerSpeed > 1000){ workerSpeed /= 1000; algoWorkerSuffix = 'kH';}
-
-							// speed
-							if (p == poolsArray.length - 1 ) {
-								algo.totalPower += parseFloat(devicesArray[i].power);
-								workersHtml += '<tr>';
-								workersHtml += '	<td class="rmv">' + devicesArray[i].deviceId + '</td>';
-								workersHtml += '	<td>' + devicesArray[i].deviceName + '</td>';
-								if (p == 0)
-									workersHtml += '	<td>' + parseFloat(workerSpeed).toFixed(3) + ' ' + algoWorkerSuffix + '/s</td>';
-								else
-										workersHtml += speed0Html + parseFloat(workerSpeed).toFixed(3) + ' ' + algoWorkerSuffix + '/s</td>';
-								workersHtml += '</tr>';
+						var deviceId = worker.device_id;
+						jQuery.each(worker.algorithms, function(i,algo) {
+							if (deviceId in algorithmsArray[algo.id].workers) {
+								algorithmsArray[algo.id].workers[deviceId] += algo.speed;
 							}
 							else {
-								speed0Html += '	<td>' + parseFloat(workerSpeed).toFixed(3) + ' ' + algoWorkerSuffix + '/s <br> ';
+								algorithmsArray[algo.id].workers[deviceId] = algo.speed;
 							}
-
 						});
+
 					});
 
-					workersHtml += '		</table>';
-					workersHtml += '	</td>';
-					workersHtml += '</tr>';
+					// Generate content algorithms + workers
+					$('#algorithmsHtml').html('');
 
-					jQuery.each(poolsArray, function(p,pool){
-						if (pool.got_job == true) {
-							pools[p].gotJob = '<div class="status_1">Ok</div>';
+					jQuery.each(algorithmsArray, function(j,algo) {
+						var algorithmsHtml = '';
+						var workersHtml = '';
+
+						var workersArray = algo.workers;
+
+						// Generate content for workers
+						var workersHtml = '';
+						workersHtml += '<tr class="workers">';
+						workersHtml += '	<td class="rmv"></td>';
+						workersHtml += '	<td colspan="4">';
+						workersHtml += '		<table class="mini">';
+						workersHtml += '			<tr>';
+						workersHtml += '				<th class="rmv idWorker">#</th>';
+						workersHtml += '				<th class="deviceWorker">Device</th>';
+						workersHtml += '				<th class="speedWorker">Speed</th>';
+						workersHtml += '			</tr>';
+
+						for (var dev_id in algo.workers) {
+
+								workerSpeed = algo.workers[dev_id];
+
+								algoWorkerSuffix = 'H';
+								if (workerSpeed > 1000000000000000){ workerSpeed /= 1000000000000000; algoWorkerSuffix = 'PH';}
+								else if (workerSpeed > 1000000000000){ workerSpeed /= 1000000000000; algoWorkerSuffix = 'TH';}
+								else if (workerSpeed > 1000000000){ workerSpeed /= 1000000000; algoWorkerSuffix = 'GH';}
+								else if (workerSpeed > 1000000){ workerSpeed /= 1000000; algoWorkerSuffix = 'MH';}
+								else if (workerSpeed > 1000){ workerSpeed /= 1000; algoWorkerSuffix = 'kH';}
+
+								// speed
+								workersHtml += '<tr>';
+								workersHtml += '	<td class="rmv">' + dev_id + '</td>';
+								workersHtml += '	<td>' + devicesArray[dev_id].deviceName + '</td>';
+								workersHtml += '	<td>' + parseFloat(workerSpeed).toFixed(3) + ' ' + algoWorkerSuffix + '/s</td>';
+								workersHtml += '</tr>';
+
+						}
+
+						workersHtml += '		</table>';
+						workersHtml += '	</td>';
+						workersHtml += '</tr>';
+
+					  var jobStatus = '';
+						if (algo.got_job == true) {
+							jobStatus = '<div class="status_1">Ok</div>';
 						}
 						else {
-							pools[p].gotJob = '<div class="status_0">Fail</div>';
+							jobStatus = '<div class="status_0">Fail</div>';
 						}
 
 						algoSuffix = 'H';
-						var algoSpeed = algo.speed[p];
+						var algoSpeed = algo.speed;
 						if (algoSpeed > 1000000000000000){ algoSpeed /= 1000000000000000; algoSuffix = 'PH';}
 						else if (algoSpeed > 1000000000000){ algoSpeed /= 1000000000000; algoSuffix = 'TH';}
 						else if (algoSpeed > 1000000000){ algoSpeed /= 1000000000; algoSuffix = 'GH';}
@@ -330,24 +319,24 @@
 						else if (algoSpeed > 1000){ algoSpeed /= 1000; algoSuffix = 'kH';}
 
 						algorithmsHtml += '<tr><td>';
-						if (p == 0) {
-							algorithmsHtml += algo.name;
-						}
-						algorithmsHtml += '<div class="shw"><b>Status:</b> ' + pool.gotJob + '<br><b>Address:</b> ' + pool.address + '<br><b>Speed:</b> ' + parseFloat(algoSpeed).toFixed(3) + ' ' + algoSuffix + '/s</div></td>';
-						algorithmsHtml += '	<td class="rmv">' + pool.gotJob + '</td>';
-						algorithmsHtml += '	<td class="rmv">' + pool.address + '</td>';
+						algorithmsHtml += algo.name;
+						algorithmsHtml += '<div class="shw"><b>Status:</b> ' + jobStatus + '<br><b>Speed:</b> ' + parseFloat(algoSpeed).toFixed(3) + ' ' + algoSuffix + '/s</div></td>';
+						algorithmsHtml += '	<td class="rmv">' + jobStatus + '</td>';
+						algorithmsHtml += '	<td class="rmv">' + "" + '</td>';
 						algorithmsHtml += '	<td class="rmv">' + parseFloat(algoSpeed).toFixed(3) + ' ' + algoSuffix + '/s</td>';
 						algorithmsHtml += '</tr>';
 
+						$('#algorithmsHtml').append(algorithmsHtml + workersHtml);
+
 					});
-
-					$('#algorithmsHtml').append(algorithmsHtml + workersHtml);
-
 				});
+
 				$(".loadingFrame").hide();
 				$(".errorFrame").hide();
 				$("#content").show();
+
 			});
+
 		}
 
 	  $(function(){
