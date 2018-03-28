@@ -1,4 +1,4 @@
-# Excavator API Version 0.1.0
+# Excavator API Version 0.1.1
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -58,6 +58,7 @@ Method | Description
 -------|-------------
 [device\.list](#device-list) | Queries available devices - GPUs.
 [device\.get](#device-get) | Queries particular device - GPU.
+[devices\.get](#devices-get) | Queries available devices - GPU.
 [device\.set\.power_limit](#device-set-power-limit) | Sets device power limit.
 [device\.set\.tdp](#device-set-tdp) | Sets device TDP.
 [device\.set\.core_delta](#device-set-core-delta) | Sets device core clock (delta +/-).
@@ -187,7 +188,7 @@ This method does not take in any parameter.
 
 Response field | Type | Description
 ------|---------|---------
-`devices` | array | Array of device objects. If system has no avaiable GPGPU devices, this array is empty.
+`devices` | array | Array of device objects. If system has no available GPGPU devices, this array is empty.
 `devices[i]/device_id` | int | Device ID. This is a handle for future API commands related to this device.
 `devices[i]/name` | string | Device name.
 `devices[i]/gpgpu_type` | int | GPGPU type. 1 means CUDA, 2 means OpenCL.
@@ -315,6 +316,86 @@ Example response:
    "gpu_fan_speed_rpm":0,
    "gpu_memory_free": 3066073088,
    "gpu_memory_used": 155152384,
+   "id":1,
+   "error":null
+}
+```
+
+
+# <a name="devices-get"></a> devices.get
+
+Returns non-changing and changing details about available devices. See [device\.get](#device-get).
+
+This method does not take in any parameter.
+
+Response field | Type | Description
+------|---------|---------
+`devices` | array | Array of [device\.get](#device-get) responses. If system has no available GPGPU devices, this array is empty.
+
+Example usage:
+```
+{"id":1,"method":"devices.get","params":[]}
+```
+
+Example response:
+```
+{
+   "devices":[
+      {
+          "device_id":0,
+          "name":"GeForce GTX 1080 Ti",
+          "gpgpu_type":1,
+          "subvendor":"10de",
+          "details":{
+             "cuda_id":0,
+             "sm_major":6,
+             "sm_minor":1,
+             "bus_id":5
+          },
+          "uuid":"GPU-8f6552ba-76e8-4e86-c2bb-53b69fb685ef",
+          "gpu_temp":28,
+          "gpu_load":0,
+          "gpu_load_memctrl":0,
+          "gpu_power_usage":56.340999603271487,
+          "gpu_power_limit_current":250.0,
+          "gpu_power_limit_min":125.0,
+          "gpu_power_limit_max":300.0,
+          "gpu_tdp_current":100.0,
+          "gpu_clock_core_max":1911,
+          "gpu_clock_memory":5005,
+          "gpu_fan_speed":23,
+          "gpu_fan_speed_rpm":1036,
+          "gpu_memory_free":10753101824,
+          "gpu_memory_used":1058058240
+      },
+      {
+          "device_id":1,
+          "name":"GeForce GTX 1080",
+          "gpgpu_type":1,
+          "subvendor":"3842",
+          "details":{
+             "cuda_id":1,
+             "sm_major":6,
+             "sm_minor":1,
+             "bus_id":7
+          },
+          "uuid":"GPU-c108e737-1a9a-2302-c878-402608fd4535",
+          "gpu_temp":35,
+          "gpu_load":0,
+          "gpu_load_memctrl":0,
+          "gpu_power_usage":6.573999881744385,
+          "gpu_power_limit_current":180.0,
+          "gpu_power_limit_min":90.0,
+          "gpu_power_limit_max":217.0,
+          "gpu_tdp_current":100.0,
+          "gpu_clock_core_max":2012,
+          "gpu_clock_memory":4513,
+          "gpu_fan_speed":0,
+          "gpu_fan_speed_rpm":0,
+          "gpu_memory_free":8471445504,
+          "gpu_memory_used":118489088
+      }
+   ],
    "id":1,
    "error":null
 }
@@ -1047,6 +1128,9 @@ Example response:
 ```
 
 # Changelog
+* v0.1.1 (excavator v1.5.1a)
+    - Added [devices.\get](#devices-get) method.
+
 * v0.1.0 (excavator v1.5.0a)
     - Added [subscribe](#subscribe), [subscribe\.info](#subscribe-info) and [unsubscribe](#unsubscribe) methods.
     - Changed [algorithm.\add](#algorithm-add) and [algorithm.\remove](#algorithm-remove) input parameters.

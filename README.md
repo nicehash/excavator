@@ -68,6 +68,12 @@ From version 1.5.0a further excavator supports only NiceHash stratums.
 
 # Changelog
 
+v1.5.1a
+- API bug fixes
+- API version bumped to 0.1.1 (added devices.get method)
+- CryptoNight and CryptoNightV7 bug fixes 
+- speed improvements for lyra2rev2 on Titan V 
+
 v1.5.0a
 - bug fixes & improvements
 - changed stratum protocol to NiceHash Miner Protocol
