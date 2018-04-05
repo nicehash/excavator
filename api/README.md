@@ -117,7 +117,7 @@ Command parameter # | Type | Description
 1 | string | Stratum URL (hostname with port).
 2 | string | Username and password (split with `:`);
 
-NiceHash stratum servers are available at: nhmp.LOCATION.nicehash.com
+NiceHash stratum servers are available at: nhmp.LOCATION.nicehash.com:3200
 (LOCATION: eu, usa, hk, jp, in, br).
 
 
@@ -636,13 +636,14 @@ Response field | Type | Description
 `algorithms` | array | Array of algorithms. If no algorithms, this array is empty.
 `algorithms[i]/algorithm_id` | int | Algorithm ID.
 `algorithms[i]/name` | string | Algorithm name.
-`algorithms[i]/connected` | boolean | `True` if connected to remote pool.
 `algorithms[i]/speed` | float | Speed in hashes per second.
-`algorithms[i]/got_job` | boolean | `True` if remote pool provided valid job.
-`algorithms[i]/received_jobs` | int | Number of jobs provided by the remote pool.
+`algorithms[i]/uptime` | float | Uptime in seconds.
+`algorithms[i]/benchmark` | boolean | `True` if benchmark
 `algorithms[i]/accepted_shares` | int | Total shares accepted by the remote pool.
 `algorithms[i]/rejected_shares` | int | Total shares rejected by the remote pool.
-
+`algorithms[i]/got_job` | boolean | `True` if remote pool provided valid job.
+`algorithms[i]/received_jobs` | int | Number of jobs provided by the remote pool.
+`algorithms[i]/current_job_difficulty` | float | Difficulty for current job.
 
 
 Example usage:
@@ -786,7 +787,7 @@ This method returns no response fields. If error occured, field `error` is not `
 
 Example usage:
 ```
-{"id":1,"method":"worker.clear","params":[""]}
+{"id":1,"method":"worker.clear","params":[]}
 ```
 
 Example response:
