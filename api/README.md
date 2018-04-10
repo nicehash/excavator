@@ -638,7 +638,7 @@ Response field | Type | Description
 `algorithms[i]/name` | string | Algorithm name.
 `algorithms[i]/speed` | float | Speed in hashes per second.
 `algorithms[i]/uptime` | float | Uptime in seconds.
-`algorithms[i]/benchmark` | boolean | `True` if benchmark
+`algorithms[i]/benchmark` | boolean | `True` if benchmark.
 `algorithms[i]/accepted_shares` | int | Total shares accepted by the remote pool.
 `algorithms[i]/rejected_shares` | int | Total shares rejected by the remote pool.
 `algorithms[i]/got_job` | boolean | `True` if remote pool provided valid job.
@@ -1055,7 +1055,7 @@ Response field | Type | Description
 `build_platform` | string | Build platform.
 `build_time` | string | Build time.
 `build_number` | int | Build number.
-`uptime` | long | Uptime in milliseconds.
+`uptime` | long | Uptime in seconds.
 `cpu_load` | double | CPU load in percentage.
 `cpu_usage` | double | CPU usage in percentage.
 `ram_load` | double | Used memory in percentage.
@@ -1073,7 +1073,7 @@ Example response:
 "build_platform": "Windows",
 "build_time": "2017-11-17 13:26:36",
 "build_number": 3456,
-"uptime": 75063,
+"uptime": 5,
 "cpu_load": 3.0168410822665095,
 "cpu_usage": 0,
 "ram_load": 42,
