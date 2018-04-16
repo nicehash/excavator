@@ -1,4 +1,4 @@
-# Excavator API Version 0.1.1
+# Excavator API Version 0.1.2
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -144,6 +144,8 @@ Response field | Type | Description
 ------|---------|---------
 `address` | string | Remote address of the NiceHash stratum.
 `login` | string | Login credentials.
+`connected` | boolean | `True` if connected to the stratum.
+`server_status` | string | Message from the stratum server.
 
 Example usage:
 ```
@@ -152,11 +154,12 @@ Example usage:
 
 Example response:
 ```
-{
-   "address":"nhmp.usa.nicehash.com:3200",
-   "login":"34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x",
-   "id":1,
-   "error":null
+{  
+  "id":1,
+  "address":"nhmp.eu.nicehash.com:3200",
+  "login":"34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x",
+  "connected":true,
+  "server_status":"Subscribed"
 }
 ```
 
@@ -1129,6 +1132,9 @@ Example response:
 ```
 
 # Changelog
+* v0.1.2 (excavator v1.5.2a)
+    - Changed response fields of the [subscribe.\info](#subscribe-info) method.
+
 * v0.1.1 (excavator v1.5.1a)
     - Added [devices.\get](#devices-get) method.
 
@@ -1137,7 +1143,7 @@ Example response:
     - Changed [algorithm.\add](#algorithm-add) and [algorithm.\remove](#algorithm-remove) input parameters.
     - Changed response of the [algorithm.\list](#algorithm-list) method.
     - Added [workers\.reset](#workers-reset), [worker\.list](#worker-list), [worker.\.print.\speeds](#worker-speeds) and [worker\.clear](#worker-clear) methods.
-    - Added [mining.\stop](#mining-stop) method.
+    - Added [miner.\stop](#miner-stop) method.
 
 
 * v0.0.3 (excavator v1.4.3a)
