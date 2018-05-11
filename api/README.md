@@ -1,4 +1,4 @@
-# Excavator API Version 0.1.2
+# Excavator API Version 0.1.3
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -59,7 +59,8 @@ Method | Description
 [device\.list](#device-list) | Queries available devices - GPUs.
 [device\.get](#device-get) | Queries particular device - GPU.
 [devices\.get](#devices-get) | Queries available devices - GPU.
-[device\.set\.power_limit](#device-set-power-limit) | Sets device power limit.
+[device\.set\.power_limit](#device-set-power-limit) | Sets device power limit in Watts.
+[device\.set\.power_mode](#device-set-power-mode) | Sets device power limit in %.
 [device\.set\.tdp](#device-set-tdp) | Sets device TDP.
 [device\.set\.core_delta](#device-set-core-delta) | Sets device core clock (delta +/-).
 [device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-).
@@ -98,6 +99,7 @@ Method | Description
 Method | Description
 -------|------------
 [miner\.stop](#miner-stop) | Stops mining without exiting excavator.
+[miner\.alive](#miner-alive) | Check the excavator responsiveness.
 
 **Miscellaneous methods**
 
@@ -196,6 +198,7 @@ Response field | Type | Description
 `devices[i]/name` | string | Device name.
 `devices[i]/gpgpu_type` | int | GPGPU type. 1 means CUDA, 2 means OpenCL.
 `devices[i]/subvendor` | string | Subvendor id.
+`devices[i]/display_mode` | int | Display mode. 1 if a display is currently connected to the device, 0 if not.
 `devices[i]/details` | object | Device details.
 `devices[i]/details/cuda_id` | int | Device CUDA ID.
 `devices[i]/details/sm_major` | int | Device SM major version.
@@ -216,6 +219,7 @@ Example response:
          "name":"GeForce GTX 1060 6GB",
          "gpgpu_type":1,
          "subvendor":"1462",
+         "display_mode":1,
          "details":{
             "cuda_id":1,
             "sm_major":6,
@@ -228,6 +232,7 @@ Example response:
          "name":"GeForce GTX 1070",
          "gpgpu_type":1,
          "subvendor":"3842",
+         "display_mode":0,
          "details":{
             "cuda_id":3,
             "sm_major":6,
@@ -240,6 +245,7 @@ Example response:
           "name":"Ellesmere",
           "gpgpu_type":2,
           "subvendor":"0",
+          "display_mode":0,
           "details":{
 
           }
@@ -274,6 +280,7 @@ Response field | Type | Description
 `gpu_temp` | int | GPU temperature in °C.
 `gpu_load` | int | GPU core load in %.
 `gpu_load_memctrl` | int | GPU memory controller load in %.
+`gpu_power_mode` | float | Current GPU power limit in %.
 `gpu_power_usage` | float | GPU power usage in Watts.
 `gpu_power_limit_current` | float | Current GPU power limit in Watts.
 `gpu_power_limit_min` | float | Minimal GPU power limit in Watts.
@@ -308,6 +315,7 @@ Example response:
    "gpu_temp":42,
    "gpu_load":80,
    "gpu_load_memctrl":66,
+   "gpu_power_mode":80.0,
    "gpu_power_usage":131.9720001220703,
    "gpu_power_limit_current":126.0,
    "gpu_power_limit_min":105.0,
@@ -359,6 +367,7 @@ Example response:
           "gpu_temp":28,
           "gpu_load":0,
           "gpu_load_memctrl":0,
+          "gpu_power_mode":80.0,
           "gpu_power_usage":56.340999603271487,
           "gpu_power_limit_current":250.0,
           "gpu_power_limit_min":125.0,
@@ -386,6 +395,7 @@ Example response:
           "gpu_temp":35,
           "gpu_load":0,
           "gpu_load_memctrl":0,
+          "gpu_power_mode":-1.0,
           "gpu_power_usage":6.573999881744385,
           "gpu_power_limit_current":180.0,
           "gpu_power_limit_min":90.0,
@@ -407,7 +417,7 @@ Example response:
 
 # <a name="device-set-power-limit"></a> device.set.power_limit
 
-Sets power limit for certain device. Provided power limit is in Watts and it has to be be inside interval `gpu_power_limit_min` and `gpu_power_limit_min` provided by method [device\.get](#device-get).
+Sets power limit for certain device. Provided power limit is in Watts and it has to be inside interval `gpu_power_limit_min` and `gpu_power_limit_max` provided by method [device\.get](#device-get).
 
 Command parameter # | Type | Description
 -------|---------|---------
@@ -417,6 +427,29 @@ Command parameter # | Type | Description
 Example usage:
 ```
 {"id":1,"method":"device.set.power_limit","params":["0","150"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
+# <a name="device-set-power-mode"></a> device.set.power_mode
+
+Sets power limit for certain device in %. 0 sets power limit to `gpu_power_limit_min` and 100 to `gpu_power_limit_max` provided by method [device\.get](#device-get).
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID.
+2 | string | New power limit in %.
+
+Example usage:
+```
+{"id":1,"method":"device.set.power_mode","params":["0","80"]}
 ```
 
 Example response:
@@ -1046,6 +1079,25 @@ Example response:
 }
 ```
 
+# <a name="miner-alive"></a> miner.alive
+
+Check if excavator is responsive.
+
+This method does not take in any parameter.
+
+Example usage:
+```
+{"id":1,"method":"miner.alive","params":[]}
+```
+
+Example response:
+```
+{
+   "id": 1,
+   "error": null
+}
+```
+
 # <a name="info"></a> info
 
 Returns basic information about Excavator.
@@ -1132,18 +1184,24 @@ Example response:
 ```
 
 # Changelog
+* v0.1.3 (excavator v1.5.3a)
+    - Added [miner\.alive](#miner-alive) method.
+    - Added `devices[i]/display_mode` to [device\.list](#device-list) method.
+    - Added [device\.set\.power_mode](#device-set-power-mode) method.
+    - Added `devices[i]/gpu_power_mode` to [device\.get](#device-get) and [devices\.get](#devices-get) methods.
+
 * v0.1.2 (excavator v1.5.2a)
-    - Changed response fields of the [subscribe.\info](#subscribe-info) method.
+    - Changed response fields of the [subscribe\.info](#subscribe-info) method.
 
 * v0.1.1 (excavator v1.5.1a)
-    - Added [devices.\get](#devices-get) method.
+    - Added [devices\.get](#devices-get) method.
 
 * v0.1.0 (excavator v1.5.0a)
     - Added [subscribe](#subscribe), [subscribe\.info](#subscribe-info) and [unsubscribe](#unsubscribe) methods.
-    - Changed [algorithm.\add](#algorithm-add) and [algorithm.\remove](#algorithm-remove) input parameters.
-    - Changed response of the [algorithm.\list](#algorithm-list) method.
-    - Added [workers\.reset](#workers-reset), [worker\.list](#worker-list), [worker.\.print.\speeds](#worker-speeds) and [worker\.clear](#worker-clear) methods.
-    - Added [miner.\stop](#miner-stop) method.
+    - Changed [algorithm\.add](#algorithm-add) and [algorithm\.remove](#algorithm-remove) input parameters.
+    - Changed response of the [algorithm\.list](#algorithm-list) method.
+    - Added [workers\.reset](#workers-reset), [worker\.list](#worker-list), [worker\.print\.speeds](#worker-speeds) and [worker\.clear](#worker-clear) methods.
+    - Added [miner\.stop](#miner-stop) method.
 
 
 * v0.0.3 (excavator v1.4.3a)

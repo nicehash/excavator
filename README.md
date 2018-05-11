@@ -68,6 +68,10 @@ From version 1.5.0a further excavator supports only NiceHash stratums.
 
 # Changelog
 
+v1.5.3a
+- API version bumped to 0.1.3
+- ignore duplicate subscribe calls
+
 v1.5.2a
 - bug fixes
 - API version bumped to 0.1.2
