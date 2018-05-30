@@ -1,4 +1,4 @@
-# Excavator API Version 0.1.3
+# Excavator API Version 0.1.4
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -60,8 +60,8 @@ Method | Description
 [device\.get](#device-get) | Queries particular device - GPU.
 [devices\.get](#devices-get) | Queries available devices - GPU.
 [device\.set\.power_limit](#device-set-power-limit) | Sets device power limit in Watts.
-[device\.set\.power_mode](#device-set-power-mode) | Sets device power limit in %.
 [device\.set\.tdp](#device-set-tdp) | Sets device TDP.
+[device\.set\.tdp\.simple](#device-set-tdp-simple) | Sets device power mode.
 [device\.set\.core_delta](#device-set-core-delta) | Sets device core clock (delta +/-).
 [device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-).
 [device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed.
@@ -100,6 +100,7 @@ Method | Description
 -------|------------
 [miner\.stop](#miner-stop) | Stops mining without exiting excavator.
 [miner\.alive](#miner-alive) | Check the excavator responsiveness.
+[state\.set](#state-set) | Set state of all GPU devices.
 
 **Miscellaneous methods**
 
@@ -438,28 +439,6 @@ Example response:
 ```
 
 
-# <a name="device-set-power-mode"></a> device.set.power_mode
-
-Sets power limit for certain device in %. 0 sets power limit to `gpu_power_limit_min` and 100 to `gpu_power_limit_max` provided by method [device\.get](#device-get).
-
-Command parameter # | Type | Description
--------|---------|---------
-1 | string | Device ID.
-2 | string | New power limit in %.
-
-Example usage:
-```
-{"id":1,"method":"device.set.power_mode","params":["0","80"]}
-```
-
-Example response:
-```
-{
-  "id":1,
-  "error":null
-}
-```
-
 
 # <a name="device-set-tdp"></a> device.set.tdp
 
@@ -483,6 +462,35 @@ Example response:
 }
 ```
 
+# <a name="device-set-tdp-simple"></a> device.set.tdp.simple
+
+Sets power mode for certain device.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID.
+2 | string | Power mode (0, 1 or 2).
+
+
+Power mode | Description | Remark
+-------|---------|---------
+0 | low | min TDP
+1 | medium | between min and max TDP
+2 | high | max TDP
+
+
+Example usage:
+```
+{"id":1,"method":"device.set.tdp.simple","params":["0","1"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
 
 # <a name="device-set-core-delta"></a> device.set.core_delta
 
@@ -1098,6 +1106,78 @@ Example response:
 }
 ```
 
+
+# <a name="state-set"></a> state.set
+
+Set state of all GPU devices. This is an alternative method to calling [subscribe](#subscribe), [algorithm\.add](#algorithm-add), [algorithm\.remove](#algorithm-remove) and [worker\.add](#worker-add). Its main purpose is to make switching between different algorithms easier.
+
+This method takes one parameter of param object type as input.
+
+Param object:
+
+Field name  | Type                    | Description
+------------|-------------------------|------------
+btc_address | string                  | Username and password (split with :)
+stratum_url | string                  | Stratum URL (hostname with port)
+devices     | array of device objects |
+
+Device object:
+
+Field name  | Type                    | Description
+------------|-------------------------|------------
+device_uuid | string                  | Universally unique identifier (UUID) of device
+algorithm   | string                  | Algorithm name (see list of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia))
+params      | array of strings        | Algorithm (optional) parameters
+
+
+Example usage:
+```
+{
+   "id": 1,
+   "method": "state.set",
+   "params": {
+      "btc_address": "34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x",
+      "stratum_url": "nhmp.usa.nicehash.com:3200",
+      "devices": [
+         {
+            "device_uuid": "GPU-fc05ecf6-b928-749b-5089-bcb77fc8db11",
+            "algorithm": "daggerhashimoto",
+            "params": [
+               "B=9184",
+               "TPB=128",
+               "HPW=4",
+               "S=1"
+            ]
+         },
+         {
+            "device_uuid": "GPU-f66f42d1-ff8c-6a00-3a3b-7445c538d6e1",
+            "algorithm": "lyra2rev2",
+            "params": []
+         }
+      ]
+   }
+}
+```
+
+Example response:
+```
+{
+   "devices": [
+      {
+         "device_uuid": "GPU-fc05ecf6-b928-749b-5089-bcb77fc8db11",
+         "error": null
+      },
+      {
+         "device_uuid": "GPU-f66f42d1-ff8c-6a00-3a3b-7445c538d6e1",
+         "error": null
+      }
+   ],
+   "id": 1,
+   "error": null
+}
+```
+
+
 # <a name="info"></a> info
 
 Returns basic information about Excavator.
@@ -1184,10 +1264,15 @@ Example response:
 ```
 
 # Changelog
+
+* v0.1.4 (excavator v1.5.4a)
+    - Renamed device\.set\.power_mode method to [device\.set\.tdp\.simple](#device-set-tdp-simple).
+    - Added [state\.set](#state-set) method.
+
 * v0.1.3 (excavator v1.5.3a)
     - Added [miner\.alive](#miner-alive) method.
     - Added `devices[i]/display_mode` to [device\.list](#device-list) method.
-    - Added [device\.set\.power_mode](#device-set-power-mode) method.
+    - Added `device\.set\.power_mode` method.
     - Added `devices[i]/gpu_power_mode` to [device\.get](#device-get) and [devices\.get](#devices-get) methods.
 
 * v0.1.2 (excavator v1.5.2a)
