@@ -1,4 +1,4 @@
-# Excavator API Version 0.1.4
+# Excavator API Version 0.1.5
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -200,6 +200,7 @@ Response field | Type | Description
 `devices[i]/gpgpu_type` | int | GPGPU type. 1 means CUDA, 2 means OpenCL.
 `devices[i]/subvendor` | string | Subvendor id.
 `devices[i]/display_mode` | int | Display mode. 1 if a display is currently connected to the device, 0 if not.
+`devices[i]/gpu_memory_total` | long | Total GPU memory in bytes.
 `devices[i]/details` | object | Device details.
 `devices[i]/details/cuda_id` | int | Device CUDA ID.
 `devices[i]/details/sm_major` | int | Device SM major version.
@@ -221,6 +222,7 @@ Example response:
          "gpgpu_type":1,
          "subvendor":"1462",
          "display_mode":1,
+         "gpu_memory_total":6442450944,
          "details":{
             "cuda_id":1,
             "sm_major":6,
@@ -234,6 +236,7 @@ Example response:
          "gpgpu_type":1,
          "subvendor":"3842",
          "display_mode":0,
+         "gpu_memory_total":8589934592,
          "details":{
             "cuda_id":3,
             "sm_major":6,
@@ -246,6 +249,7 @@ Example response:
           "name":"Ellesmere",
           "gpgpu_type":2,
           "subvendor":"0",
+          "gpu_memory_total":-1,
           "display_mode":0,
           "details":{
 
@@ -1264,6 +1268,9 @@ Example response:
 ```
 
 # Changelog
+
+* v0.1.5 (excavator v1.5.5a)
+    - Added `devices[i]/gpu_memory_total` to [device\.list](#device-list) method.
 
 * v0.1.4 (excavator v1.5.4a)
     - Renamed device\.set\.power_mode method to [device\.set\.tdp\.simple](#device-set-tdp-simple).
