@@ -14,7 +14,7 @@ First, make sure you have Visual C++ 2017 redistributable (x64) installed.
 
 NVIDIA display driver 387.xx or more recent is required. CUDA devices with SM 5.0 and higher are supported.
 
-From version 1.5.0a excavator supports only NiceHash stratums. Stratum servers are available at nhmp.<LOCATION>.nicehash.com:3200 (LOCATION: eu, usa, hk, jp, in, br). The same stratum url is used for all algorithms.
+From version 1.5.0a excavator supports only NiceHash stratums. Stratum servers are available at nhmp.LOCATION.nicehash.com:3200 (LOCATION: eu, usa, hk, jp, in, br). The same stratum url is used for all algorithms.
 
 **ADVANCED** There are two methods to use Excavator. Both rely on API commands you can find in [API section](/api).
 
