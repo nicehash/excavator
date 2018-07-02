@@ -17,6 +17,7 @@ Name | Supported devices | Wcount*1 | Pcount*2
 [neoscrypt](#neoscrypt)| NVIDIA SM 5.0+ | 1 |1
 [cryptonightV7](#cryptonightV7)| NVIDIA SM 5.0+ | 1 |2
 [lyra2z](#lyra2z)| NVIDIA SM 5.0+ | 1 | 1
+[x16r](#x16r)| NVIDIA SM 5.0+ | 1 | 1
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
@@ -240,3 +241,14 @@ Parameter # or name | Range | Explanation
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
 **WARNING: This algorithm is optimized for the following cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+
+
+# <a name="x16r"></a> x16r
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `B` | 0-inf | Number of blocks
+
+If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
+
+**WARNING: You may reach higher speeds by experimenting with input parameters.**

@@ -68,6 +68,9 @@ From version 1.5.0a further excavator supports only NiceHash stratums.
 
 # Changelog
 
+v1.5.6a
+- added algorithm x16r
+
 v1.5.5a
 - API version bumped to 0.1.5
 - speed improvements for lyra2z
