@@ -14,6 +14,8 @@ First, make sure you have Visual C++ 2017 redistributable (x64) installed.
 
 NVIDIA display driver 387.xx or more recent is required. CUDA devices with SM 5.0 and higher are supported.
 
+From version 1.5.0a excavator supports only NiceHash stratums. Stratum servers are available at nhmp.<LOCATION>.nicehash.com:3200 (LOCATION: eu, usa, hk, jp, in, br). The same stratum url is used for all algorithms.
+
 **ADVANCED** There are two methods to use Excavator. Both rely on API commands you can find in [API section](/api).
 
 1. Using API port or HTTP API; for that, you need an application that will pass commands to the Excavator. We do not provide any such application (except [web example](/web)), nor there is any public source code available (yet).
@@ -64,7 +66,7 @@ Parameter | Range | Description | Default
 
 WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVERCLOCKING MAY PERMANENTLY DAMAGE YOUR COMPUTER HARDWARE!
 
-From version 1.5.0a further excavator supports only NiceHash stratums.  
+The algorithm names are case sensitive.  
 
 # Changelog
 
@@ -77,7 +79,7 @@ v1.5.5a
 
 v1.5.4a
 - API version bumped to 0.1.4
-- added algorithm lyra2z 
+- added algorithm lyra2z
 - lyra2rev2 bug fix
 
 v1.5.3a
