@@ -70,6 +70,9 @@ The algorithm names are case sensitive.
 
 # Changelog
 
+v1.5.7a
+- changed benchmark job for x16r 
+
 v1.5.6a
 - added algorithm x16r
 
