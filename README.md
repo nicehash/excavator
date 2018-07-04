@@ -70,6 +70,9 @@ The algorithm names are case sensitive.
 
 # Changelog
 
+v1.5.8a
+- worker.reset is called automatically after worker initialization
+
 v1.5.7a
 - changed benchmark job for x16r 
 
