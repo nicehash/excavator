@@ -1,27 +1,26 @@
 # Available CUDA Algorithms in Excavator
 
-Name | Supported devices | Wcount*1 | Pcount*2
------------------|----------|---------|----
-[equihash](#equihash) | NVIDIA SM 5.0+ | 1/2 | 1
-[pascal](#pascal) | NVIDIA SM 5.0+ | 1 | 2
-[decred](#decred)| NVIDIA SM 5.0+ | 1 | 3
-[sia](#sia)| NVIDIA SM 5.0+ | 1 | 3
-[lbry](#lbry)| NVIDIA SM 5.0+ | 1 | 3
-[blake2s](#blake2s)| NVIDIA SM 5.0+ | 1 | 3
-[daggerhashimoto](#daggerhashimoto)| NVIDIA SM 5.2+ | 1 | 4
-[lyra2rev2](#lyra2rev2)| NVIDIA SM 5.0+ | 1 | 1
-[daggerhashimoto_decred](#daggerhashimoto_decred)| NVIDIA SM 5.2+ | 1 | 3
-[daggerhashimoto_sia](#daggerhashimoto_sia)| NVIDIA SM 5.2+ | 1 | 3
-[daggerhashimoto_pascal](#daggerhashimoto_pascal)| NVIDIA SM 5.2+ | 1 | 3
-[keccak](#keccak)| NVIDIA SM 5.0+ | 1 |3
-[neoscrypt](#neoscrypt)| NVIDIA SM 5.0+ | 1 |1
-[cryptonightV7](#cryptonightV7)| NVIDIA SM 5.0+ | 1 |2
-[lyra2z](#lyra2z)| NVIDIA SM 5.0+ | 1 | 1
-[x16r](#x16r)| NVIDIA SM 5.0+ | 1 | 1
+Name | Supported devices | Wcount*1 | Pcount*2 | Intensity*3
+-----------------|----------|---------|----|----
+[equihash](#equihash) | NVIDIA SM 5.0+ | 1/2 | 1 | 0
+[pascal](#pascal) | NVIDIA SM 5.0+ | 1 | 2 | 0
+[decred](#decred)| NVIDIA SM 5.0+ | 1 | 3 | 0
+[blake2s](#blake2s)| NVIDIA SM 5.0+ | 1 | 3 | 1
+[daggerhashimoto](#daggerhashimoto)| NVIDIA SM 5.2+ | 1 | 4 | 1
+[lyra2rev2](#lyra2rev2)| NVIDIA SM 5.0+ | 1 | 1 | 1
+[daggerhashimoto_decred](#daggerhashimoto_decred)| NVIDIA SM 5.2+ | 1 | 3 | 0
+[daggerhashimoto_pascal](#daggerhashimoto_pascal)| NVIDIA SM 5.2+ | 1 | 3 | 0
+[keccak](#keccak)| NVIDIA SM 5.0+ | 1 |3 | 1
+[neoscrypt](#neoscrypt)| NVIDIA SM 5.0+ | 1 | 1 | 1
+[cryptonightV7](#cryptonightV7)| NVIDIA SM 5.0+ | 1 |2 | 0
+[lyra2z](#lyra2z)| NVIDIA SM 5.0+ | 1 | 1 | 1
+[x16r](#x16r)| NVIDIA SM 5.0+ | 1 | 1 | 1
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
 *2 Number of supported parameters. Parameters are explained in details in section for each algorithm.
+
+*3 1 if running in low intensity is supported
 
 All CUDA algorithms support named parameters. Named parameters are of format NAME=VALUE; example:
 > `... ["0","1","TPB=512","B=30"] ...`
@@ -73,31 +72,6 @@ Parameter # or name | Range | Explanation
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
 **WARNING: Decred is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
-
-# <a name="sia"></a> sia
-
-Parameter # or name | Range | Explanation
------------------|----------|---------
-1 or `B` | 0-inf | Number of blocks
-2 or `TPB` | 0-512 | Number of threads per block
-3 or `NPT` | 0-inf | Number of iterations per thread
-
-If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
-
-**WARNING: Sia is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
-
-
-# <a name="lbry"></a> lbry
-
-Parameter # or name | Range | Explanation
------------------|----------|---------
-1 or `B` | 0-inf | Number of blocks
-2 or `TPB` | 0-768 | Number of threads per block
-3 or `NPT` | 0-inf | Number of iterations per thread
-
-If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
-
-**WARNING: Lbry is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 
 # <a name="blake2s"></a> blake2s
@@ -161,24 +135,6 @@ If no parameters are provided, device specific defaults are used. If provided pa
 **WARNING: Daggerhashimoto_decred is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 970, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 NOTE1: Parameter P is used to select the most profitable default ratio values. If P is 0 the goal is to reach highest daggerhashimoto speed while retaining decent speed on decred. When P is 1 default ratio is set to reach highest combined speeds on both algorithms.
-
-# <a name="daggerhashimoto_sia"></a> daggerhashimoto_sia
-
-Parameter # or name | Range | Explanation
------------------|----------|---------
-1 or `R_0` | 0-16 | Ratio of blocks used for daggerhashimoto\*
-2 or `R_1` | 0-16 | Ratio of blocks used for sia\*
-3 or `P` | 0-1 | Profitability of sia\*\*
-
-\* The R_0:R_1 ratio adjusts how many blocks are used for each algorithm.
-
-\*\* Set P to 0 or 1 based on current profitability of sia. If profitability of sia is low compared to profitability of daggerhashimoto set P to 0, otherwise to 1.
-
-If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
-
-**WARNING: Daggerhashimoto_sia is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 970, P104-100 and P106-100. You may reach higher speeds by experimenting with parameters when using a different card.**
-
-NOTE1: Parameter P is used to select the most profitable default ratio values. If P is 0 the goal is to reach highest daggerhashimoto speed while retaining decent speed on sia. When P is 1 default ratio is set to reach highest combined speeds on both algorithms.
 
 # <a name="daggerhashimoto_pascal"></a> daggerhashimoto_pascal
 

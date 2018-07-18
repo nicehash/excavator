@@ -70,11 +70,19 @@ The algorithm names are case sensitive.
 
 # Changelog
 
+v1.5.9a
+- added support for low intensity mining
+- lyra2z speed improvements for Pascal cards
+- added benchmark option to state.set method
+- API version bumped to 0.1.6
+- removed algorithms sia, lbry and daggerhashimoto_sia
+- removed '_nvidia' tag from version name
+
 v1.5.8a
 - worker.reset is called automatically after worker initialization
 
 v1.5.7a
-- changed benchmark job for x16r 
+- changed benchmark job for x16r
 
 v1.5.6a
 - added algorithm x16r

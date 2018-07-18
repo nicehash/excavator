@@ -1,4 +1,4 @@
-# Excavator API Version 0.1.5
+# Excavator API Version 0.1.6
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -66,8 +66,7 @@ Method | Description
 [device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-).
 [device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed.
 [device\.set\.fan\.reset](#device-set-fan-reset) | Resets device fan speed.
-
-<!-- [device\.set\.intensity](#device-set-intensity) | Upcoming feature. -->
+[device\.set\.intensity](#device-set-intensity) | Sets device intensity.
 
 **Algorithm managing methods**
 
@@ -87,6 +86,7 @@ Method | Description
 [worker\.free](#worker-free) | Frees worker.
 [worker\.clear](#worker-clear) | Frees all workers.
 [worker\.reset](#worker-reset) | Resets worker's speed.
+[worker\.reset\.device](#worker-reset-device) | Resets worker's speed for device.
 [worker\.list](#worker-list) | Lists all workers.
 [worker\.print\.speed](#worker-speed)| Prints speed of a worker.
 [worker\.print\.speeds](#worker-speeds)| Prints speed of all workers.
@@ -196,6 +196,7 @@ Response field | Type | Description
 ------|---------|---------
 `devices` | array | Array of device objects. If system has no available GPGPU devices, this array is empty.
 `devices[i]/device_id` | int | Device ID. This is a handle for future API commands related to this device.
+`devices[i]/uuid` | int | Device UUID.
 `devices[i]/name` | string | Device name.
 `devices[i]/gpgpu_type` | int | GPGPU type. 1 means CUDA, 2 means OpenCL.
 `devices[i]/subvendor` | string | Subvendor id.
@@ -218,6 +219,7 @@ Example response:
    "devices":[
       {
          "device_id":0,
+         "uuid":"GPU-8f6552ba-76e8-4e86-c2bb-53b69fb685ef",
          "name":"GeForce GTX 1060 6GB",
          "gpgpu_type":1,
          "subvendor":"1462",
@@ -232,6 +234,7 @@ Example response:
       },
       {
          "device_id":1,
+         "uuid":"GPU-6de5ebad-b2b8-7ce9-995c-35eece4e66ab",
          "name":"GeForce GTX 1070",
          "gpgpu_type":1,
          "subvendor":"3842",
@@ -243,17 +246,6 @@ Example response:
             "sm_minor":1,
             "bus_id":5
          }
-      },
-      {
-          "device_id":2,
-          "name":"Ellesmere",
-          "gpgpu_type":2,
-          "subvendor":"0",
-          "gpu_memory_total":-1,
-          "display_mode":0,
-          "details":{
-
-          }
       }
    ],
    "id":1,
@@ -268,7 +260,7 @@ Returns details about certain device. Use this method to get static (non-changin
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Device ID.
+1 | string | Device ID or Device UUID.
 
 Response field | Type | Description
 ------|---------|---------
@@ -285,7 +277,7 @@ Response field | Type | Description
 `gpu_temp` | int | GPU temperature in °C.
 `gpu_load` | int | GPU core load in %.
 `gpu_load_memctrl` | int | GPU memory controller load in %.
-`gpu_power_mode` | float | Current GPU power limit in %.
+`gpu_power_mode` | int | Current GPU power mode.
 `gpu_power_usage` | float | GPU power usage in Watts.
 `gpu_power_limit_current` | float | Current GPU power limit in Watts.
 `gpu_power_limit_min` | float | Minimal GPU power limit in Watts.
@@ -297,6 +289,7 @@ Response field | Type | Description
 `gpu_fan_speed_rpm` | int | Current fan speed in RPMs.
 `gpu_memory_free` | long | Free GPU memory in bytes.
 `gpu_memory_used` | long | Used GPU memory in bytes.
+`intensity` | int | Current GPU intensity mode.
 
 Example usage:
 ```
@@ -320,7 +313,7 @@ Example response:
    "gpu_temp":42,
    "gpu_load":80,
    "gpu_load_memctrl":66,
-   "gpu_power_mode":80.0,
+   "gpu_power_mode":-1,
    "gpu_power_usage":131.9720001220703,
    "gpu_power_limit_current":126.0,
    "gpu_power_limit_min":105.0,
@@ -332,6 +325,7 @@ Example response:
    "gpu_fan_speed_rpm":0,
    "gpu_memory_free": 3066073088,
    "gpu_memory_used": 155152384,
+   "intensity": 1,
    "id":1,
    "error":null
 }
@@ -372,7 +366,7 @@ Example response:
           "gpu_temp":28,
           "gpu_load":0,
           "gpu_load_memctrl":0,
-          "gpu_power_mode":80.0,
+          "gpu_power_mode":1,
           "gpu_power_usage":56.340999603271487,
           "gpu_power_limit_current":250.0,
           "gpu_power_limit_min":125.0,
@@ -383,7 +377,8 @@ Example response:
           "gpu_fan_speed":23,
           "gpu_fan_speed_rpm":1036,
           "gpu_memory_free":10753101824,
-          "gpu_memory_used":1058058240
+          "gpu_memory_used":1058058240,
+          "intensity": 1
       },
       {
           "device_id":1,
@@ -400,7 +395,7 @@ Example response:
           "gpu_temp":35,
           "gpu_load":0,
           "gpu_load_memctrl":0,
-          "gpu_power_mode":-1.0,
+          "gpu_power_mode":-1,
           "gpu_power_usage":6.573999881744385,
           "gpu_power_limit_current":180.0,
           "gpu_power_limit_min":90.0,
@@ -411,7 +406,8 @@ Example response:
           "gpu_fan_speed":0,
           "gpu_fan_speed_rpm":0,
           "gpu_memory_free":8471445504,
-          "gpu_memory_used":118489088
+          "gpu_memory_used":118489088,
+          "intensity": 1
       }
    ],
    "id":1,
@@ -426,7 +422,7 @@ Sets power limit for certain device. Provided power limit is in Watts and it has
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Device ID.
+1 | string | Device ID or Device UUID.
 2 | string | New power limit in Watts.
 
 Example usage:
@@ -450,7 +446,7 @@ Similar as [device\.set\.power_limit](#device-set-power-limit), this method sets
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Device ID.
+1 | string | Device ID or Device UUID.
 2 | string | New TDP limit %.
 
 Example usage:
@@ -472,7 +468,7 @@ Sets power mode for certain device.
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Device ID.
+1 | string | Device ID or Device UUID.
 2 | string | Power mode (0, 1 or 2).
 
 
@@ -502,7 +498,7 @@ Sets delta of max core clock of GPU. Provided clock delta is in MHz. Note that t
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Device ID.
+1 | string | Device ID or Device UUID.
 2 | string | Clock delta in MHz.
 
 Example usage:
@@ -525,7 +521,7 @@ Sets delta of max memory clock of GPU. Provided clock delta is in MHz.
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Device ID.
+1 | string | Device ID or Device UUID.
 2 | string | Clock delta in MHz.
 
 Example usage:
@@ -548,7 +544,7 @@ Sets fan speed of device. Provided fan speed is in %.
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Device ID.
+1 | string | Device ID or Device UUID.
 2 | string | Fan speed in % (from 0 to 100).
 
 Example usage:
@@ -571,7 +567,7 @@ Resets fan speed to factory's default.
 
 Command parameter # | Type | Description
 -------|---------|---------
-1 | string | Device ID.
+1 | string | Device ID or Device UUID.
 
 
 Example usage:
@@ -587,6 +583,29 @@ Example response:
 }
 ```
 
+
+# <a name="device-set-intensity"></a> device.set.intensity
+
+Sets device intensity. See [list of algorithms](../nvidia/README.md#available-cuda-algorithms-in-excavator) supporting intensity. On default intensity is set to high.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID or Device UUID.
+1 | int | Intensity mode (0 - low, 1 - high)
+
+
+Example usage:
+```
+{"id":1,"method":"device.set.intensity","params":["0","0"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
 
 
 # <a name="algorithm-add"></a> algorithm.add
@@ -774,7 +793,7 @@ Creates a new worker by linking certain device with an algorithm.
 Command parameter # | Type | Description
 -------|---------|---------
 1 | string | Algorithm name.
-2 | string | Device ID.
+2 | string | Device ID or Device UUID.
 3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia).
 
 Response field | Type | Description
@@ -867,6 +886,34 @@ Example response:
   "error":null
 }
 ```
+
+# <a name="worker-reset-device"></a> worker.reset.device
+
+Resets logged speed of worker on device to 0.
+
+Command parameter # | Type | Description
+-------|---------|---------
+2 | string | Array of Device IDs or Device UUIDs.
+
+
+Example usage:
+```
+{"id":1,"method":"worker.reset","params":["0","1"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "status":
+  [
+      { "error":null },
+      { "error":null }
+  ]
+}
+```
+
+
 # <a name="worker-list"></a> worker.list
 
 Report speed for all workers.
@@ -877,6 +924,7 @@ Response field | Type | Description
 ------|---------|---------
 `workers` | array | Array of workers. If no workers, this array is empty.
 `workers[i]/device_id` | int | Device ID.
+`workers[i]/device_uuid` | int | Device UUID.
 `workers[i]/worker_id` | int | Worker ID.
 `workers[i]/params` | array | Parameters which were used to start this worker (array of strings).
 `workers[i]/algorithms` | array | Array of algorithms. Array can have zero, one or two elements.
@@ -896,6 +944,7 @@ Example response:
       {
          "worker_id": 0,
          "device_id": 0,
+         "device_uuid":"GPU-8f6552ba-76e8-4e86-c2bb-53b69fb685ef",
          "params": [],
          "algorithms": [
             {
@@ -908,6 +957,7 @@ Example response:
       {
          "worker_id": 0,
          "device_id": 1,
+         "device_uuid":"GPU-6de5ebad-b2b8-7ce9-995c-35eece4e66ab",
          "params": [],
          "algorithms": [
             {
@@ -920,6 +970,7 @@ Example response:
       {
          "worker_id": 0,
          "device_id": 2,
+         "device_uuid":"GPU-819ca3e1-09c1-6982-6d28-29701e685270",
          "params": [],
          "algorithms": [
             {
@@ -987,7 +1038,7 @@ Creates multiple new workers. See [worker\.add](#worker-add).
 Command parameter # | Type | Description
 -------|---------|---------
 1 | string | "alg-" + Algorithm Name.
-2 | string | Device ID.
+2 | string | Device ID or Device UUID.
 3+ | string | _OPTIONAL_ Additional parameters. See details of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia).
 
 This method returns array of [worker\.add](#worker-add) responses.
@@ -1268,6 +1319,24 @@ Example response:
 ```
 
 # Changelog
+
+* v0.1.6 (excavator v1.5.9a)
+    - Added Device UUID option as input parameter for next methods:
+    [device\.get](#device-get),
+    [device\.set\.power_limit](#device-set-power-limit),
+    [device\.set\.tdp](#device-set-tdp),
+    [device\.set\.core_delta](#device-set-core-delta),
+    [device\.set\.memory_delta](#device-set-memory-delta),
+    [device\.set\.fan\.speed](#device-set-fan-speed),
+    [device\.set\.fan\.reset](#device-set-fan-reset),
+    [device\.set\.fan\.speed](#device-set-fan-speed),
+    [worker\.add](#worker-add),
+    [workers\.add](#workers-add).
+    - Added [device\.set\.intensity](#device-set-intensity) method.
+    - Added `intensity` field to [device\.get](#device-get) and [devices\.get](#devices-get) methods.
+    - Added `devices[i]/uuid` field to [device\.list](#device-list) method.
+    - Added `worker[i]/device_uuid` field to [worker\.list](#worker-list) method.
+    - Added [worker\.reset\.device](#worker-reset-device) method.
 
 * v0.1.5 (excavator v1.5.5a)
     - Added `devices[i]/gpu_memory_total` to [device\.list](#device-list) method.
