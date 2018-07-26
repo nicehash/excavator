@@ -1,4 +1,4 @@
-# Excavator API Version 0.1.6
+# Excavator API Version 0.1.7
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -475,8 +475,8 @@ Command parameter # | Type | Description
 Power mode | Description | Remark
 -------|---------|---------
 0 | low | min TDP
-1 | medium | between min and max TDP
-2 | high | max TDP
+1 | medium | between min and 100% TDP
+2 | high | 100% TDP
 
 
 Example usage:
@@ -1319,6 +1319,10 @@ Example response:
 ```
 
 # Changelog
+
+* v0.1.7 (excavator v1.5.10a)
+  - Changed high power mode to 100% TDP in [device\.set\.power_limit](#device-set-power-limit) method.
+
 
 * v0.1.6 (excavator v1.5.9a)
     - Added Device UUID option as input parameter for next methods:

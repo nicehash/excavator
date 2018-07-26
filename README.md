@@ -70,6 +70,11 @@ The algorithm names are case sensitive.
 
 # Changelog
 
+v1.5.10a
+- lyra2z speed improvements
+- small lyra2rev2 speed improvements for some cards
+- API bumped to 0.1.7
+
 v1.5.9a
 - added support for low intensity mining
 - lyra2z speed improvements for Pascal cards
