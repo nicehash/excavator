@@ -1,0 +1,16 @@
+[
+	{"time":0,"commands":[
+		{"id":1,"method":"subscribe","params":["nhmp.usa.nicehash.com:3200","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.testrig"]}
+	]},
+	{"time":2,"commands":[
+        {"id":1,"method":"algorithm.add","params":["daggerhashimoto"]},
+		{"id":1,"method":"algorithm.add","params":["decred"]}
+    ]},
+	{"time":3,"commands":[
+		{"id":1,"method":"worker.add","params":["daggerhashimoto_decred","0"]}
+	]},
+	{"time":10,"loop":10,"commands":[
+		{"id":1,"method":"worker.print.speed","params":["0"]},
+		{"id":1,"method":"algorithm.print.speeds","params":[]}
+	]}
+]
