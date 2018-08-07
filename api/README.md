@@ -591,7 +591,7 @@ Sets device intensity. See [list of algorithms](../nvidia/README.md#available-cu
 Command parameter # | Type | Description
 -------|---------|---------
 1 | string | Device ID or Device UUID.
-1 | int | Intensity mode (0 - low, 1 - high)
+2 | string | Intensity mode (0 - low, 1 - high)
 
 
 Example usage:
