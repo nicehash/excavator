@@ -471,13 +471,13 @@ Command parameter # | Type | Description
 1 | string | Device ID or Device UUID.
 2 | string | Power mode (0, 1 or 2).
 
-
 Power mode | Description | Remark
 -------|---------|---------
 0 | low | min TDP
-1 | medium | between min and 100% TDP
+1 | medium | (low + high) / 2
 2 | high | 100% TDP
 
+For example, if high is 100 and min is 60, then medium is (60 + 100) / 2 = 80
 
 Example usage:
 ```

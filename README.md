@@ -70,6 +70,9 @@ The algorithm names are case sensitive.
 
 # Changelog
 
+v1.5.11a
+- fixed difficulty parsing bug
+
 v1.5.10a
 - lyra2z speed improvements
 - small lyra2rev2 speed improvements for some cards
