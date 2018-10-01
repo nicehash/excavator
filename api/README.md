@@ -1,4 +1,4 @@
-# Excavator API Version 0.1.7
+# Excavator API Version 0.1.8
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -207,6 +207,7 @@ Response field | Type | Description
 `devices[i]/details/sm_major` | int | Device SM major version.
 `devices[i]/details/sm_minor` | int | Device SM minor version.
 `devices[i]/details/bus` | int | Device bus ID.
+`devices[i]/details/sli` | boolean | `True` if SLI is enabled on device.
 
 Example usage:
 ```
@@ -229,7 +230,8 @@ Example response:
             "cuda_id":1,
             "sm_major":6,
             "sm_minor":1,
-            "bus_id":3
+            "bus_id":3,
+            "sli":false
          }
       },
       {
@@ -244,7 +246,8 @@ Example response:
             "cuda_id":3,
             "sm_major":6,
             "sm_minor":1,
-            "bus_id":5
+            "bus_id":5,
+            "sli": false
          }
       }
    ],
@@ -273,6 +276,7 @@ Response field | Type | Description
 `devices[i]/details/sm_major` | int |Device SM major version.
 `devices[i]/details/sm_minor` | int | Device SM minor version.
 `devices[i]/details/bus` | int | Device bus ID.
+`devices[i]/details/sli` | boolean | `True` if SLI is enabled on device.
 `uuid` | string | Unique identification of device. Use this to distinguish devices with same name in the system.
 `gpu_temp` | int | GPU temperature in °C.
 `gpu_load` | int | GPU core load in %.
@@ -307,7 +311,8 @@ Example response:
       "cuda_id":0,
       "sm_major":6,
       "sm_minor":1,
-      "bus_id":6
+      "bus_id":6,
+      "sli": false
    },
    "uuid":"GPU-f23ae914-dcd8-f751-72da-e2852a2379c8",
    "gpu_temp":42,
@@ -360,7 +365,8 @@ Example response:
              "cuda_id":0,
              "sm_major":6,
              "sm_minor":1,
-             "bus_id":5
+             "bus_id":5,
+             "sli": false
           },
           "uuid":"GPU-8f6552ba-76e8-4e86-c2bb-53b69fb685ef",
           "gpu_temp":28,
@@ -389,7 +395,8 @@ Example response:
              "cuda_id":1,
              "sm_major":6,
              "sm_minor":1,
-             "bus_id":7
+             "bus_id":7,
+             "sli": false
           },
           "uuid":"GPU-c108e737-1a9a-2302-c878-402608fd4535",
           "gpu_temp":35,
@@ -610,15 +617,14 @@ Example response:
 
 # <a name="algorithm-add"></a> algorithm.add
 
-Adds new algorithm instance to the miner. Establish connection with remote pool and starts receiving work.
+Adds new algorithm instance to the miner. Requests the remote pool to start sending work for the algorithm at hand.
 
 Command parameter # | Type | Description
 -------|---------|---------
 1 | string | Algorithm name (see list of supported algorithms for [NVIDIA](https://github.com/nicehash/excavator/tree/master/nvidia).
-2 | string | _OPTIONAL PARAMETER_ Use 'benchmark' to perform dummy job.
 
 _REMARKS_:
-- If provided parameter 2 is `"benchmark"` then no connection is established to the remote pool, but rather benchmark dummy job is used for serving mining work.
+- If algorithm name is prefixed with `"benchmark-"` prefix, then no connection to the remote pool is established, but rather benchmark dummy job is used for serving mining work.
 - For dual mining both algorithms have to be added.
 
 
@@ -629,7 +635,7 @@ Example usage:
 
 Example usage 2 (benchmark):
 ```
-{"id":1,"method":"algorithm.add","params":["equihash","benchmark"]}
+{"id":1,"method":"algorithm.add","params":["benchmark-equihash"]}
 ```
 
 Example usage 3 (dual mining):
@@ -800,12 +806,20 @@ Response field | Type | Description
 ------|---------|---------
 `worker_id` | int | Worker ID.
 
+_REMARKS_:
+- If algorithm name is prefixed with `"benchmark-"` prefix, then a benchmark dummy job will be used for measuring algorithm's performance on the particular device and no share will be sent to the remote pool. Note that the same algorithm (or a pair of algorithms in case of dual mining) with `"benchmark-"` prefix should be added using [algorithm\.add](#walgorithm-add) command to make the benchmark job available.
+
 Example usage:
 ```
 {"id":1,"method":"worker.add","params":["equihash","0"]}
 ```
 
-Example usage 2:
+Example usage 2 (benchmarking):
+```
+{"id":1,"method":"worker.add","params":["benchmark-daggerhashimoto","0"]}
+```
+
+Example usage 3 (dual mining):
 ```
 {"id":1,"method":"worker.add","params":["daggerhashimoto_decred","0"]}
 ```
@@ -1319,6 +1333,10 @@ Example response:
 ```
 
 # Changelog
+
+* v0.1.8 (excavator v1.5.12a)
+  - Added `sli` field to device details.
+  - Changed handling with benchmark mode in [algorithm\.add](#algorithm-add), [worker\.add](#worker-add), [workers\.add](#workers-add) methods.
 
 * v0.1.7 (excavator v1.5.10a)
   - Changed high power mode to 100% TDP in [device\.set\.power_limit](#device-set-power-limit) method.
