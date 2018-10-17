@@ -15,6 +15,7 @@ Name | Supported devices | Wcount*1 | Pcount*2 | Intensity*3
 [cryptonightV7](#cryptonightV7)| NVIDIA SM 5.0+ | 1 |2 | 0
 [lyra2z](#lyra2z)| NVIDIA SM 5.0+ | 1 | 1 | 1
 [x16r](#x16r)| NVIDIA SM 5.0+ | 1 | 1 | 1
+[cryptonightV8](#cryptonightV8)| NVIDIA SM 5.0+ | 1 |2 | 0
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
@@ -208,3 +209,14 @@ Parameter # or name | Range | Explanation
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
 **WARNING: You may reach higher speeds by experimenting with input parameters.**
+
+# <a name="cryptonightV8"></a> cryptonightV8
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `B` | 0-inf | Number of blocks
+2 or `TPB` | 0-1024 | Number of threads per block
+
+If no parameters are provided or '0' is specified, the device specific default values will be used.
+
+**WARNING: This algorithm is optimized for the following cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**

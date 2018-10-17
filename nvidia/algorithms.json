@@ -186,6 +186,20 @@
 			}]
 		},
 
+    "cryptonightV8": {
+      "WorkerCount": [1],
+      "Parameters": [{
+        "Name": "B",
+        "Range": [0, 65535],
+        "Explanation": "Number of blocks"
+      },
+      {
+        "Name": "TPB",
+        "Range": [0, 1024],
+        "Explanation": "Number of threads per block"
+      }]
+    },
+
 		"lyra2z": {
 			"WorkerCount": [1],
 			"Parameters": [{

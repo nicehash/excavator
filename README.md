@@ -70,6 +70,11 @@ The algorithm names are case sensitive.
 
 # Changelog
 
+v1.5.13a
+- added algorithm CryptoNightV8 (XMR)
+- new benchmark job for x16r
+- fixed TDP limits for RTX cards
+
 v1.5.12a
 - lyra2rev2 speed improvements
 - support for simultaneous mining and benchmarking 
