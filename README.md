@@ -70,6 +70,12 @@ The algorithm names are case sensitive.
 
 # Changelog
 
+v1.5.14a
+- bux fixes
+- x16r speed improvements
+- lyra2z speed improvements
+- api bumped to 0.1.9
+
 v1.5.13a
 - added algorithm CryptoNightV8 (XMR)
 - new benchmark job for x16r
@@ -77,10 +83,10 @@ v1.5.13a
 
 v1.5.12a
 - lyra2rev2 speed improvements
-- support for simultaneous mining and benchmarking 
-- added support for RTX 2080 in CUDA 10 build 
+- support for simultaneous mining and benchmarking
+- added support for RTX 2080 in CUDA 10 build
 - SLI issue fix (bus ID is mapped to correct UUID)
-- api bumped to 0.1.8 
+- api bumped to 0.1.8
 
 v1.5.11a
 - fixed difficulty parsing bug

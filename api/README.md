@@ -1259,11 +1259,16 @@ Response field | Type | Description
 `build_platform` | string | Build platform.
 `build_time` | string | Build time.
 `build_number` | int | Build number.
+`excavator_cuda_ver` | int | Returns the version of CUDA used in excavator.
+`driver_cuda_ver` | int | Returns the latest version of CUDA supported by the driver.
 `uptime` | long | Uptime in seconds.
 `cpu_load` | double | CPU load in percentage.
 `cpu_usage` | double | CPU usage in percentage.
 `ram_load` | double | Used memory in percentage.
 `ram_usage` | double | Used memory in MB.
+
+_REMARK_:
+`driver_cuda_ver` has to be grater than or equal to `excavator_cuda_ver`.
 
 Example usage:
 ```
@@ -1277,6 +1282,8 @@ Example response:
 "build_platform": "Windows",
 "build_time": "2017-11-17 13:26:36",
 "build_number": 3456,
+"excavator_cuda_version": 9010,
+"driver_cuda_version": 10000,
 "uptime": 5,
 "cpu_load": 3.0168410822665095,
 "cpu_usage": 0,
@@ -1333,6 +1340,9 @@ Example response:
 ```
 
 # Changelog
+
+* v0.1.9 (excavator v1.5.14a)
+- Added `driver_cuda_ver` and `excavator_cuda_ver` fields to [info](#info) method.
 
 * v0.1.8 (excavator v1.5.12a)
   - Added `sli` field to device details.
