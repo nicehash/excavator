@@ -9,21 +9,6 @@
 			}]
 		},
 
-		"pascal": {
-			"WorkerCount": [1],
-			"Parameters": [{
-					"Name": "B",
-					"Range": [0, 65535],
-					"Explanation": "Number of blocks"
-				},
-				{
-					"Name": "TPB",
-					"Range": [0, 512],
-					"Explanation": "Number of threads per block"
-				}
-			]
-		},
-
 		"decred": {
 			"WorkerCount": [1],
 			"Parameters": [{
@@ -118,26 +103,6 @@
 			]
 		},
 
-		"daggerhashimoto_pascal": {
-			"WorkerCount": [1],
-			"Parameters": [{
-					"Name": "R_0",
-					"Range": [0, 16],
-					"Explanation": "Ratio of blocks used for daggerhashimoto"
-				},
-				{
-					"Name": "R_1",
-					"Range": [0, 16],
-					"Explanation": "Ratio of blocks used for pascal"
-				},
-				{
-					"Name": "P",
-					"Range": [0, 65535],
-					"Explanation": "Number of iterations per thread for pascal"
-				}
-			]
-		},
-
 		"keccak": {
 			"WorkerCount": [1],
 			"Parameters": [{
@@ -209,6 +174,20 @@
 				}
 			]
 		},
+
+   "skunk": {
+      "WorkerCount": [1],
+      "Parameters": [{
+        "Name": "B",
+        "Range": [0, 65535],
+        "Explanation": "Number of blocks"
+      },
+      {
+        "Name": "TPB",
+        "Range": [0, 1024],
+        "Explanation": "Number of threads per block"
+      }]
+    },
 
 		"x16r": {
 			"WorkerCount": [1],

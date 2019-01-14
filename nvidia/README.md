@@ -3,19 +3,18 @@
 Name | Supported devices | Wcount*1 | Pcount*2 | Intensity*3
 -----------------|----------|---------|----|----
 [equihash](#equihash) | NVIDIA SM 5.0+ | 1/2 | 1 | 0
-[pascal](#pascal) | NVIDIA SM 5.0+ | 1 | 2 | 0
 [decred](#decred)| NVIDIA SM 5.0+ | 1 | 3 | 0
 [blake2s](#blake2s)| NVIDIA SM 5.0+ | 1 | 3 | 1
 [daggerhashimoto](#daggerhashimoto)| NVIDIA SM 5.2+ | 1 | 4 | 1
 [lyra2rev2](#lyra2rev2)| NVIDIA SM 5.0+ | 1 | 1 | 1
 [daggerhashimoto_decred](#daggerhashimoto_decred)| NVIDIA SM 5.2+ | 1 | 3 | 0
-[daggerhashimoto_pascal](#daggerhashimoto_pascal)| NVIDIA SM 5.2+ | 1 | 3 | 0
 [keccak](#keccak)| NVIDIA SM 5.0+ | 1 |3 | 1
 [neoscrypt](#neoscrypt)| NVIDIA SM 5.0+ | 1 | 1 | 1
 [cryptonightV7](#cryptonightV7)| NVIDIA SM 5.0+ | 1 |2 | 0
 [lyra2z](#lyra2z)| NVIDIA SM 5.0+ | 1 | 1 | 1
 [x16r](#x16r)| NVIDIA SM 5.0+ | 1 | 1 | 1
 [cryptonightV8](#cryptonightV8)| NVIDIA SM 5.0+ | 1 |2 | 0
+[skunk](#skunk)| NVIDIA SM 5.0+ | 1 | 2 | 0
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
@@ -51,17 +50,6 @@ If no parameters are provided, device specific defaults are used (M=1). We sugge
 
 **WARNING: Mode 1 is currently unstable on some Windows systems.**
 
-# <a name="pascal"></a> pascal
-
-Parameter # or name | Range | Explanation
------------------|----------|---------
-1 or `B` | 0-inf | Number of blocks
-2 or `TPB` | 0-512 | Number of threads per block
-
-If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
-
-**WARNING: Pascal is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
-
 # <a name="decred"></a> decred
 
 Parameter # or name | Range | Explanation
@@ -72,7 +60,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Decred is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Decred is tuned for next cards: 2080 Ti, 2080, 2070, 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 
 # <a name="blake2s"></a> blake2s
@@ -85,7 +73,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Blake2s is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Blake2s is tuned for next cards: 2080 Ti, 2080, 2070, 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 # <a name="daggerhashimoto"></a> daggerhashimoto
 
@@ -98,7 +86,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Daggerhashimoto is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, TITAN X, 980 Ti, 980, 970, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Daggerhashimoto is tuned for next cards: 2080 Ti, 2080, 2070, 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, TITAN X, 980 Ti, 980, 970, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 NOTE1: If you use Windows 10 and your speed is very low, make sure you use Windows version 1607 or higher and latest NVIDIA drivers. When you use Maxwell cards for mining, also make sure you turn on `Optimize for compute performance` and set some value for `DSR-Factors` in NVIDIA control panel.
 
@@ -116,7 +104,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Lyra2REv2 is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Lyra2REv2 is tuned for next cards: 2080 Ti, 2080, 2070, 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 
 # <a name="daggerhashimoto_decred"></a> daggerhashimoto_decred
@@ -137,23 +125,6 @@ If no parameters are provided, device specific defaults are used. If provided pa
 
 NOTE1: Parameter P is used to select the most profitable default ratio values. If P is 0 the goal is to reach highest daggerhashimoto speed while retaining decent speed on decred. When P is 1 default ratio is set to reach highest combined speeds on both algorithms.
 
-# <a name="daggerhashimoto_pascal"></a> daggerhashimoto_pascal
-
-Parameter # or name | Range | Explanation
------------------|----------|---------
-1 or `R_0` | 0-16 | Ratio of blocks used for daggerhashimoto\*
-2 or `R_1` | 0-16 | Ratio of blocks used for pascal\*
-3 or `P` | 0-inf | Number of iterations per thread for pascal\*\*
-
-\* The R_0:R_1 ratio adjusts how many blocks are used for each algorithm.
-
-\*\* Set P to 0 or 1 based on current profitability of pascal. If profitability of pascal is low compared to profitability of daggerhashimoto set P to 0, otherwise to 1.
-
-If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
-
-**WARNING: Daggerhashimoto_pascal is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070 and P104-100. You may reach higher speeds by experimenting with parameters when using a different card.**
-
-NOTE1: Parameter P is used to select the most profitable default ratio values. If P is 0 the goal is to reach highest daggerhashimoto speed while retaining decent speed on pascal. When P is 1 default ratio is set to reach highest combined speeds on both algorithms.
 
 # <a name="keccak"></a> keccak
 
@@ -165,7 +136,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: Keccak is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: Keccak is tuned for next cards: 2080 Ti, 2080, 2070, 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 # <a name="neoscrypt"></a> neoscrypt
 
@@ -176,7 +147,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used. Different modes use different kernels (kernels performance varies per card).
 
-**WARNING: NeoScrypt is tuned for next cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: NeoScrypt is tuned for next cards: 2080 Ti, 2080, 2070, 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, P104-100, P106-100 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 # <a name="cryptonightV7"></a> cryptonightV7
 
@@ -187,7 +158,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided or '0' is specified, the device specific default values will be used.
 
-**WARNING: This algorithm is optimized for the following cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: This algorithm is optimized for the following cards: 2080 Ti, 2080, 2070, 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 # <a name="lyra2z"></a> lyra2z
 
@@ -197,7 +168,7 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided, device specific defaults are used. If provided parameter is '0' then device specific default value is used.
 
-**WARNING: This algorithm is optimized for the following cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: This algorithm is optimized for the following cards: 2080 Ti, 2080, 2070, 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
 
 
 # <a name="x16r"></a> x16r
@@ -219,4 +190,15 @@ Parameter # or name | Range | Explanation
 
 If no parameters are provided or '0' is specified, the device specific default values will be used.
 
-**WARNING: This algorithm is optimized for the following cards: 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+**WARNING: This algorithm is optimized for the following cards: 2080 Ti, 2080, 2070, 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
+
+# <a name="skunk"></a> skunk
+
+Parameter # or name | Range | Explanation
+-----------------|----------|---------
+1 or `B` | 0-inf | Number of blocks
+2 or `TPB` | 0-1024 | Number of threads per block
+
+If no parameters are provided or '0' is specified, the device specific default values will be used.
+
+**WARNING: This algorithm is optimized for the following cards: 2080 Ti, 2080, 2070, 1080 Ti, 1080, 1070 Ti, 1070, 1060 6GB, 1060 3GB, 1050 Ti, 1050, 1030, TITAN X, 980 Ti, 980, 970, 960, 950 and TITAN V. You may reach higher speeds by experimenting with parameters when using a different card.**
