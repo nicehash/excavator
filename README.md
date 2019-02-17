@@ -1,6 +1,12 @@
 # NiceHash Excavator
 
-Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com). Excavator is being actively developed by djeZo and dropky. Miner is using custom built code base with modern approach and supporting modern NVIDIA video cards.
+**Development of Excavator is terminated until further notice.**
+
+We recommend using NiceHash Miner Legacy instead: https://github.com/nicehash/NiceHashMinerLegacy/releases/tag/1.9.0.13  
+
+---
+
+Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com).
 
 Download from here: https://github.com/nicehash/excavator/releases
 
