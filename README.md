@@ -2,7 +2,7 @@
 
 **Development of Excavator is terminated until further notice.**
 
-We recommend using NiceHash Miner Legacy instead: https://github.com/nicehash/NiceHashMinerLegacy/releases/tag/1.9.0.13  
+We recommend using NiceHash Miner Legacy instead: https://github.com/nicehash/NiceHashMinerLegacy/releases
 
 ---
 
