@@ -1240,10 +1240,10 @@ Example response:
 # Changelog
 
 * v0.2.0 (excavator v1.6.1c)
-- Revamped API with a lot of changes for returned version of Excavator
+   - Revamped API with a lot of changes for returned version of Excavator
 
 * v0.1.9 (excavator v1.5.14a)
-- Added `driver_cuda_ver` and `excavator_cuda_ver` fields to [info](#info) method.
+   - Added `driver_cuda_ver` and `excavator_cuda_ver` fields to [info](#info) method.
 
 * v0.1.8 (excavator v1.5.12a)
   - Added `sli` field to device details.
