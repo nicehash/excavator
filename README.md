@@ -1,9 +1,5 @@
 # NiceHash Excavator
 
-**Development of Excavator has been returned. More news are following. **
-
----
-
 Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com).
 
 Download from here: https://github.com/nicehash/excavator/releases
@@ -14,11 +10,9 @@ YOU ARE NOT ALLOWED TO REDISTRIBUTE IT!**
 
 # How to Use Excavator?
 
-First, make sure you have Visual C++ 2017 redistributable (x64) installed.
+NVIDIA display driver 457.xx or more recent is required. CUDA devices with SM 6.0 (Pascal, 1xxx series) and higher are supported.
 
-NVIDIA display driver 387.xx or more recent is required. CUDA devices with SM 5.0 and higher are supported.
-
-From version 1.5.0a excavator supports only NiceHash stratums. Stratum servers are available at nhmp.LOCATION.nicehash.com:3200 (LOCATION: eu, usa, hk, jp, in, br). The same stratum url is used for all algorithms.
+From version 1.6.1c Excavator supports only NiceHash stratums. Stratum servers are available at nhmp-ssl.LOCATION.nicehash.com:443 (LOCATION: eu, usa). The same stratum url is used for all algorithms.
 
 **ADVANCED** There are two methods to use Excavator. Both rely on API commands you can find in [API section](/api).
 
@@ -73,6 +67,12 @@ WARNING! Excavator supports overclocking. Use overclocking at your own risk. OVE
 The algorithm names are case sensitive.  
 
 # Changelog
+
+v1.6.1c
+- completely revamped Excavator
+- removed all algorithms except daggerhashimoto
+- removed support for older than Pascal NVIDIA cards
+- various bug fixes and compatibility improvements
 
 v1.5.15a
 - bug fixes & improvements
