@@ -4,15 +4,12 @@ SET COMMAND_FILE=default_command_file.json
 SET CONSOLE_LOG_LEVEL=2
 SET FILE_LOG_LEVEL=6
 SET WEB_PORT=38080
-SET WEB_HOST=127.0.0.1
+SET WEB_HOST=::1
 SET WEB_AUTH_TOKEN=
-SET WEB_LAUNCH_DELAY=5
-SET RESTART_DELAY=10
+SET RESTART_DELAY=4
 :: CONFIG ENDS
 
 echo Welcome to NiceHash Excavator
-echo Opening website
-start cmd /c "@echo off & echo Please, wait %WEB_LAUNCH_DELAY% seconds for Excavator status page to open... & ping 127.0.0.1 -n %WEB_LAUNCH_DELAY% > nul & if "%WEB_HOST%"=="0.0.0.0" (explorer http://127.0.0.1:%WEB_PORT%) else (explorer http://%WEB_HOST%:%WEB_PORT%) & exit"
 
 :start
 @setlocal enableextensions
