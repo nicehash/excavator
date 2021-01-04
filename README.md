@@ -1,8 +1,6 @@
 # NiceHash Excavator
 
-**Development of Excavator is terminated until further notice.**
-
-We recommend using NiceHash Miner Legacy instead: https://github.com/nicehash/NiceHashMinerLegacy/releases
+**Development of Excavator has been returned. More news are following. **
 
 ---
 
