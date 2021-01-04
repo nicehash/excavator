@@ -1,14 +1,14 @@
 [
 	{"time":0,"commands":[
-		{"id":1,"method":"subscribe","params":["nhmp.usa.nicehash.com:3200","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.testrig"]}
+		{"id":1,"method":"subscribe","params":["nhmp-ssl.eu.nicehash.com:443","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.testrig"]}
 	]},
 	{"time":1,"commands":[
-        {"id":1,"method":"algorithm.add","params":["equihash"]}
+        {"id":1,"method":"algorithm.add","params":["daggerhashimoto"]}
     ]},
 	{"time":2,"commands":[
-		{"id":1,"method":"worker.add","params":["equihash","1"]},
-		{"id":1,"method":"worker.add","params":["equihash","2"]},
-		{"id":1,"method":"worker.add","params":["equihash","3"]}
+		{"id":1,"method":"worker.add","params":["daggerhashimoto","0"]},
+		{"id":1,"method":"worker.add","params":["daggerhashimoto","1"]},
+		{"id":1,"method":"worker.add","params":["daggerhashimoto","2"]}
 	]},
 	{"time":5,"commands":[
 		{"id":1,"method":"device.set.power_limit","params":["0","150"]},
@@ -19,10 +19,7 @@
 		{"id":1,"method":"device.set.memory_delta","params":["1","700"]},
 		{"id":1,"method":"device.set.power_limit","params":["2","126"]},
 		{"id":1,"method":"device.set.core_delta","params":["2","130"]},
-		{"id":1,"method":"device.set.memory_delta","params":["2","900"]},
-		{"id":1,"method":"device.set.power_limit","params":["3","126"]},
-		{"id":1,"method":"device.set.core_delta","params":["3","100"]},
-		{"id":1,"method":"device.set.memory_delta","params":["3","600"]}
+		{"id":1,"method":"device.set.memory_delta","params":["2","900"]}
 	]},
 	{"time":10,"commands":[
 		{"id":1,"method":"worker.reset","params":["0"]},
