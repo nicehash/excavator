@@ -1,17 +1,15 @@
 # Available CUDA Algorithms in Excavator
 
-Name | Supported devices | Wcount*1 | Pcount*2 | Intensity*3
------------------|----------|---------|----|----
-[daggerhashimoto](#daggerhashimoto)| NVIDIA SM 6.0+ | 1 | 4 | 0
+Name | Supported devices | Wcount*1 | Pcount*2
+-----------------|----------|---------|----
+[daggerhashimoto](#daggerhashimoto)| NVIDIA SM 6.0+ | 1 | 4
 
 *1 Recommended number of workers per device to reach optimal speeds.
 
 *2 Number of supported parameters. Parameters are explained in details in section for each algorithm.
 
-*3 1 if running in low intensity is supported
-
 All CUDA algorithms support named parameters. Named parameters are of format NAME=VALUE; example:
-> `... ["0","1","TPB=512","B=30"] ...`
+> `... ["0","1","TPB=64","B=30"] ...`
 
 When providing named parameters, order is not important. You can mix named and unnamed parameters. Named parameters are ignored in unnamed list.
 
