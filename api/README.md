@@ -1,4 +1,4 @@
-# Excavator API Version 0.1.8
+# Excavator API Version 0.2.0
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -66,7 +66,6 @@ Method | Description
 [device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-).
 [device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed.
 [device\.set\.fan\.reset](#device-set-fan-reset) | Resets device fan speed.
-[device\.set\.intensity](#device-set-intensity) | Sets device intensity.
 
 **Algorithm managing methods**
 
@@ -120,13 +119,13 @@ Command parameter # | Type | Description
 1 | string | Stratum URL (hostname with port).
 2 | string | Username and password (split with `:`);
 
-NiceHash stratum servers are available at: nhmp.LOCATION.nicehash.com:3200
-(LOCATION: eu, usa, hk, jp, in, br).
+NiceHash stratum servers are available at: nhmp-ssl.LOCATION.nicehash.com:443
+(LOCATION: eu, usa).
 
 
 Example usage:
 ```
-{"id":1,"method":"subscribe","params":["nhmp.usa.nicehash.com:3200", "34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x"]}
+{"id":1,"method":"subscribe","params":["nhmp-ssl.usa.nicehash.com:443", "34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x"]}
 ```
 
 Example response:
@@ -159,7 +158,7 @@ Example response:
 ```
 {  
   "id":1,
-  "address":"nhmp.eu.nicehash.com:3200",
+  "address":"nhmp-ssl.eu.nicehash.com:443",
   "login":"34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x",
   "connected":true,
   "server_status":"Subscribed"
@@ -591,30 +590,6 @@ Example response:
 ```
 
 
-# <a name="device-set-intensity"></a> device.set.intensity
-
-Sets device intensity. See [list of algorithms](../nvidia/README.md#available-cuda-algorithms-in-excavator) supporting intensity. On default intensity is set to high.
-
-Command parameter # | Type | Description
--------|---------|---------
-1 | string | Device ID or Device UUID.
-2 | string | Intensity mode (0 - low, 1 - high)
-
-
-Example usage:
-```
-{"id":1,"method":"device.set.intensity","params":["0","0"]}
-```
-
-Example response:
-```
-{
-  "id":1,
-  "error":null
-}
-```
-
-
 # <a name="algorithm-add"></a> algorithm.add
 
 Adds new algorithm instance to the miner. Requests the remote pool to start sending work for the algorithm at hand.
@@ -630,18 +605,12 @@ _REMARKS_:
 
 Example usage:
 ```
-{"id":1,"method":"algorithm.add","params":["equihash"]}
+{"id":1,"method":"algorithm.add","params":["daggerhashimoto"]}
 ```
 
 Example usage 2 (benchmark):
 ```
-{"id":1,"method":"algorithm.add","params":["benchmark-equihash"]}
-```
-
-Example usage 3 (dual mining):
-```
-{"id":1,"method":"algorithm.add","params":["daggerhashimoto"]},
-{"id":2,"method":"algorithm.add","params":["decred"]}
+{"id":1,"method":"algorithm.add","params":["benchmark-daggerhashimoto"]}
 ```
 
 Example response:
@@ -666,7 +635,7 @@ This method returns no response fields. If error occured, field `error` is not `
 
 Example usage:
 ```
-{"id":1,"method":"algorithm.remove","params":["equihash"]}
+{"id":1,"method":"algorithm.remove","params":["daggerhashimoto"]}
 ```
 
 Example response:
@@ -739,32 +708,6 @@ Example response:
          "got_job": true,
          "received_jobs": 4,
          "current_job_difficulty": 0.5
-      },
-      {
-         "algorithm_id": 21,
-         "name": "decred",
-         "speed": 5078989989.082617,
-         "uptime": 19.18767738342285,
-         "benchmark": false,
-         "sent_shares": 1,
-         "accepted_shares": 1,
-         "rejected_shares": 0,
-         "got_job": true,
-         "received_jobs": 1,
-         "current_job_difficulty": 4
-      },
-      {
-         "algorithm_id": 24,
-         "name": "equihash",
-         "speed": 441.36426519101843,
-         "uptime": 19.18423080444336,
-         "benchmark": false,
-         "sent_shares": 0,
-         "accepted_shares": 0,
-         "rejected_shares": 0,
-         "got_job": true,
-         "received_jobs": 2,
-         "current_job_difficulty": 1024
       }
    ],
    "id": 1,
@@ -811,17 +754,12 @@ _REMARKS_:
 
 Example usage:
 ```
-{"id":1,"method":"worker.add","params":["equihash","0"]}
+{"id":1,"method":"worker.add","params":["daggerhashimoto","0"]}
 ```
 
 Example usage 2 (benchmarking):
 ```
 {"id":1,"method":"worker.add","params":["benchmark-daggerhashimoto","0"]}
-```
-
-Example usage 3 (dual mining):
-```
-{"id":1,"method":"worker.add","params":["daggerhashimoto_decred","0"]}
 ```
 
 Example response:
@@ -957,32 +895,6 @@ Example response:
    "workers": [
       {
          "worker_id": 0,
-         "device_id": 0,
-         "device_uuid":"GPU-8f6552ba-76e8-4e86-c2bb-53b69fb685ef",
-         "params": [],
-         "algorithms": [
-            {
-               "id": 21,
-               "name": "decred",
-               "speed": 4634748002.093876
-            }
-         ]
-      },
-      {
-         "worker_id": 0,
-         "device_id": 1,
-         "device_uuid":"GPU-6de5ebad-b2b8-7ce9-995c-35eece4e66ab",
-         "params": [],
-         "algorithms": [
-            {
-               "id": 24,
-               "name": "equihash",
-               "speed": 430.27065527065525
-            }
-         ]
-      },
-      {
-         "worker_id": 0,
          "device_id": 2,
          "device_uuid":"GPU-819ca3e1-09c1-6982-6d28-29701e685270",
          "params": [],
@@ -991,11 +903,6 @@ Example response:
                "id": 20,
                "name": "daggerhashimoto",
                "speed": 8513547.199441634
-            },
-            {
-               "id": 21,
-               "name": "decred",
-               "speed": 204325144.6518932
             }
          ]
       }
@@ -1060,7 +967,7 @@ This method returns array of [worker\.add](#worker-add) responses.
 
 Example usage:
 ```
-{"id":1,"method":"workers.add","params":["alg-equihash","0","alg-equihash","1"]}
+{"id":1,"method":"workers.add","params":["alg-daggerhashimoto","0","alg-daggerhashimoto","1"]}
 ```
 
 Example response:
@@ -1206,7 +1113,7 @@ Example usage:
    "method": "state.set",
    "params": {
       "btc_address": "34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.test2:x",
-      "stratum_url": "nhmp.usa.nicehash.com:3200",
+      "stratum_url": "nhmp-ssl.usa.nicehash.com:443",
       "devices": [
          {
             "device_uuid": "GPU-fc05ecf6-b928-749b-5089-bcb77fc8db11",
@@ -1217,11 +1124,6 @@ Example usage:
                "HPW=4",
                "S=1"
             ]
-         },
-         {
-            "device_uuid": "GPU-f66f42d1-ff8c-6a00-3a3b-7445c538d6e1",
-            "algorithm": "lyra2rev2",
-            "params": []
          }
       ]
    }
@@ -1234,10 +1136,6 @@ Example response:
    "devices": [
       {
          "device_uuid": "GPU-fc05ecf6-b928-749b-5089-bcb77fc8db11",
-         "error": null
-      },
-      {
-         "device_uuid": "GPU-f66f42d1-ff8c-6a00-3a3b-7445c538d6e1",
          "error": null
       }
    ],
@@ -1340,6 +1238,9 @@ Example response:
 ```
 
 # Changelog
+
+* v0.2.0 (excavator v1.6.1c)
+- Revamped API with a lot of changes for returned version of Excavator
 
 * v0.1.9 (excavator v1.5.14a)
 - Added `driver_cuda_ver` and `excavator_cuda_ver` fields to [info](#info) method.
