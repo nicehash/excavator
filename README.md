@@ -4,6 +4,14 @@ Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com]
 
 Download from here: https://github.com/nicehash/excavator/releases
 
+Supported OS:
+- Windows 10 64-bit
+
+Supported hardware:
+- NVIDIA GeForce GTX 1000 series with minimal 6GB of RAM (Desktop editions)
+- NVIDIA GeForce RTX 2000 series with minimal 6GB of RAM (Desktop editions)
+- NVIDIA GeForce RTX 3000 series with minimal 6GB of RAM (Desktop editions)
+
 **WARNING!!! Excavator is a proprietary software by NiceHash and has a special [EULA](excavator-EULA.txt).
 YOU ARE NOT ALLOWED TO REDISTRIBUTE IT!**
 
