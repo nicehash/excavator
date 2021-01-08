@@ -1,0 +1,127 @@
+<html>
+<head>
+    <style>
+        .log-class-normal {
+            background-color: blanchedalmond;
+            font-family: "Lucida Console";
+            font-size: 12px;
+        }
+        .log-class-error {
+            background-color: orangered;
+            font-family: "Lucida Console";
+            font-size: 12px;
+        }
+        .log-class-ocscanner {
+            background-color: orange;
+            font-family: "Lucida Console";
+            font-size: 12px;
+        }
+        #log-view-div {
+            max-height: 100px;
+        }
+    </style>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="octune.js"></script>
+</head>
+<body>
+    <div class="slidecontainer">
+        <label for="refresh-time">Refresh time:</label>
+        <input type="range" min="1" max="5" value="2" class="slider" id="refresh-time" onchange="refresh_change()" />
+        <button disabled><div id="refresh-time-text">2</div> seconds</button>
+    </div>
+
+    <h2>Excavator Health Monitor</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>GPU ID</th>
+                <th>GPU Name</th>
+                <th>Temp GPU</th>
+                <th>Fan (RPM)</th>
+                <th>Fan (%)</th>
+                <th>Manual fan</th>
+                <th>Reset fan</th>
+            </tr>
+        </thead>
+        <tbody id="table-main-health">
+        </tbody>
+    </table>
+    <label for="fan-speed-all">Fan speed for all devices:</label>
+    <input type="range" min="0" max="100" value="50" class="slider" id="fan-speed-all" onchange="set_fan_all()" />
+    <br />
+    <h2>Excavator OC Tunner</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>GPU ID</th>
+                <th>GPU Name</th>
+                <th>Min KT</th>
+                <th>Avg KT</th>
+                <th>HW err</th>
+                <th>HW ok</th>
+                <th>Core Delta</th>
+                <th>Mem Delta</th>
+                <th>Power Lim (W)</th>
+                <th>TDP Lim (%)</th>
+                <th>Power Real (W)</th>
+                <th>Speed (MH/s)</th>
+                <th>Eff. (kH/J)</th>
+            </tr>
+        </thead>
+        <tbody id="table-main-oc">
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th id="total-power">0</th>
+                <th id="total-speed">0</th>
+                <th id="total-eff">0</th>
+            </tr>
+        </tfoot>
+    </table>
+    <br />
+    <div>
+        <label for="selected-device">Device:</label>
+        <select id="selected-device" onchange="pre_oc_fill()"></select><br />
+        <label for="selected-core">Core clock delta:</label>
+        <input type="text" id="selected-core" value="" size="3" />
+        <button onclick="change_core_clock(-25)">-25</button>
+        <button onclick="change_core_clock(-10)">-10</button>
+        <button onclick="change_core_clock(10)">+10</button>
+        <button onclick="change_core_clock(25)">+25</button><br />
+        <label for="selected-memory">Memory clock delta:</label>
+        <input type="text" id="selected-memory" value="" size="3" />
+        <button onclick="change_mem_clock(-25)">-25</button>
+        <button onclick="change_mem_clock(-10)">-10</button>
+        <button onclick="change_mem_clock(10)">+10</button>
+        <button onclick="change_mem_clock(25)">+25</button>
+        <button onclick="find_best_oc()">Find best OC for this mem clock</button>
+        <button onclick="find_best_oc_cancel()">Cancel</button><br />
+        <label for="selected-power">Power limit (W):</label>
+        <input type="text" id="selected-power" value="" size="3" />
+        <button onclick="change_power(-5)">-5</button>
+        <button onclick="change_power(-2)">-2</button>
+        <button onclick="change_power(2)">+2</button>
+        <button onclick="change_power(5)">+5</button><br />
+        <button onclick="apply_oc()">Apply OC</button>
+        <button onclick="apply_oc_all()">Apply OC All</button><br /><br />
+        <button onclick="reset_oc()">Reset OC</button>
+        <button onclick="reset_oc_all()">Reset OC All</button>
+    </div>
+    <br />
+    <div>
+        <label for="log-view">Events:</label><br />
+        <div id="log-view-div">
+        </div>
+    </div>
+</body>
+</html>
