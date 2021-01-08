@@ -205,7 +205,8 @@ Response field | Type | Description
 `devices[i]/details/cuda_id` | int | Device CUDA ID.
 `devices[i]/details/sm_major` | int | Device SM major version.
 `devices[i]/details/sm_minor` | int | Device SM minor version.
-`devices[i]/details/bus` | int | Device bus ID.
+`devices[i]/details/bus_id` | int | Device bus ID.
+`devices[i]/details/bus_slot_id` | int | Device bus slot ID.
 `devices[i]/details/sli` | boolean | `True` if SLI is enabled on device.
 
 Example usage:
