@@ -66,6 +66,10 @@ Method | Description
 [device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-).
 [device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed.
 [device\.set\.fan\.reset](#device-set-fan-reset) | Resets device fan speed.
+[device\.set\.oc_profile](#device-set-oc-profile) | Sets overclocking profile.
+[device\.set\.oc_reset](#device-set-oc-reset) | Resets overclocking profile.
+[device\.hwerr\.get](#device-hwerr-get) | Gets hardware error count.
+[device\.hwerr\.reset](#device-hwerr-reset) | Resets hardware error count.
 
 **Algorithm managing methods**
 
@@ -89,6 +93,8 @@ Method | Description
 [worker\.list](#worker-list) | Lists all workers.
 [worker\.print\.speed](#worker-speed)| Prints speed of a worker.
 [worker\.print\.speeds](#worker-speeds)| Prints speed of all workers.
+[worker\.print\.efficiencies](#worker-efficiencies)| Prints efficiencies of all workers.
+[worker\.change_params](#worker-change-params) | Change worker's launch parameters.
 [workers\.add](#workers-add) | Adds multiple new workers.
 [workers\.free](#workers-free) | Frees multiple workers.
 [workers\.reset](#workers-reset) | Resets logged speed for multiple workers.
@@ -108,6 +114,8 @@ Method | Description
 [info](#info) | Gets information about Excavator.
 [quit](#quit) | Quits Excavator.
 [message](#message) | Displays message in console.
+[elevate](#elevate) | Try to gain administrative privileges.
+[restart](#restart) | Restart miner with same command line.
 
 
 # <a name="subscribe"></a> subscribe
