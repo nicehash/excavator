@@ -345,6 +345,26 @@ function pre_oc_fill()
     $('#selected-power').val(device_ocs.power_limit_watts);
 }
 
+function get_admin()
+{
+    $.ajax({
+        url: url + "elevate",
+        success: function( data ) {
+            if (data.error !== null)
+            {
+                log_write('error', 'Failed to acquire administrator privileges! Overclocking will not work.');
+            }
+            else
+            {
+                log_write('normal', 'Administrator privileges acquired!');
+            }
+        },
+        error: function() {
+            log_write('normal', 'Administrator privileges acquired!');
+        }
+    });
+}
+
 
 // =========================================
 // DEVICE HEALTH
