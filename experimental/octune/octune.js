@@ -68,6 +68,8 @@ function updateAll()
         {
             first_time = false;
 
+            get_current_credentials();
+
             for (var i = 0; i < MAX_LOG_SIZE; ++i)
                 log_lines[i] = '<br />';
             log_write('normal', 'Starting up...');
@@ -361,6 +363,71 @@ function get_admin()
         },
         error: function() {
             log_write('normal', 'Administrator privileges acquired!');
+        }
+    });
+}
+
+function save_current_cmds()
+{
+    $.ajax({
+        url: url + "cmdcommit",
+        success: function( data ) {
+            if (data.error !== null)
+            {
+                log_write('error', 'Failed to save current commands.');
+            }
+            else
+            {
+                log_write('normal', 'Configuration saved!');
+            }
+        },
+        error: function() {
+        }
+    });
+}
+
+function apply_credentials()
+{
+    var username = $('#input-username').val();
+    var location = $('#input-location').val();
+    log_write('normal', 'Setting username: ' + username + ' (location: ' + location + ')');
+
+    $.ajax({
+        url: url + "quickstart?id=" + username + '&loc=' + location,
+        success: function( data ) {
+            if (data.error !== null)
+            {
+                log_write('error', 'Failed to apply new credentials.');
+            }
+            else
+            {
+                log_write('normal', 'New credentials applied!');
+            }
+        },
+        error: function() {
+        }
+    });
+}
+
+function get_current_credentials()
+{
+    $.ajax({
+        url: url + 'api?command={"id":1,"method":"subscribe.info","params":[]}',
+        success: function( data ) {
+            if (data.error !== null)
+            {
+            }
+            else
+            {
+                if (data.address.substring(0, 12) === 'nhmp-ssl.usa')
+                    $('#input-location').val('usa');
+                else
+                    $('#input-location').val('eu');
+                $('#input-username').val(data.login);
+                //log_write('normal', 'New credentials applied!');
+            }
+        },
+        error: function() {
         }
     });
 }
