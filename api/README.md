@@ -1,4 +1,4 @@
-# Excavator API Version 0.2.0
+# Excavator API Version 0.2.1
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -116,6 +116,7 @@ Method | Description
 [message](#message) | Displays message in console.
 [elevate](#elevate) | Try to gain administrative privileges.
 [restart](#restart) | Restart miner with same command line.
+[cmdfile.commit](#cmdfile-commit) | Save current command file with updated info.
 
 
 # <a name="subscribe"></a> subscribe
@@ -1227,7 +1228,6 @@ Command parameter # | Type | Description
 -------|---------|---------
 1 | string | Message.
 
-
 Example usage:
 ```
 {"id":1,"method":"message","params":["Test!"]}
@@ -1241,7 +1241,73 @@ Example response:
 }
 ```
 
+
+# <a name="elevate"></a> elevate
+
+Restart Excavator under administrative privileges.
+
+This method does not take in any parameter.
+
+Example usage:
+```
+{"id":1,"method":"elevate","params":[]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
+# <a name="restart"></a> restart
+
+Restart Excavator using same command line.
+
+This method does not take in any parameter.
+
+Example usage:
+```
+{"id":1,"method":"restart","params":[]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
+# <a name="cmdfile-commit"></a> cmdfile.commit
+
+Update used command file with latest subscription data (location & username) and overclocking profiles data.
+
+This method does not take in any parameter.
+
+Example usage:
+```
+{"id":1,"method":"cmdfile.commit","params":[]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
 # Changelog
+
+* v0.2.1 (excavator v1.6.1d)
+   - Added `cmdfile.commit`
+   - Added `restart`
+   - Added `elevate`
 
 * v0.2.0 (excavator v1.6.1c)
    - Revamped API with a lot of changes for returned version of Excavator
