@@ -30,6 +30,17 @@
         <button disabled><div id="refresh-time-text">2</div> seconds</button>
     </div>
     <button onclick="get_admin()">Get admin privileges (needed for OC)</button>
+    <button onclick="save_current_cmds()">Save current configuration</button>
+
+    <h2>Credentials</h2>
+    <label for="input-username">Username (BTC + worker):</label>
+    <input type="text" id="input-username" value="" size="50" /><br />
+    <label for="input-location">Location:</label>
+    <select id="input-location">
+        <option value="eu">EU</option>
+        <option value="usa">USA</option>
+    </select>
+    <button onclick="apply_credentials()">Apply</button>
 
     <h2>Excavator Health Monitor</h2>
     <table border="1">
