@@ -1,23 +1,25 @@
-NiceHash QuickMiner (nhqm package) contains latest version of Excavator bundled with:
+# NiceHash QuickMiner
+[NiceHash QuickMiner](NH_QuickMiner_v0.1.0.0.zip) (latest version: 0.1.0.0) contains latest version of Excavator bundled with:
 * watchdog (NiceHashQuickMiner.exe),
-* autostart service (nhqmservice.exe),
-* example command file (commands.json) and
-* example startup command line (startcmdline.conf).
+* autostart service (nhqmservice.exe) and
+* example command file (commands.json)
 
 # Installation
 Simply extract all files in .zip archive into any folder you want.
 
-# Before first use
-You HAVE to modify `commands.json` file by putting in your NiceHash BTC address. If you have more than one GPU, you should also add `worker.add` commands so you'd mine on other GPUs not only first one. You may use other features. Check [API page](/api) for more info.
-
 # How to run
-Simply double click `NiceHashQuickMiner.exe` and mining process will start. Some extra features are available in your Windows tray (notification area); right click NiceHash icon and you can add/remove autostart service. By enabling autostart, NiceHash QuickMiner will start with Windows automatically.
+Simply double click `NiceHashQuickMiner.exe` and mining process will start. You may want to change mining address (to your NiceHash Mining address) - you can do this by modifying `nhqm.conf` file. Besides configuring your BTC mining address, you may want to modify following:
+* serviceLocation (0 is eu, 1 is usa),
+* workerName (name of your rig) and
+* launchCommandLine (extra command line options).
+
+Some extra features are available in your Windows tray (notification area); right click NiceHash icon and you can add/remove autostart service. By enabling autostart, NiceHash QuickMiner will start with Windows automatically.
 
 # Deinstallation
 Delete all files. If you have added autostart, make sure to disable autostart before you delete all files.
 
 # Recommendations
-Also download [octune](/experimental/octune_v1.zip). Unzip and run `octune.html` when Excavator is running. You will get a (not-so-good-looking) interface to manage Excavator over your web browser. You can play with overclock settings. Once you are happy with your settings, just save everything by clicking on button `Save current configuration`. Next time Excavator is started, your saved configuration will be used. You do not have to modify `commands.json` file manually anymore.
+Also use OCTune; run `octune.html` when Excavator is running. You will get a (not-so-good-looking) interface to manage Excavator over your web browser. You can play with overclock settings. Once you are happy with your settings, just save everything by clicking on the button `Save current configuration`. Next time Excavator is started, your saved configuration will be used. You do not have to modify `commands.json` file manually anymore.
 
 # FAQ
 1. Why is NiceHashQuickMiner started with administrator privileges?
