@@ -1,5 +1,5 @@
 # NiceHash QuickMiner
-[NiceHash QuickMiner](NH_QuickMiner_v0.1.0.0.zip) (latest version: 0.1.0.0) contains latest version of Excavator bundled with:
+[NiceHash QuickMiner](NH_QuickMiner_v0.1.0.2.zip) (latest version: 0.1.0.2) contains latest version of Excavator bundled with:
 * watchdog (NiceHashQuickMiner.exe),
 * autostart service (nhqmservice.exe) and
 * example command file (commands.json)
@@ -10,8 +10,11 @@ Simply extract all files in .zip archive into any folder you want.
 # How to run
 Simply double click `NiceHashQuickMiner.exe` and mining process will start. You may want to change mining address (to your NiceHash Mining address) - you can do this by modifying `nhqm.conf` file. Besides configuring your BTC mining address, you may want to modify following:
 * serviceLocation (0 is eu, 1 is usa),
-* workerName (name of your rig) and
-* launchCommandLine (extra command line options).
+* workerName (name of your rig),
+* launchCommandLine (extra command line options) and
+* consoleLogLevel & fileLogLevel (logging options).
+
+**_Please, have fileLogLevel set to 0 at all times and submit all the errors and issues you find using this software bundle. Thanks!_**
 
 Some extra features are available in your Windows tray (notification area); right click NiceHash icon and you can add/remove autostart service. By enabling autostart, NiceHash QuickMiner will start with Windows automatically.
 
