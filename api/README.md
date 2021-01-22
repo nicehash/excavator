@@ -599,7 +599,7 @@ Example response:
 # <a name="device-set-oc-profile"></a> device.set.oc_profile
 
 Sets overclocking profile which is automatically reverted when Excavator exits. You need to run Excavator with admin privileges for this method to work.
-When device has applied OC profile, memory is reverted back to 0 delta memory clock for the time of DAG generation. This greatly reduces the change of faulty DAG being generated.
+When device has applied OC profile, memory is reverted back to 0 delta memory clock for the time of DAG generation. This greatly reduces the chance of faulty DAG being generated.
 
 Command parameter # | Type | Description
 -------|---------|---------
