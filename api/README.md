@@ -503,6 +503,7 @@ Example response:
 }
 ```
 
+
 # <a name="device-set-core-delta"></a> device.set.core_delta
 
 Sets delta of max core clock of GPU. Provided clock delta is in MHz. Note that this clock is not achieved if GPU is TDP limited.
@@ -584,6 +585,55 @@ Command parameter # | Type | Description
 Example usage:
 ```
 {"id":1,"method":"device.set.fan.reset","params":["0"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
+# <a name="device-set-oc-profile"></a> device.set.oc_profile
+
+Sets overclocking profile which is automatically reverted when Excavator exits. You need to run Excavator with admin privileges for this method to work.
+When device has applied OC profile, memory is reverted back to 0 delta memory clock for the time of DAG generation. This greatly reduces the change of faulty DAG being generated.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID or Device UUID.
+2 | string | Core clock delta in MHz.
+3 | string | Memory clock delta in MHz.
+4 | string | Power limit in Watts.
+5 | string | _OPTIONAL_ Fan speed in percentage of load.
+
+Example usage:
+```
+{"id":1,"method":"device.set.oc_profile","params":["0","-250","1000","150","100"]}
+```
+
+Example response:
+```
+{
+  "id":1,
+  "error":null
+}
+```
+
+
+# <a name="device-set-oc-profile"></a> device.set.oc_reset
+
+Resets previously applied overclocking profile.
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID or Device UUID.
+
+Example usage:
+```
+{"id":1,"method":"device.set.oc_reset","params":["0"]}
 ```
 
 Example response:
