@@ -1,6 +1,6 @@
 # NiceHash Excavator
 
-Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com). Hashing speed is comparable to other miners, but it does NOT have any devfee. It can be used only on NiceHash.
+Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com). Hashing speed is comparable to other miners, but it does NOT have any devfee and it comes from a trusted source, completely made by NiceHash developers (we put our signature on final release versions). If you are skeptical towards other closed source miners, or if your PC contains sensitive information, wallet keys and so on, using Excavator (or NiceHash QuickMiner) is prefered way as you do not have to worry anything to be stolen from your PC. It can be used only on NiceHash.
 
 Supported OS:
 - Windows 10 64-bit
