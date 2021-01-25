@@ -1,5 +1,5 @@
 # NiceHash QuickMiner
-[NiceHash QuickMiner](NH_QuickMiner_v0.1.0.2.zip) (latest version: 0.1.0.2) contains latest version of Excavator bundled with:
+[NiceHash QuickMiner](NH_QuickMiner_v0.1.0.3.zip) (latest version: 0.1.0.3) contains latest version of Excavator bundled with:
 * watchdog (NiceHashQuickMiner.exe),
 * autostart service (nhqmservice.exe) and
 * example command file (commands.json)
