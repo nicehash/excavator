@@ -2,8 +2,6 @@
 
 Excavator is GPU miner by NiceHash for mining various altcoins on [NiceHash.com](https://www.nicehash.com). Hashing speed is comparable to other miners, but it does NOT have any devfee. It can be used only on NiceHash.
 
-Download from here: https://github.com/nicehash/excavator/releases
-
 Supported OS:
 - Windows 10 64-bit
 
@@ -12,11 +10,18 @@ Supported hardware:
 - NVIDIA GeForce RTX 2000 series with minimal 6GB of RAM (Desktop editions)
 - NVIDIA GeForce RTX 3000 series with minimal 6GB of RAM (Desktop editions)
 
+Needed drivers:
+- NVIDIA GeForce Game driver 457.xx or higher is required
+
 **WARNING!!! Excavator is a proprietary software by NiceHash and has a special [EULA](excavator-EULA.txt).
 YOU ARE NOT ALLOWED TO REDISTRIBUTE IT!**
 
+# Where to get and how to Use Excavator?
 
-# How to Use Excavator?
+There are three possible ways to use Excavator:
+1. It is included with [NiceHash Miner](https://www.github.com/nicehash/NiceHashMiner) - just install it and make sure to enable Excavator plugin. Also update to the latest version of plugin.
+2. Using it with it's own wrapper called [NiceHash QuickMiner](https://github.com/nicehash/excavator/tree/master/experimental). The idea is a simple yet strong (support for overclocking), lightweight Windows 10 miner which does not require anything else to be installed, is super quick to establish and start mining (no time wasted for benchmarking), but it does not do any algorithm switching. If you need to setup mining within one minute on some rig, then this is the best way to go.
+3. Be master of your own, using standalone version making your own command scripts: https://github.com/nicehash/excavator/releases
 
 NVIDIA display driver 457.xx or more recent is required. CUDA devices with SM 6.0 (Pascal, 1xxx series) and higher are supported.
 
