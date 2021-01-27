@@ -4,6 +4,8 @@
 * autostart service (nhqmservice.exe) and
 * example command file (commands.json)
 
+_Notice: when using GeForce series 1000 and 2000, update to 0.1.0.4 to avoid bug that causes nhmws - Rig Manager on NiceHash not working for your rig._
+
 # Installation
 Simply extract all files in .zip archive into any folder you want.
 
