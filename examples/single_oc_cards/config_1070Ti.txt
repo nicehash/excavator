@@ -1,0 +1,17 @@
+[
+	{"time":0,"commands":[
+		{"id":1,"method":"subscribe","params":["nhmp-ssl.usa.nicehash.com:443","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.testrig"]},
+		{"id":1,"method":"algorithm.add","params":["daggerhashimoto"]},
+		{"id":1,"method":"worker.add","params":["daggerhashimoto","0"]}
+	]},
+	{"time":10,"commands":[
+		{"id":1,"method":"device.set.oc_profile","params":["0","0","625","135","100"]},
+		{"id":1,"method":"worker.reset","params":["0"]}
+	]},
+	{"time":15,"loop":30,"commands":[
+	  	{"id":1,"method":"worker.print.efficiencies","params":[]},
+		{"id":1,"method":"worker.reset","params":["0"]}
+	]},
+	{"event":"on_quit","commands":[
+	]}
+]
