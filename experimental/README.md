@@ -1,16 +1,14 @@
 # NiceHash QuickMiner
-[NiceHash QuickMiner](NH_QuickMiner_v0.1.0.3.zip) (latest version: 0.1.0.3) contains latest version of Excavator bundled with:
+[NiceHash QuickMiner](NH_QuickMiner_v0.1.1.0_Excavator_b530.zip) (latest version: 0.1.1.0) contains latest version of Excavator bundled with:
 * watchdog (NiceHashQuickMiner.exe),
 * autostart service (nhqmservice.exe) and
 * example command file (commands.json)
-
-_Notice: when using GeForce series 1000 and 2000, update to 0.1.0.4 to avoid bug that causes nhmws - Rig Manager on NiceHash not working for your rig._
 
 # Installation
 Simply extract all files in .zip archive into any folder you want.
 
 # How to run
-Simply double click `NiceHashQuickMiner.exe` and mining process will start. You may want to change mining address (to your NiceHash Mining address) - you can do this by modifying `nhqm.conf` file. Besides configuring your BTC mining address, you may want to modify following:
+Simply double click `NiceHashQuickMiner.exe` and mining process will start. You have to change mining address (to your NiceHash Mining address) - you can do this by modifying `nhqm.conf` file. Besides configuring your BTC mining address, you may want to modify following:
 * serviceLocation (0 is eu, 1 is usa),
 * workerName (name of your rig),
 * launchCommandLine (extra command line options) and
