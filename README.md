@@ -71,6 +71,13 @@ Parameter | Range | Description | Default
 -f | 0-6 | File log level | 6
 -fn | file name | Log file | log_$timestamp.log
 -c | file name | Use commanding file |
+-m | none | Allow running multiple instances of Excavator |
+-t | 0, 1 | 0 = production, 1 = use test.nicehash.com | 0
+-ql | eu, usa | QuickMiner location | eu
+-qu | string | QuickMiner user name |
+-qc | none | QuickMiner enable CPU mining |
+-qm | none | Minimize when starting |
+-qx | none | Suppress QuickMiner text |
 
 
 # Additional Notices
