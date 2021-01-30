@@ -1,5 +1,5 @@
 # NiceHash QuickMiner
-[NiceHash QuickMiner](NH_QuickMiner_v0.1.1.0_Excavator_b531.zip) (latest version: 0.1.1.0) contains latest version of Excavator bundled with:
+[NiceHash QuickMiner](NH_QuickMiner_v0.2.0.1_Excavator_b543.zip) (latest version: 0.2.0.1) contains latest version of Excavator bundled with:
 * watchdog (NiceHashQuickMiner.exe),
 * autostart service (nhqmservice.exe) and
 * example command file (commands.json)
@@ -16,7 +16,7 @@ Simply double click `NiceHashQuickMiner.exe` and mining process will start. You 
 
 **_Please, have fileLogLevel set to 0 at all times and submit all the errors and issues you find using this software bundle. Thanks!_**
 
-Some extra features are available in your Windows tray (notification area); right click NiceHash icon and you can add/remove autostart service. By enabling autostart, NiceHash QuickMiner will start with Windows automatically.
+Some extra features are available in your Windows tray (notification area); right click NiceHash icon and you can add/remove autostart task or service. By enabling autostart, NiceHash QuickMiner will start with Windows automatically. NiceHash QuickMiner is bundled with CPU miner - XMRig. CPU mining is possible on CPUs that support AVX2 instruction set.
 
 # Deinstallation
 Delete all files. If you have added autostart, make sure to disable autostart before you delete all files.
@@ -36,3 +36,13 @@ Excavator would set memory overclock to 0 for the time DAG is being generated. T
 _3. Where can I see number of accepted and rejects shares?_
 
 You can see number of accepted and rejected shares by calling [API method algorithm.list](https://github.com/nicehash/excavator/tree/master/api#algorithm-list). Note that, to the contrary of other PPLNS pools, for NiceHash, these values are not important. The reason is, because each share has a certain value that may not be the same. NiceHash does not have a fixed difficulty but rather dynamic. Higher difficulty shares have higher value. Since NiceHash has a PPS payout scheme (pay-per-share), it is very important to know the value of the share (share at twice the difficulty is worth twice as much BTC). If you chart down shares with their values, you get accepted/rejected speed. These charts are already available at NiceHash - Rig Manager. Other pools often display accepted speed on their charts as the value that the miner is reporting to the pool - and this value can be cheated-out (sending some extreme large value for example). NiceHash does not support speed reported by miner, rather it calculates accepted/rejected speed out of your shares. Thus, contrary to the other pools, these charts have very high value as they represent direct performance of your miner and your mining payouts are based directly on that.
+
+# Troubleshooting
+
+_Error #102_ Excavator.exe is missing. Most likely your Antivirus (AV) or Microsoft Defender has deleted it. Make sure to add exception for following files:
+* excavator.exe
+* NiceHashQuickMiner.exe
+* nhqmservice.exe
+* xmrig.exe
+
+_Warning #103_ Your PC does not have enough Virtual Memory set. This can cause mining failure. Increase your Virtual Memory size to at least 6000 MB times number of GPUs your PC has. Read [here](https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/how-to-increase-virtual-memory-in-windows-10-a/46dacaf5-15cf-4f5d-9d5a-cba1401ae4c9) how to increase Virtual Memory size.
