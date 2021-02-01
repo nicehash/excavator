@@ -45,7 +45,7 @@ You can see number of accepted and rejected shares by calling [API method algori
 * nhqmservice.exe
 * xmrig.exe
 
-**_Warning #103_** Your PC does not have enough Virtual Memory set. This can cause mining failure. Increase your Virtual Memory size to at least 6000 MB times number of GPUs your PC has. Read [here](https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/how-to-increase-virtual-memory-in-windows-10-a/46dacaf5-15cf-4f5d-9d5a-cba1401ae4c9) how to increase Virtual Memory size.
+**_Warning #103_** Your PC does not have enough Virtual Memory set. This can cause mining failure. Increase your Virtual Memory size to at least 6000 MB times number of GPUs your PC has. Read [here](https://www.nicehash.com/blog/post/how-to-increase-virtual-memory-on-windows) how to increase Virtual Memory size.
 
 # Tips & Tricks
 
