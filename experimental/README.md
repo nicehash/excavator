@@ -20,6 +20,7 @@ Some extra features are available in your Windows tray (notification area); righ
 
 # Deinstallation
 Delete all files. If you have added autostart, make sure to disable autostart before you delete all files.
+Alternative way; run `NiceHashQuickMiner.exe --uninstall` and all files and folders will be purged from your PC automatically. If you also add `--keepconfig`, then config files will be kept.
 
 # Recommendations
 Also use OCTune; run `octune.html` when Excavator is running. You will get a (not-so-good-looking) interface to manage Excavator over your web browser. You can play with overclock settings. Once you are happy with your settings, just save everything by clicking on the button `Save current configuration`. Next time Excavator is started, your saved configuration will be used. You do not have to modify `commands.json` file manually anymore.
