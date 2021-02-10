@@ -20,7 +20,7 @@ YOU ARE NOT ALLOWED TO REDISTRIBUTE IT!**
 
 There are three possible ways to use Excavator:
 1. It is included with [NiceHash Miner](https://www.github.com/nicehash/NiceHashMiner) - just install it and make sure to enable Excavator plugin. Also update to the latest version of plugin.
-2. Using it with it's own wrapper called [NiceHash QuickMiner](https://github.com/nicehash/excavator/tree/master/experimental). The idea is a simple yet strong (support for overclocking), lightweight Windows 10 miner which does not require anything else to be installed, is super quick to establish and start mining (no time wasted for benchmarking), but it does not do any algorithm switching. If you need to setup mining within one minute on some rig, then this is the best way to go.
+2. Using it with it's own wrapper called [NiceHash QuickMiner](https://github.com/nicehash/NiceHashQuickMiner). The idea is a simple yet strong (support for overclocking), lightweight Windows 10 miner which does not require anything else to be installed, is super quick to establish and start mining (no time wasted for benchmarking), but it does not do any algorithm switching. If you need to setup mining within one minute on some rig, then this is the best way to go.
 3. Be master of your own, using standalone version making your own command scripts: https://github.com/nicehash/excavator/releases
 
 NVIDIA display driver 457.xx or more recent is required. CUDA devices with SM 6.0 (Pascal, 1xxx series) and higher are supported.
