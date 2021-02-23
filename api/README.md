@@ -1,4 +1,4 @@
-# Excavator API Version 0.2.1
+# Excavator API Version 0.2.2
 
 **WARNING! This document is not complete yet and is still being worked on. Also, during Excavator alpha versions, API may change so make sure you check this page always before updating to next alpha version!**
 
@@ -70,6 +70,7 @@ Method | Description
 [device\.set\.oc_reset](#device-set-oc-reset) | Resets overclocking profile.
 [device\.hwerr\.get](#device-hwerr-get) | Gets hardware error count.
 [device\.hwerr\.reset](#device-hwerr-reset) | Resets hardware error count.
+[device\.smartfan\.set\.advanced](#device-smartfan-set-advanced) | Set advanced properties for SmartFan algorithm.
 
 **Algorithm managing methods**
 
@@ -643,6 +644,25 @@ Example response:
   "error":null
 }
 ```
+
+
+# <a name="device-smartfan-set-advanced"></a> device.smartfan.set.advanced
+
+Sets various constants/properties of SmartFan algorithm as explained below. Fan level is always from 0 to 100 (including). Call [devices\.get](#devices-get) or [device\.get](#device-get) to get current values (defaults).
+
+Command parameter # | Type | Description
+-------|---------|---------
+1 | string | Device ID or Device UUID.
+2 | string | Starting fan level when mode 2 or 3 is used.
+3 | string | Override default min level.
+4 | string | Override default max level.
+5 | string | Decrease multi K constant.
+6 | string | Increase multi K constant.
+7 | string | Increase add n constant (when GPU target is used).
+8 | string | Increase add n constant (when VRAM target is used).
+
+You have to provide **ALL** parameters or the method would not execute.
+
 
 
 # <a name="algorithm-add"></a> algorithm.add
@@ -1353,6 +1373,10 @@ Example response:
 
 
 # Changelog
+
+* v0.2.2 (excavator v1.6.3g)
+   - Added `device.smartfan.set.advanced`
+   - Many others... (docs not complete yet)
 
 * v0.2.1 (excavator v1.6.1d)
    - Added `cmdfile.commit`
