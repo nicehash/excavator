@@ -661,8 +661,7 @@ Command parameter # | Type | Description
 7 | string | Increase add n constant (when GPU target is used).
 8 | string | Increase add n constant (when VRAM target is used).
 
-You have to provide **ALL** parameters or the method would not execute.
-
+You have to provide **ALL** parameters or the method would not execute. If in mode 2 or 3, each time algorithm is executed (calling devices.smartfan.exec), it first calculates delta temperature (difference between actual and target temperature) to get Dt. Then if fan speed (F) needs to be reduced, decrease multi K constant is used in formula `F = F - (Dt * K * 0.001)`. If fan speed needs to be increased, increase multi K constant plus n constants are used in formula `F = F + (Dt * K * 0.001) + n`. Fan speed is adjusted according to min/max levels.
 
 
 # <a name="algorithm-add"></a> algorithm.add
