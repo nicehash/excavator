@@ -59,18 +59,32 @@ Method | Description
 [device\.list](#device-list) | Queries available devices - GPUs.
 [device\.get](#device-get) | Queries particular device - GPU.
 [devices\.get](#devices-get) | Queries available devices - GPU.
+[devices\.smartfan\.exec](#devices-smartfan-exec) | Executes SmartFan algorithm on all devices.
+[devices\.smartfan\.reset](#devices-smartfan-reset) | Resets SmartFan to automatic (mode = 0) on all devices.
 [device\.set\.power_limit](#device-set-power-limit) | Sets device power limit in Watts.
 [device\.set\.tdp](#device-set-tdp) | Sets device TDP.
 [device\.set\.tdp\.simple](#device-set-tdp-simple) | Sets device power mode.
 [device\.set\.core_delta](#device-set-core-delta) | Sets device core clock (delta +/-).
+[device\.set\.core_abs](#device-set-core-abs) | Sets max core clock limit.
+[device\.set\.core_uvolt](#device-set-core-uvolt) | Sets max core clock limit and undervolt in mV.
+[device\.set\.core_uvolt.max](#device-set-core-uvolt-max) | Sets max core clock and voltage in mV.
+[device\.set\.core_uvolt.reset](#device-set-core-uvolt-reset) | Resets any core clock delta and voltage adjustment.
 [device\.set\.memory_delta](#device-set-memory-delta) | Sets device memory clock (delta +/-).
 [device\.set\.fan\.speed](#device-set-fan-speed) | Sets device fan speed.
 [device\.set\.fan\.reset](#device-set-fan-reset) | Resets device fan speed.
+[device\.set\.fan\.max](#device-set-fan-max) | Sets device fan speed to max (100%) level.
 [device\.set\.oc_profile](#device-set-oc-profile) | Sets overclocking profile.
+[device\.set\.oc_profile2](#device-set-oc-profile2) | Sets overclocking profile2. Alternative OC.
 [device\.set\.oc_reset](#device-set-oc-reset) | Resets overclocking profile.
 [device\.hwerr\.get](#device-hwerr-get) | Gets hardware error count.
 [device\.hwerr\.reset](#device-hwerr-reset) | Resets hardware error count.
-[device\.smartfan\.set\.advanced](#device-smartfan-set-advanced) | Set advanced properties for SmartFan algorithm.
+[device\.get\.kernel_times](#device-get-kernel-times) | Gets device kernel execution times.
+[device\.smartfan\.exec](#device-smartfan-exec) | Executes SmartFan algorithm.
+[device\.smartfan\.set](#device-smartfan-set) | Sets SmartFan mode and parameters.
+[device\.smartfan\.reset](#device-smartfan-reset) | Resets SmartFan to automatic (mode = 0).
+[device\.smartfan\.set\.advanced](#device-smartfan-set-advanced) | Sets advanced properties for SmartFan algorithm.
+[device\.smartfan\.set\.level\.min](#device-smartfan-set-level-min) | Sets SmartFan algorithm fan min level.
+
 
 **Algorithm managing methods**
 
