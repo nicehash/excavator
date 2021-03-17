@@ -80,6 +80,7 @@ Parameter | Range | Description | Default
 -qc | none | QuickMiner enable CPU mining |
 -qm | none | Minimize when starting |
 -qx | none | Suppress QuickMiner text |
+-g | none | Suppress changing memory clocks before and after DAG generation |
 
 
 # Additional Notices
