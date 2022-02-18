@@ -84,6 +84,13 @@ Method | Description
 [device\.smartfan\.reset](#device-smartfan-reset) | Resets SmartFan to automatic (mode = 0).
 [device\.smartfan\.set\.advanced](#device-smartfan-set-advanced) | Sets advanced properties for SmartFan algorithm.
 [device\.smartfan\.set\.level\.min](#device-smartfan-set-level-min) | Sets SmartFan algorithm fan min level.
+[device\.smartfan\.set\.level\.max](#) | Set fan speed to 100%.
+[devices\.print\.temp](#) | Print devices temperature.
+[device\.set\.lhr](#) | TODO.
+[device\.set\.lhr_reset](#) | TODO.
+[device\.set\.memory\.timings](#) | Set GPU memory timings.
+[device\.set\.intensity](#) | Set the intensity of mining.
+
 
 
 **Algorithm managing methods**
@@ -109,10 +116,13 @@ Method | Description
 [worker\.print\.speed](#worker-speed)| Prints speed of a worker.
 [worker\.print\.speeds](#worker-speeds)| Prints speed of all workers.
 [worker\.print\.efficiencies](#worker-efficiencies)| Prints efficiencies of all workers.
+[worker\.print\.speed\.average](#) | Print average speed.
+[worker\.print\.speeds\.average](#) | Print average speeds.
 [worker\.change_params](#worker-change-params) | Change worker's launch parameters.
 [workers\.add](#workers-add) | Adds multiple new workers.
 [workers\.free](#workers-free) | Frees multiple workers.
 [workers\.reset](#workers-reset) | Resets logged speed for multiple workers.
+
 
 **Miner managing methods**
 
@@ -121,6 +131,22 @@ Method | Description
 [miner\.stop](#miner-stop) | Stops mining without exiting excavator.
 [miner\.alive](#miner-alive) | Check the excavator responsiveness.
 [state\.set](#state-set) | Set state of all GPU devices.
+[miner\.print\.state](#) | Print state of the miner.
+
+**QuickMiner methods**
+
+Method | Description
+-------|------------
+[quickminer\.install](#) | Install QuickMiner.
+[quickminer\.start](#) | Start mining.
+[quickminer\.stop](#) | Stop mining.
+[quickminer\.cpu\.enable](#) | Enable CPU mining.
+[quickminer\.cpu\.disable](#) | Disable CPU mining.
+[quickminer\.devices](#) | Get device info.
+[quickminer\.device\.enable](#) | Enable device.
+[quickminer\.device\.disable](#) | Disable device.
+[quickminer\.device\.lock](#) | TODO.
+[quickminer\.device\.unlock](#) | TODO.
 
 **Miscellaneous methods**
 
@@ -132,6 +158,9 @@ Method | Description
 [elevate](#elevate) | Try to gain administrative privileges.
 [restart](#restart) | Restart miner with same command line.
 [cmdfile.commit](#cmdfile-commit) | Save current command file with updated info.
+[reboot](#) | Reboot the machine.
+[restart\.driver\.nvidia](#) | Restart the drivers.
+
 
 
 # <a name="subscribe"></a> subscribe
