@@ -1,6 +1,6 @@
 [
 	{"time":0,"commands":[
-		{"id":1,"method":"subscribe","params":["nhmp-ssl.usa.nicehash.com:443","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.testrig"]},
+		{"id":1,"method":"subscribe","params":["nhmp.auto.nicehash.com:443","34HKWdzLxWBduUfJE9JxaFhoXnfC6gmePG.testrig"]},
 		{"id":1,"method":"algorithm.add","params":["daggerhashimoto"]}
 	]},
 	{"time":1,"commands":[
