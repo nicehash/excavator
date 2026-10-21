@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蔡舒桐 · 个人简介</title>
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg-soft:#11182b;
+    --card:#151d33;
+    --card-2:#1a2440;
+    --line:rgba(120,160,255,.14);
+    --text:#e8eefc;
+    --muted:#93a3c7;
+    --brand:#4f8cff;
+    --brand-2:#22d3ee;
+    --brand-3:#a78bfa;
+    --grad:linear-gradient(135deg,#4f8cff 0%,#22d3ee 50%,#a78bfa 100%);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Segoe UI","PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* 背景光效 */
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(600px 400px at 12% -8%,rgba(79,140,255,.22),transparent 60%),
+      radial-gradient(700px 500px at 100% 0%,rgba(167,139,250,.18),transparent 60%),
+      radial-gradient(500px 400px at 50% 120%,rgba(34,211,238,.14),transparent 60%);
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px 80px}
+
+  /* 顶部导航 */
+  header{
+    position:sticky;top:0;z-index:20;
+    backdrop-filter:blur(14px);
+    background:rgba(10,14,26,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{max-width:980px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .logo{font-weight:700;letter-spacing:.5px;font-size:17px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav-links{display:flex;gap:22px;flex-wrap:wrap}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+
+  /* Hero */
+  .hero{padding:76px 0 44px}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--brand-2);
+    background:rgba(34,211,238,.08);
+    border:1px solid rgba(34,211,238,.25);
+    padding:6px 14px;border-radius:999px;margin-bottom:22px;
+  }
+  .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--brand-2);box-shadow:0 0 10px var(--brand-2)}
+  h1{
+    font-size:clamp(38px,7vw,68px);
+    line-height:1.12;font-weight:800;letter-spacing:-1px;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero .role{margin-top:14px;font-size:clamp(16px,2.4vw,21px);color:var(--muted);font-weight:500}
+  .hero .role strong{color:var(--text)}
+  .hero .lead{margin-top:26px;max-width:720px;color:var(--muted);font-size:16px}
+  .hero .actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-block;text-decoration:none;font-size:14px;font-weight:600;
+    padding:12px 22px;border-radius:12px;transition:transform .18s,box-shadow .18s,background .18s;
+  }
+  .btn-primary{background:var(--grad);color:#06101f;box-shadow:0 8px 24px rgba(79,140,255,.28)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(79,140,255,.4)}
+  .btn-ghost{color:var(--text);border:1px solid var(--line);background:rgba(255,255,255,.03)}
+  .btn-ghost:hover{background:rgba(255,255,255,.06)}
+
+  /* 分区 */
+  section{margin-top:56px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:24px}
+  .sec-index{font-size:13px;font-weight:700;color:var(--brand);letter-spacing:2px}
+  h2{font-size:clamp(24px,4vw,32px);font-weight:700;letter-spacing:-.5px}
+  .sec-rule{height:3px;width:64px;border-radius:99px;background:var(--grad);margin-bottom:18px}
+
+  .card{
+    background:linear-gradient(180deg,var(--card),var(--card-2));
+    border:1px solid var(--line);
+    border-radius:18px;padding:26px 28px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+  }
+  .card + .card{margin-top:16px}
+  .card p{color:var(--muted)}
+  .card p + p{margin-top:12px}
+
+  /* 技能 */
+  .skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:760px){.skills{grid-template-columns:1fr}}
+  .skill{background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:16px;padding:20px 22px;transition:transform .18s,border-color .18s}
+  .skill:hover{transform:translateY(-4px);border-color:rgba(79,140,255,.4)}
+  .skill .ico{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:19px;background:rgba(79,140,255,.12);border:1px solid rgba(79,140,255,.25);margin-bottom:12px}
+  .skill h3{font-size:15px;margin-bottom:6px;color:var(--text)}
+  .skill p{font-size:13.5px;color:var(--muted)}
+
+  .tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+  .tag{font-size:12.5px;color:var(--muted);padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+  .tag:hover{color:var(--text);border-color:rgba(79,140,255,.4)}
+
+  /* 协作 */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.grid-2{grid-template-columns:1fr}}
+  .item{background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+  .item .num{font-size:12px;font-weight:700;color:var(--brand-2);letter-spacing:2px}
+  .item h3{font-size:15.5px;margin:8px 0 6px}
+  .item p{font-size:13.5px;color:var(--muted)}
+
+  footer{margin-top:70px;padding-top:26px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13.5px}
+  footer .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="logo">蔡舒桐 · IoT</div>
+    <div class="nav-links">
+      <a href="#about">个人简介</a>
+      <a href="#skills">技能栈</a>
+      <a href="#collab">学习与协作</a>
+      <a href="#future">未来展望</a>
+    </div>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="badge"><span class="dot"></span>广东海洋大学 · 物联网工程</span>
+    <h1>蔡舒桐</h1>
+    <p class="role">物联网工程专业学生 · <strong>软硬件结合的连接者</strong></p>
+    <p class="lead">我关注物理世界的感知，也热衷于数字世界的处理——用传感器、嵌入式与软件，把万物连接成更智能的系统。</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#about">认识我</a>
+      <a class="btn btn-ghost" href="#future">未来展望</a>
+    </div>
+  </div>
+
+  <!-- 个人简介 -->
+  <section id="about">
+    <div class="sec-head"><span class="sec-index">01</span><h2>个人简介</h2></div>
+    <div class="sec-rule"></div>
+    <div class="card">
+      <p>大家好，我叫<strong>蔡舒桐</strong>，是<strong>广东海洋大学物联网工程专业</strong>的一名学生。</p>
+      <p>我既对硬件充满兴趣——喜欢动手搭建传感器、单片机与嵌入式系统；也热衷于软件与数据——熟悉 C/C++、Python 等编程语言，了解网络协议与云平台对接的基本流程。</p>
+      <p>我始终相信，物联网的价值在于"连接"：把物理世界的感知与数字世界的处理打通，让设备更智能，让数据更有用。</p>
+    </div>
+  </section>
+
+  <!-- 技能栈 -->
+  <section id="skills">
+    <div class="sec-head"><span class="sec-index">02</span><h2>技能栈</h2></div>
+    <div class="sec-rule"></div>
+    <div class="skills">
+      <div class="skill">
+        <div class="ico">🔧</div>
+        <h3>硬件与嵌入式</h3>
+        <p>传感器采集、单片机开发、嵌入式系统与电路基础，动手完成从原理图到实物的落地。</p>
+      </div>
+      <div class="skill">
+        <div class="ico">💻</div>
+        <h3>软件与编程</h3>
+        <p>熟悉 C/C++、Python 等语言，具备数据结构、算法与工程化编码的基本功。</p>
+      </div>
+      <div class="skill">
+        <div class="ico">☁️</div>
+        <h3>网络与云平台</h3>
+        <p>了解常用网络协议与设备—云端对接流程，理解数据从端到云的传输与处理。</p>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag">C / C++</span>
+      <span class="tag">Python</span>
+      <span class="tag">单片机</span>
+      <span class="tag">嵌入式系统</span>
+      <span class="tag">传感器</span>
+      <span class="tag">网络协议</span>
+      <span class="tag">云平台对接</span>
+      <span class="tag">软硬件结合</span>
+    </div>
+  </section>
+
+  <!-- 学习与协作 -->
+  <section id="collab">
+    <div class="sec-head"><span class="sec-index">03</span><h2>学习与协作</h2></div>
+    <div class="sec-rule"></div>
+    <div class="grid-2">
+      <div class="item">
+        <div class="num">01</div>
+        <h3>以实践巩固知识</h3>
+        <p>习惯通过课程项目和实验把课堂知识落地，在动手过程中理解原理、发现并解决问题。</p>
+      </div>
+      <div class="item">
+        <div class="num">02</div>
+        <h3>团队协作</h3>
+        <p>乐于在团队中沟通、分工与推进，尊重不同意见，主动补位，一起把目标完成。</p>
+      </div>
+      <div class="item">
+        <div class="num">03</div>
+        <h3>保持好奇</h3>
+        <p>面对陌生领域愿意从零学起，通过查资料、做实验快速建立认知，把未知变成能力。</p>
+      </div>
+      <div class="item">
+        <div class="num">04</div>
+        <h3>拆解与突破</h3>
+        <p>面对困难习惯拆解问题、逐项突破，用清晰的步骤和耐心把复杂任务做扎实。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 未来展望 -->
+  <section id="future">
+    <div class="sec-head"><span class="sec-index">04</span><h2>未来展望</h2></div>
+    <div class="sec-rule"></div>
+    <div class="card">
+      <p>我希望在<strong>物联网、嵌入式或软硬件结合</strong>的方向上继续深入，把所学转化为真正可用的产品与方案。</p>
+      <p>同时保持开放与学习的心态，紧跟技术演进，在实践中不断打磨工程能力。很高兴认识大家，也期待在接下来的学习和交流中共同成长，谢谢！</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><span class="grad">蔡舒桐</span> · 广东海洋大学 · 物联网工程</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
